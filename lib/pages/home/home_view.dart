@@ -98,6 +98,7 @@ class HomeView extends HookView<HomeViewModel> {
             children: [
               Center(child: Text("1",style: TextStyle(color: Colors.red),),),
               Center(child: Text("2",style: TextStyle(color: Colors.red),),),
+              Center(child: Text("2",style: TextStyle(color: Colors.red),),),
             ],
           ),
         ),
