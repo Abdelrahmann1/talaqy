@@ -11,5 +11,6 @@ class HomeViewModel extends ViewModel {
     currentIndex = index;
     notifyListeners();
   }
+
 }
 

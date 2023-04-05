@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:pmvvm/pmvvm.dart';
 import 'package:talaqy/pages/home/home_view_model.dart';
 import 'package:talaqy/utils/app_colors.dart';
+import 'package:talaqy/widgets/founded_people.dart';
+import 'package:talaqy/widgets/main_button.dart';
+import 'package:talaqy/widgets/missing_container.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,11 +17,11 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
 class HomeView extends HookView<HomeViewModel> {
   const HomeView({Key? key, reactive = true});
   @override
   Widget render(context, viewModel) {
+    double _w = MediaQuery.of(context).size.width;
     return
       DefaultTabController(
         length: 2,
@@ -37,7 +41,7 @@ class HomeView extends HookView<HomeViewModel> {
               child: Container(
                 width: 130,
                 height: 130,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
                       image:  AssetImage('assets/images/logo.png'),
@@ -67,7 +71,37 @@ class HomeView extends HookView<HomeViewModel> {
             elevation: 0,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (builder){
+                    return  Container(
+                      height: 200.0,
+                      color: Colors.transparent,
+                      child:  Container(
+                          decoration:  const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:  BorderRadius.only(
+                                  topLeft: Radius.circular(25.0),
+                                  topRight: Radius.circular(25.0))),
+                          child:  Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              IconButton(
+                                iconSize: 30,
+                                color: Colors.black,
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.backspace_outlined,
+                                ),
+                              ),
+                              MainButton("الإبلاغ عن مفقود", (){},bgColor: AppColors.primaryColor,),
+                              MainButton("الإبلاغ عن موجود", (){},bgColor: AppColors.primaryColor,),
+                            ],
+                          )),
+                    );
+                  }
+              );            },
             backgroundColor: AppColors.primaryColor,
             foregroundColor: AppColors.white,
             child: const Icon(Icons.add),
@@ -94,11 +128,106 @@ class HomeView extends HookView<HomeViewModel> {
             ],
           ),
           backgroundColor: AppColors.white,
-          body: TabBarView(
+          body:  TabBarView(
             children: [
-              Center(child: Text("1",style: TextStyle(color: Colors.red),),),
-              Center(child: Text("2",style: TextStyle(color: Colors.red),),),
-              Center(child: Text("2",style: TextStyle(color: Colors.red),),),
+          AnimationLimiter(
+          child: ListView.builder(
+          padding: EdgeInsets.all(_w / 25),
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
+          itemCount: 10,
+          itemBuilder: (BuildContext context, int index) {
+            return AnimationConfiguration.staggeredList(
+              position: index,
+              delay: const Duration(milliseconds: 100),
+              child: SlideAnimation(
+                duration: const Duration(milliseconds: 2500),
+                curve: Curves.fastLinearToSlowEaseIn,
+                child: FadeInAnimation(
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  duration: const Duration(milliseconds: 2500),
+                  child: Container(
+                      margin: EdgeInsets.only(bottom: _w / 20),
+                      height: _w / 3,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                        const BorderRadius.all(Radius.circular(10)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 40,
+                            spreadRadius: 10,
+                          ),
+                        ],
+                      ),
+                      child:
+                      MissingContainer(
+                        onTap: () {},
+                        borderColor: Colors.blue,
+                        invoicesNumber:"aa",
+                        ticketType: "ss",
+                        price: "",
+                        dateTime: "",
+                        nameOfLine:"",
+                        arrivalPoint:"",
+                        bookingDate: "",
+                      )),
+                ),
+              ),
+            );
+          },
+        ),
+        ),
+          AnimationLimiter(
+          child: ListView.builder(
+          padding: EdgeInsets.all(_w / 25),
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
+          itemCount: 10,
+          itemBuilder: (BuildContext context, int index) {
+            return AnimationConfiguration.staggeredList(
+              position: index,
+              delay: const Duration(milliseconds: 100),
+              child: SlideAnimation(
+                duration: const Duration(milliseconds: 2500),
+                curve: Curves.fastLinearToSlowEaseIn,
+                child: FadeInAnimation(
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  duration: const Duration(milliseconds: 2500),
+                  child: Container(
+                      margin: EdgeInsets.only(bottom: _w / 20),
+                      height: _w / 3,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                        const BorderRadius.all(Radius.circular(10)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 40,
+                            spreadRadius: 10,
+                          ),
+                        ],
+                      ),
+                      child:
+                      FoundedPeopleContainer(
+                        onTap: () {},
+                        borderColor: Colors.blue,
+                        invoicesNumber:"aa",
+                        ticketType: "ss",
+                        price: "",
+                        dateTime: "",
+                        nameOfLine:"",
+                        arrivalPoint:"",
+                        bookingDate: "",
+                      )),
+                ),
+              ),
+            );
+          },
+        ),
+        ),
             ],
           ),
         ),

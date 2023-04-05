@@ -1,5 +1,9 @@
+import 'package:flutter/widgets.dart';
 import 'package:pmvvm/pmvvm.dart';
 class LoginViewModel extends ViewModel {
+  final formKey = GlobalKey<FormState>();
+  final emailCtrl = TextEditingController();
+  final passwordCtrl = TextEditingController();
   bool? isChecked = false;
   bool isShowPassword = true;
   setCheckBoxValue(dynamic newBool) {
@@ -10,5 +14,6 @@ class LoginViewModel extends ViewModel {
     isShowPassword = !isShowPassword;
     notifyListeners();
   }
+
 
 }

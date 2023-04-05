@@ -74,14 +74,19 @@ class RegisterView extends HookView<SignUpViewModel> {
                         textDirection: TextDirection.rtl,
                         child: TextFormField(
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Please Enter Your Full Name";
+                            if (value!.length > 100) {
+                              return "لا يمكن ان يكون اسم المستخدم اكير من 100 حروف";
+                            }
+                            if (value.length < 3) {
+                              return "لا يمكن ان يكون اسم المستخدم اقل من 3 حروف";
                             }
                             return null;
                           },
-                          controller: viewModel.email,
+                          onSaved: (value){
+                            viewModel.fullName =value;
+                          },
+
                           textAlign: TextAlign.right,
-                          autovalidateMode: AutovalidateMode.always,
                           decoration: InputDecoration(
                             labelText: 'اسم المستخدم *',
                             contentPadding: const EdgeInsets.symmetric(
@@ -89,7 +94,8 @@ class RegisterView extends HookView<SignUpViewModel> {
                                 vertical:
                                     10), // Adjust the padding around the input field
 
-                            labelStyle: Theme.of(context).textTheme.displaySmall,
+                            labelStyle:
+                                Theme.of(context).textTheme.displaySmall,
                             alignLabelWithHint: true,
                             border: OutlineInputBorder(
                               borderSide: const BorderSide(
@@ -105,8 +111,21 @@ class RegisterView extends HookView<SignUpViewModel> {
                       Directionality(
                         textDirection: TextDirection.rtl,
                         child: TextFormField(
+                          onSaved: (value)
+                          {
+                            viewModel.email=value;
+                          },
+                          validator: (value) {
+                            if (value!.length > 100) {
+                              return "لا يمكن ان يكون اكثر من 100 حرف";
+                            }
+                            if (value.length < 3) {
+                              return "لا يمكن ان يكون اقل من 3 حرف";
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.emailAddress,
                           textAlign: TextAlign.right,
-                          autovalidateMode: AutovalidateMode.always,
                           decoration: InputDecoration(
                             labelText: 'البريد الالكتروني',
                             contentPadding: const EdgeInsets.symmetric(
@@ -114,7 +133,8 @@ class RegisterView extends HookView<SignUpViewModel> {
                                 vertical:
                                     10), // Adjust the padding around the input field
 
-                            labelStyle: Theme.of(context).textTheme.displaySmall,
+                            labelStyle:
+                                Theme.of(context).textTheme.displaySmall,
 
                             alignLabelWithHint: true,
 
@@ -132,9 +152,22 @@ class RegisterView extends HookView<SignUpViewModel> {
                       Directionality(
                         textDirection: TextDirection.rtl,
                         child: TextFormField(
+                          onSaved: (value){
+                            viewModel.passWord = value;
+                          },
+                          validator: (value) {
+                            if (value!.length > 50) {
+                              return "لا يمكن ان يكون كلمه المرور اكير من 100 حرف";
+                            }
+                            if (value.length < 6) {
+                              return "لا يمكن ان يكون كلمة السر اقل من 6 حرف";
+                            }
+                            return null;
+                          },
                           obscureText: viewModel.isShowPassword,
                           textAlign: TextAlign.right,
-                          autovalidateMode: AutovalidateMode.always,
+                          keyboardType: TextInputType.text,
+
                           decoration: InputDecoration(
                             labelText: ' كلمة السر',
                             contentPadding: const EdgeInsets.symmetric(
@@ -142,7 +175,8 @@ class RegisterView extends HookView<SignUpViewModel> {
                                 vertical:
                                     10), // Adjust the padding around the input field
 
-                            labelStyle: Theme.of(context).textTheme.displaySmall,
+                            labelStyle:
+                                Theme.of(context).textTheme.displaySmall,
 
                             alignLabelWithHint: true,
                             suffixIcon: InkWell(
@@ -163,36 +197,37 @@ class RegisterView extends HookView<SignUpViewModel> {
                       const SizedBox(
                         height: 13,
                       ),
-                      Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: TextFormField(
-                          obscureText: viewModel.isShowPassword,
-                          textAlign: TextAlign.right,
-                          autovalidateMode: AutovalidateMode.always,
-                          decoration: InputDecoration(
-                            suffixIcon: InkWell(
-                              child: const Icon(Icons.remove_red_eye_outlined,
-                                  color: Colors.grey, size: 20),
-                              onTap: () {
-                                viewModel.showPassword();
-                              },
-                            ),
-                            labelText: 'تأكيد كلمة السر',
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical:
-                                    10), // Adjust the padding around the input field
-
-                            labelStyle: Theme.of(context).textTheme.displaySmall,
-                            alignLabelWithHint: true,
-                            border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: AppColors.greyForFileds),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Directionality(
+                      //   textDirection: TextDirection.rtl,
+                      //   child: TextFormField(
+                      //     obscureText: viewModel.isShowPassword,
+                      //     textAlign: TextAlign.right,
+                      //     autovalidateMode: AutovalidateMode.always,
+                      //     decoration: InputDecoration(
+                      //       suffixIcon: InkWell(
+                      //         child: const Icon(Icons.remove_red_eye_outlined,
+                      //             color: Colors.grey, size: 20),
+                      //         onTap: () {
+                      //           viewModel.showPassword();
+                      //         },
+                      //       ),
+                      //       labelText: 'تأكيد كلمة السر',
+                      //       contentPadding: const EdgeInsets.symmetric(
+                      //           horizontal: 20,
+                      //           vertical:
+                      //               10), // Adjust the padding around the input field
+                      //
+                      //       labelStyle:
+                      //           Theme.of(context).textTheme.displaySmall,
+                      //       alignLabelWithHint: true,
+                      //       border: OutlineInputBorder(
+                      //         borderSide: const BorderSide(
+                      //             color: AppColors.greyForFileds),
+                      //         borderRadius: BorderRadius.circular(8.0),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 13,
                       ),
@@ -224,7 +259,8 @@ class RegisterView extends HookView<SignUpViewModel> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Container(
                               height: 1.0,
                               width: 130.0,
@@ -237,7 +273,8 @@ class RegisterView extends HookView<SignUpViewModel> {
                                 color: AppColors.greyForFileds, fontSize: 10),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Container(
                                 height: 1.0,
                                 width: 130.0,
@@ -252,7 +289,7 @@ class RegisterView extends HookView<SignUpViewModel> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           SmallButton(
-                              "Facebook", () {}, FontAwesomeIcons.facebook),
+                              "Facebook", () {print(viewModel.fullName);}, FontAwesomeIcons.facebook),
                           SmallButton(
                             "Google",
                             () {},
@@ -275,8 +312,9 @@ class RegisterView extends HookView<SignUpViewModel> {
                                     color: AppColors.blackColor)),
                           ),
                           TextButton(
-                            onPressed: (){
-                              Navigator.pushNamed(context, AppRouter.loginScreen);
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, AppRouter.loginScreen);
                             },
                             child: Text(
                               "لديك حساب ؟ ",
@@ -292,10 +330,13 @@ class RegisterView extends HookView<SignUpViewModel> {
                         children: [
                           MainButton(
                             "إنشاء حساب",
-                            () {
-                              if (viewModel.formKey.currentState!.validate()){
-                                Navigator.pushNamed(context, AppRouter.onBoardingScreen);
-                              }
+                            ()  {
+                               viewModel.signUpWithEmailAndPassword(
+                                   email: viewModel.email,
+                                   password: viewModel.passWord);
+                              // userProviderAuth.signUpWithEmailAndPassword(
+                              //     email: viewModel.email.text,
+                              //     password: viewModel.passWord.text);
                             },
                             bgColor: AppColors.primaryColor,
                           )
