@@ -3,12 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pmvvm/pmvvm.dart';
 import 'package:talaqy/extentions/padding_ext.dart';
 import 'package:talaqy/pages/auth/sgin_up/sgin_up_view_model.dart';
+import 'package:talaqy/provider/auth_provider.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
 import 'package:talaqy/widgets/small_button.dart';
-
 import '../../../widgets/main_button.dart';
-
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
   @override
@@ -19,12 +18,12 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 }
-
 class RegisterView extends HookView<SignUpViewModel> {
   const RegisterView({super.key, reactive = true});
 
   @override
   Widget render(context, viewModel) {
+    final userProviderAuth = Provider.of<UserProviderAuth>(context);
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
@@ -289,10 +288,17 @@ class RegisterView extends HookView<SignUpViewModel> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           SmallButton(
-                              "Facebook", () {print(viewModel.fullName);}, FontAwesomeIcons.facebook),
+                              "Facebook", () {
+                                print(viewModel.fullName);
+                                print(viewModel.email);
+                                print(viewModel.passWord);
+                                }, FontAwesomeIcons.facebook),
                           SmallButton(
                             "Google",
-                            () {},
+                            () async{
+                             await userProviderAuth.signInWithGoogle();
+
+                            },
                             FontAwesomeIcons.google,
                           ),
                         ],
@@ -330,13 +336,16 @@ class RegisterView extends HookView<SignUpViewModel> {
                         children: [
                           MainButton(
                             "إنشاء حساب",
-                            ()  {
-                               viewModel.signUpWithEmailAndPassword(
-                                   email: viewModel.email,
-                                   password: viewModel.passWord);
-                              // userProviderAuth.signUpWithEmailAndPassword(
-                              //     email: viewModel.email.text,
-                              //     password: viewModel.passWord.text);
+                            ()  async{
+                              viewModel.response = await viewModel.signUpWithEmailAndPassword(
+                                   email: viewModel.email.toString(),
+                                   password: viewModel.passWord.toString());
+                              print(viewModel.response!.user!.email);
+                              // if (viewModel.response !=null){
+                              //   Navigator.pushReplacementNamed(context, AppRouter.homeScreen);
+                              // }else{
+                              //   print("sign in failed");
+                              // }
                             },
                             bgColor: AppColors.primaryColor,
                           )
