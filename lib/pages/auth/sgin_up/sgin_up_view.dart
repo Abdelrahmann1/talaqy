@@ -288,11 +288,7 @@ class RegisterView extends HookView<SignUpViewModel> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           SmallButton(
-                              "Facebook", () {
-                                print(viewModel.fullName);
-                                print(viewModel.email);
-                                print(viewModel.passWord);
-                                }, FontAwesomeIcons.facebook),
+                              "Facebook", () {}, FontAwesomeIcons.facebook),
                           SmallButton(
                             "Google",
                             () async{
@@ -341,11 +337,11 @@ class RegisterView extends HookView<SignUpViewModel> {
                                    email: viewModel.email.toString(),
                                    password: viewModel.passWord.toString());
                               print(viewModel.response!.user!.email);
-                              // if (viewModel.response !=null){
-                              //   Navigator.pushReplacementNamed(context, AppRouter.homeScreen);
-                              // }else{
-                              //   print("sign in failed");
-                              // }
+                              if (viewModel.response !=null){
+                                Navigator.pushReplacementNamed(context, AppRouter.homeScreen);
+                              }else{
+                                print("sign in failed");
+                              }
                             },
                             bgColor: AppColors.primaryColor,
                           )

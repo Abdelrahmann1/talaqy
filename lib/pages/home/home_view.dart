@@ -7,6 +7,9 @@ import 'package:talaqy/widgets/founded_people.dart';
 import 'package:talaqy/widgets/main_button.dart';
 import 'package:talaqy/widgets/missing_container.dart';
 
+import '../../provider/auth_provider.dart';
+import '../../utils/app_router.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   @override
@@ -21,6 +24,8 @@ class HomeView extends HookView<HomeViewModel> {
   const HomeView({Key? key, reactive = true});
   @override
   Widget render(context, viewModel) {
+    final userProviderAuth = Provider.of<UserProviderAuth>(context);
+
     double _w = MediaQuery.of(context).size.width;
     return
       DefaultTabController(
@@ -52,11 +57,12 @@ class HomeView extends HookView<HomeViewModel> {
             ),          actions: [
               IconButton(
                 icon: const Icon(
-                  Icons.search,
+                  Icons.exit_to_app,
                   color: Colors.black,
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
+                onPressed: () async{
+                  await userProviderAuth.signOut();
+                  Navigator.pushReplacementNamed(context, AppRouter.loginScreen);
                 },
               ),
             ],
@@ -91,7 +97,7 @@ class HomeView extends HookView<HomeViewModel> {
                                 iconSize: 30,
                                 color: Colors.black,
                                 onPressed: () {},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.backspace_outlined,
                                 ),
                               ),
