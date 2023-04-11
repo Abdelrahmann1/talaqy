@@ -1,12 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pmvvm/pmvvm.dart';
+
 class SignUpViewModel extends ViewModel {
   UserCredential? response;
   bool? isChecked = false;
   bool isShowPassword = true;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  var fullName, passWord, email;
+  TextEditingController fullName = TextEditingController();
+  TextEditingController passWord = TextEditingController();
+  TextEditingController email = TextEditingController();
   setCheckBoxValue(dynamic newBool) {
     isChecked = newBool;
     notifyListeners();
@@ -14,6 +18,15 @@ class SignUpViewModel extends ViewModel {
   showPassword() {
     isShowPassword = !isShowPassword;
     notifyListeners();
+  }
+  void addUserToFireStore()async{
+    FirebaseFirestore.instance.collection("users").add({
+      "userName":fullName.text,
+      "email":email.text,
+    })
+        .then((value) => print('User data saved to Firestore'))
+        .catchError((error) => print('Failed to save user data: $error'));
+
   }
   signUpWithEmailAndPassword({required String email, required String password}) async {
     var formData = formKey.currentState;

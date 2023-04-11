@@ -81,9 +81,7 @@ class RegisterView extends HookView<SignUpViewModel> {
                             }
                             return null;
                           },
-                          onSaved: (value){
-                            viewModel.fullName =value;
-                          },
+                          controller: viewModel.fullName ,
 
                           textAlign: TextAlign.right,
                           decoration: InputDecoration(
@@ -110,10 +108,7 @@ class RegisterView extends HookView<SignUpViewModel> {
                       Directionality(
                         textDirection: TextDirection.rtl,
                         child: TextFormField(
-                          onSaved: (value)
-                          {
-                            viewModel.email=value;
-                          },
+                          controller: viewModel.email,
                           validator: (value) {
                             if (value!.length > 100) {
                               return "لا يمكن ان يكون اكثر من 100 حرف";
@@ -151,9 +146,7 @@ class RegisterView extends HookView<SignUpViewModel> {
                       Directionality(
                         textDirection: TextDirection.rtl,
                         child: TextFormField(
-                          onSaved: (value){
-                            viewModel.passWord = value;
-                          },
+                         controller: viewModel.passWord,
                           validator: (value) {
                             if (value!.length > 50) {
                               return "لا يمكن ان يكون كلمه المرور اكير من 100 حرف";
@@ -334,10 +327,10 @@ class RegisterView extends HookView<SignUpViewModel> {
                             "إنشاء حساب",
                             ()  async{
                               viewModel.response = await viewModel.signUpWithEmailAndPassword(
-                                   email: viewModel.email.toString(),
-                                   password: viewModel.passWord.toString());
-                              print(viewModel.response!.user!.email);
+                                   email: viewModel.email.text,
+                                   password: viewModel.passWord.text);
                               if (viewModel.response !=null){
+                                viewModel.addUserToFireStore();
                                 Navigator.pushReplacementNamed(context, AppRouter.homeScreen);
                               }else{
                                 print("sign in failed");

@@ -1,14 +1,18 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:pmvvm/pmvvm.dart';
+
+import '../../../widgets/show_loading.dart';
 
 class LoginViewModel extends ViewModel {
   UserCredential? user;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  var  passWord, email;
+  TextEditingController email = TextEditingController();
+  TextEditingController passWord = TextEditingController();
+  // var  passWord, email;
   bool? isChecked = false;
+  bool loading = false;
+
   bool isShowPassword = true;
   setCheckBoxValue(dynamic newBool) {
     isChecked = newBool;
@@ -18,8 +22,11 @@ class LoginViewModel extends ViewModel {
     isShowPassword = !isShowPassword;
     notifyListeners();
   }
-  signInWithEmailAndPassword(
-      {required String email, required String password}) async {
+  setLoading(bool bool) {
+    loading = bool;
+    notifyListeners();
+  }
+  signInWithEmailAndPassword({required String email, required String password}) async {
     var formData = formKey.currentState;
     if (formData!.validate()) {
       formData.save();
@@ -27,11 +34,13 @@ class LoginViewModel extends ViewModel {
       print("Not Valid");
     }
     try {
+      showLoading(context);
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       return userCredential;
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {
+        Navigator.of(context).pop();
         showDialog(
           context: context,
           builder: (context) {
@@ -42,7 +51,7 @@ class LoginViewModel extends ViewModel {
         );
         print("no user found");
       } else if (e.code == "wrong-password") {
-        {
+          Navigator.of(context).pop();
           showDialog(
             context: context,
             builder: (context) {
@@ -56,4 +65,4 @@ class LoginViewModel extends ViewModel {
       }
     }
   }
-}
+

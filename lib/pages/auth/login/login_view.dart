@@ -79,10 +79,7 @@ class LoginView extends HookView<LoginViewModel> {
                       Directionality(
                         textDirection: TextDirection.rtl,
                         child: TextFormField(
-
-                          onSaved: (value){
-                            viewModel.email = value;
-                          },
+                          controller: viewModel.email,
                           validator: (value) {
                             if (value!.length > 100) {
                               return "لا يمكن ان يكون اكثر من 100 حرف";
@@ -114,9 +111,7 @@ class LoginView extends HookView<LoginViewModel> {
                       Directionality(
                         textDirection: TextDirection.rtl,
                         child: TextFormField(
-                          onSaved: (value){
-                            viewModel.passWord = value;
-                          },
+                          controller: viewModel.passWord,
                           validator: (value) {
                             if (value!.length > 50) {
                               return "لا يمكن ان يكون كلمه المرور اكير من 100 حرف";
@@ -159,7 +154,10 @@ class LoginView extends HookView<LoginViewModel> {
                       Row(
                         children: [
                           TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                print(viewModel.email);
+                                print(viewModel.passWord);
+                              },
                               child: const Text(
                                 "نسيت كلمة السر ؟",
                                 style:
@@ -247,8 +245,8 @@ class LoginView extends HookView<LoginViewModel> {
                               }
                               viewModel.user =
                                   await viewModel.signInWithEmailAndPassword(
-                                      email: viewModel.email.toString(),
-                                      password: viewModel.passWord.toString());
+                                      email: viewModel.email.text,
+                                      password: viewModel.passWord.text);
                             },
                             bgColor: AppColors.primaryColor,
                           )
