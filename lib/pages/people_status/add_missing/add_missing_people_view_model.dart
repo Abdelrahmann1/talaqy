@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pmvvm/pmvvm.dart';
-
-
 class AddMissingPeopleViewModel extends ViewModel {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController fatherName = TextEditingController();
@@ -11,6 +9,6 @@ class AddMissingPeopleViewModel extends ViewModel {
   TextEditingController ageOfMissing = TextEditingController();
   TextEditingController placesOfMissing = TextEditingController();
   TextEditingController dateOfMissing = TextEditingController();
-  TextEditingController hightOfMissing = TextEditingController();
-  }
+  TextEditingController heightOfMissing = TextEditingController();
+}
 
