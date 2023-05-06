@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pmvvm/pmvvm.dart';
-
 import '../../../widgets/show_loading.dart';
 
 class LoginViewModel extends ViewModel {
@@ -12,21 +11,24 @@ class LoginViewModel extends ViewModel {
   // var  passWord, email;
   bool? isChecked = false;
   bool loading = false;
-
   bool isShowPassword = true;
   setCheckBoxValue(dynamic newBool) {
     isChecked = newBool;
     notifyListeners();
   }
+
   showPassword() {
     isShowPassword = !isShowPassword;
     notifyListeners();
   }
+
   setLoading(bool bool) {
     loading = bool;
     notifyListeners();
   }
-  signInWithEmailAndPassword({required String email, required String password}) async {
+
+  signInWithEmailAndPassword(
+      {required String email, required String password}) async {
     var formData = formKey.currentState;
     if (formData!.validate()) {
       formData.save();
@@ -50,19 +52,16 @@ class LoginViewModel extends ViewModel {
           },
         );
         print("no user found");
-      } else if (e.code == "wrong-password") {
-          Navigator.of(context).pop();
-          showDialog(
-            context: context,
-            builder: (context) {
-              return const AlertDialog(
-                title: Text("الباسورد خطأ"),
-              );
-            },
-         );
-
-        }
+      }
+      else if (e.code == "wrong-password")
+      {Navigator.of(context).pop();
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(title: Text("الباسورد خطأ"));
+          },
+        );
       }
     }
   }
-
+}

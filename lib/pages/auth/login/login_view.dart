@@ -197,7 +197,7 @@ class LoginView extends HookView<LoginViewModel> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           SmallButton(
-                              "Facebook", () {}, FontAwesomeIcons.facebook),
+                              "Facebook", () {},FontAwesomeIcons.facebook),
                           SmallButton(
                             "Google",
                             () async {

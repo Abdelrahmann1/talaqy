@@ -6,8 +6,6 @@ class SmallButton extends StatelessWidget {
   IconData? icons;
   final Color? bgColor;
   final Function onTap;
-
-
   @override
   Widget build(BuildContext context) {
     return InkWell(

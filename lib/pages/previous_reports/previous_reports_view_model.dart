@@ -1,10 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pmvvm/pmvvm.dart';
-
-
 class PreviousReportsViewModel extends ViewModel {
-  int page = 0;
-  onPageIndex(int index){
-    page=index;
-    notifyListeners();
+  var docId;
+  
+  final  CollectionReference addMissingRef =
+  FirebaseFirestore.instance.collection("Missing People");
+
   }
-}

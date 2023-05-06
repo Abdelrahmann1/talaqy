@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:pmvvm/pmvvm.dart';
 import 'package:talaqy/extentions/padding_ext.dart';
-import 'package:talaqy/pages/people_status/add_missing/add_missing_people_view_model.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/widgets/main_button.dart';
 import '../../../widgets/missed_form_field.dart';
-class AddMissingPeople extends StatelessWidget {
-  const AddMissingPeople({Key? key}) : super(key: key);
+import 'edit_missing_view_model.dart';
+class EditMissingScreen extends StatelessWidget {
+  const EditMissingScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MVVM(
-      view: (_, __) => const AddMissingPeopleView(),
-      viewModel: AddMissingPeopleViewModel(),);}
+      view: (_, __) => const EditMissingView(),
+      viewModel: EditMissingViewModel( ),);}
 }
-class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
-  const AddMissingPeopleView({Key? key, reactive = true});
+class EditMissingView extends HookView<EditMissingViewModel> {
+  const EditMissingView({Key? key, reactive = true});
   @override
   Widget render(context, viewModel) {
     return Scaffold(
@@ -35,7 +35,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
           ],
           centerTitle: true,
           title: Text(
-            'الإبلاغ عن طفل مفقود',
+            'تعديل البيانات عن طفل مفقود',
             style: Theme.of(context).textTheme.displayMedium,
           ),
         ),
@@ -134,6 +134,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                   height: 13,
                 ),
                 MainFormField(
+
                   textInputType: TextInputType.text,
 
                   controller: viewModel.placesOfMissing,
@@ -206,7 +207,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                 ),
                 MainButton(
                     "الإبلاغ عن العثور علي طفل", bgColor: AppColors.blackColor, () async {
-                      viewModel.addMissing();
+                  viewModel.editMissing();
 
 
                 })

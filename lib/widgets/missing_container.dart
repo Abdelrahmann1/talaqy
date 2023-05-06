@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MissingContainer extends StatelessWidget {
-  final String invoicesNumber;
+  final String NameOfMissing;
   final String nameOfLine;
   final String ticketType;
   final String arrivalPoint;
@@ -13,7 +13,7 @@ class MissingContainer extends StatelessWidget {
   const MissingContainer({
     super.key,
     this.onTap,
-    required this.invoicesNumber,
+    required this.NameOfMissing,
     required this.borderColor,
     required this.ticketType,
     required this.arrivalPoint,
@@ -36,7 +36,7 @@ class MissingContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "محمد محمود أحمد علي",
+                  NameOfMissing,
                   style:Theme.of(context).textTheme.displayMedium,
                 ),
 
