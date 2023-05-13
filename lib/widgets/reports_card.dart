@@ -10,7 +10,7 @@ class ReportsCards extends StatelessWidget {
   String dateOfBirthOfMissing;
   final Function onTapEdit;
   final Function onTapDelete;
-   ReportsCards( this.docId , {Key? key ,required this.dateOfMissing,required this.nameOfMissing,required this.dateOfBirthOfMissing,required this.ageOfMissing,required this.placeOfMissing, required this.onTapEdit, required this.onTapDelete}) : super(key: key);
+   ReportsCards( {Key? key ,required this.dateOfMissing,required this.docId ,required this.nameOfMissing,required this.dateOfBirthOfMissing,required this.ageOfMissing,required this.placeOfMissing, required this.onTapEdit, required this.onTapDelete}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return

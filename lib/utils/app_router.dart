@@ -28,6 +28,6 @@ class AppRouter{
       AppRouter.homeScreen: (context) =>  const HomeScreen(),
       AppRouter.addMissingScreen: (context) =>  const AddMissingPeople(),
       AppRouter.successfulmessage: (context) =>  const SuccessfulMessage(),
-      AppRouter.editMissingScreen: (context) =>  const EditMissingScreen(),
+      AppRouter.editMissingScreen: (context) =>   EditMissingScreen(),
     };
   }}

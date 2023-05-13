@@ -5,16 +5,21 @@ import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/widgets/main_button.dart';
 import '../../../widgets/missed_form_field.dart';
 import 'edit_missing_view_model.dart';
+
 class EditMissingScreen extends StatelessWidget {
-  const EditMissingScreen({Key? key}) : super(key: key);
+  var docid;
+  EditMissingScreen({Key? key, this.docid}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MVVM(
-      view: (_, __) => const EditMissingView(),
-      viewModel: EditMissingViewModel( ),);}
+      view: (_, __) => EditMissingView(),
+      viewModel: EditMissingViewModel(docId: docid),
+    );
+  }
 }
+
 class EditMissingView extends HookView<EditMissingViewModel> {
-  const EditMissingView({Key? key, reactive = true});
+  EditMissingView({Key? key, reactive = true});
   @override
   Widget render(context, viewModel) {
     return Scaffold(
@@ -44,7 +49,13 @@ class EditMissingView extends HookView<EditMissingViewModel> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 3,),
+                Text(
+                  viewModel.docId,
+                  style: TextStyle(color: Colors.black),
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
                 MainFormField(
                   textInputType: TextInputType.text,
                   controller: viewModel.fatherName,
@@ -82,9 +93,8 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                 MainFormField(
                   textInputType: TextInputType.number,
                   controller: viewModel.fatherPhoneNumber,
-                  labelText:'رقم تليفون الاب / الوصي',
-                  validator:
-                      (value) {
+                  labelText: 'رقم تليفون الاب / الوصي',
+                  validator: (value) {
                     if (value!.length > 11) {
                       return "لا يمكن ان يكون اكثر من 11 رقم";
                     }
@@ -100,8 +110,7 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                 MainFormField(
                   controller: viewModel.nameOfMissing,
                   textInputType: TextInputType.text,
-
-                  labelText:'إسم الطفل',
+                  labelText: 'إسم الطفل',
                   validator: (value) {
                     if (value!.length > 100) {
                       return "لا يمكن ان يكون اكثر من 100 حرف";
@@ -118,9 +127,8 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                 MainFormField(
                   textInputType: TextInputType.number,
                   controller: viewModel.ageOfMissing,
-                  labelText:'عمر الطفل',
-                  validator:
-                      (value) {
+                  labelText: 'عمر الطفل',
+                  validator: (value) {
                     if (value!.length > 3) {
                       return "لا يمكن ان يكون اكثر من 3 ارقام";
                     }
@@ -134,13 +142,10 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                   height: 13,
                 ),
                 MainFormField(
-
                   textInputType: TextInputType.text,
-
                   controller: viewModel.placesOfMissing,
-                  labelText:'مكان فقد الطفل',
-                  validator:
-                      (value) {
+                  labelText: 'مكان فقد الطفل',
+                  validator: (value) {
                     if (value!.length > 100) {
                       return "لا يمكن ان يكون اكثر من 100 حرف";
                     }
@@ -155,20 +160,16 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                 ),
                 MainFormField(
                   textInputType: TextInputType.datetime,
-
                   controller: viewModel.dateOfMissing,
-                  labelText:'تاريخ فقد الطفل',
+                  labelText: 'تاريخ فقد الطفل',
                 ),
-
                 const SizedBox(
                   height: 13,
                 ),
-                MainFormField (
+                MainFormField(
                   textInputType: TextInputType.number,
-
                   controller: viewModel.heightOfMissing,
-                  labelText:'طول الطفل (اختياري)',
-
+                  labelText: 'طول الطفل (اختياري)',
                 ),
                 Column(
                   children: [
@@ -205,16 +206,13 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                     ),
                   ],
                 ),
-                MainButton(
-                    "الإبلاغ عن العثور علي طفل", bgColor: AppColors.blackColor, () async {
+                MainButton(" عن العثور علي طفل", bgColor: AppColors.blackColor,
+                    () async {
                   viewModel.editMissing();
-
-
                 })
               ],
             ).setPageHorizontalPadding(context),
           ),
-        )
-    );
+        ));
   }
 }
