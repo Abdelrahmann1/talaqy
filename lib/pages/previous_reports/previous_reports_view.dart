@@ -119,7 +119,7 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                   }),
               Column(
                 children: const [
-                  Text("kosomk")
+                  Text("AAA")
                 ],
               )
             ],
