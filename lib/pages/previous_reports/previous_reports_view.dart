@@ -6,6 +6,7 @@ import 'package:talaqy/pages/previous_reports/previous_reports_view_model.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import '../../widgets/reports_card.dart';
 import '../people_status/add_missing/edit_missing_view.dart';
+
 class PreviousReportsScreen extends StatelessWidget {
   const PreviousReportsScreen({Key? key}) : super(key: key);
   @override
@@ -16,6 +17,7 @@ class PreviousReportsScreen extends StatelessWidget {
     );
   }
 }
+
 class PreviousReportsView extends HookView<PreviousReportsViewModel> {
   const PreviousReportsView({Key? key, reactive = true});
 
@@ -91,20 +93,35 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                         .data!.docs[index]["placesOfMissing"]
                                         .toString(),
                                     onTapEdit: () {
-                                   Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                                     return EditMissingScreen(docid: snapshot.data!.docs[index].id,);
-                                   }));
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(builder: (context) {
+                                        return EditMissingScreen(
+                                          docid: snapshot.data!.docs[index].id,
+                                          list: snapshot.data!.docs[index],
+                                        );
+                                      }));
                                     },
-                                    onTapDelete: () {},
+                                    onTapDelete: () async{
+                                      await viewModel.addMissingRef.doc(snapshot.data!.docs[index].id).delete();},
                                     docId: snapshot.data!.docs[index].id,
+                                    list: snapshot.data!.docs[index],
                                   )
                                 ],
                               ),
                             );
                           });
                     }
+                     if (snapshot.data!.docs.isEmpty){
+                       Text("a",style: TextStyle(color: Colors.white),);
+                     }
+                    
                     return const Center(child: CircularProgressIndicator());
-                  })
+                  }),
+              Column(
+                children: const [
+                  Text("kosomk")
+                ],
+              )
             ],
           ),
         ),

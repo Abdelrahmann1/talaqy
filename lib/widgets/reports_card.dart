@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:talaqy/utils/app_colors.dart';
 
 class ReportsCards extends StatelessWidget {
+  var list;
   String docId;
   String nameOfMissing;
   String dateOfMissing;
@@ -10,7 +11,7 @@ class ReportsCards extends StatelessWidget {
   String dateOfBirthOfMissing;
   final Function onTapEdit;
   final Function onTapDelete;
-   ReportsCards( {Key? key ,required this.dateOfMissing,required this.docId ,required this.nameOfMissing,required this.dateOfBirthOfMissing,required this.ageOfMissing,required this.placeOfMissing, required this.onTapEdit, required this.onTapDelete}) : super(key: key);
+   ReportsCards( {Key? key ,required this.dateOfMissing,required this.docId ,required this.nameOfMissing,required this.dateOfBirthOfMissing,required this.ageOfMissing,required this.placeOfMissing, required this.onTapEdit, required this.onTapDelete,required this.list}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return

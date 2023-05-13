@@ -32,7 +32,7 @@ class AddMissingPeopleViewModel extends ViewModel {
         "heightOfMissing": heightOfMissing.text,
         "userId":FirebaseAuth.instance.currentUser!.uid,
       });
-      Navigator.pushNamed(context, AppRouter.successfulmessage);
+      Navigator.pushNamed(context, AppRouter.successfulMessage);
     }
   }
 }

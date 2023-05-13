@@ -8,16 +8,16 @@ import 'edit_missing_view_model.dart';
 
 class EditMissingScreen extends StatelessWidget {
   var docid;
-  EditMissingScreen({Key? key, this.docid}) : super(key: key);
+  var list;
+  EditMissingScreen({Key? key, this.docid,this.list}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MVVM(
       view: (_, __) => EditMissingView(),
-      viewModel: EditMissingViewModel(docId: docid),
+      viewModel: EditMissingViewModel(docId: docid,list: list),
     );
   }
 }
-
 class EditMissingView extends HookView<EditMissingViewModel> {
   EditMissingView({Key? key, reactive = true});
   @override
@@ -49,14 +49,11 @@ class EditMissingView extends HookView<EditMissingViewModel> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Text(
-                  viewModel.docId,
-                  style: TextStyle(color: Colors.black),
-                ),
                 const SizedBox(
                   height: 3,
                 ),
                 MainFormField(
+                  // initialValue: viewModel.list["fatherName"].toString(),
                   textInputType: TextInputType.text,
                   controller: viewModel.fatherName,
                   labelText: 'اسم الأب / الوصي *',
@@ -74,6 +71,7 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                   height: 13,
                 ),
                 MainFormField(
+                  // initialValue: viewModel.list["fatherId"].toString(),
                   textInputType: TextInputType.number,
                   controller: viewModel.fatherId,
                   labelText: 'رقم بطاقة الاب / الوصي',
@@ -91,6 +89,8 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                   height: 13,
                 ),
                 MainFormField(
+                  // initialValue: viewModel.list["fatherPhoneNumber"].toString(),
+
                   textInputType: TextInputType.number,
                   controller: viewModel.fatherPhoneNumber,
                   labelText: 'رقم تليفون الاب / الوصي',
@@ -108,6 +108,8 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                   height: 13,
                 ),
                 MainFormField(
+                  // initialValue: viewModel.list["nameOfMissing"].toString(),
+
                   controller: viewModel.nameOfMissing,
                   textInputType: TextInputType.text,
                   labelText: 'إسم الطفل',
@@ -125,6 +127,8 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                   height: 13,
                 ),
                 MainFormField(
+                  // initialValue: viewModel.list["ageOfMissing"].toString(),
+
                   textInputType: TextInputType.number,
                   controller: viewModel.ageOfMissing,
                   labelText: 'عمر الطفل',
@@ -142,6 +146,8 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                   height: 13,
                 ),
                 MainFormField(
+                  // initialValue: viewModel.list["placesOfMissing"].toString(),
+
                   textInputType: TextInputType.text,
                   controller: viewModel.placesOfMissing,
                   labelText: 'مكان فقد الطفل',
@@ -159,6 +165,8 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                   height: 13,
                 ),
                 MainFormField(
+                  // initialValue: viewModel.list["dateOfMissing"].toString(),
+
                   textInputType: TextInputType.datetime,
                   controller: viewModel.dateOfMissing,
                   labelText: 'تاريخ فقد الطفل',
@@ -167,6 +175,7 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                   height: 13,
                 ),
                 MainFormField(
+                  // initialValue: viewModel.list["heightOfMissing"].toString(),
                   textInputType: TextInputType.number,
                   controller: viewModel.heightOfMissing,
                   labelText: 'طول الطفل (اختياري)',
@@ -206,7 +215,7 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                     ),
                   ],
                 ),
-                MainButton(" عن العثور علي طفل", bgColor: AppColors.blackColor,
+                MainButton(" تعديل البيانات", bgColor: AppColors.blackColor,
                     () async {
                   viewModel.editMissing();
                 })

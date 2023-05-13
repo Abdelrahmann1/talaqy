@@ -7,7 +7,53 @@ import 'package:talaqy/widgets/show_loading.dart';
 import '../../../utils/app_router.dart';
 class EditMissingViewModel extends ViewModel {
   var docId;
-  EditMissingViewModel({required this.docId});
+  var list;
+  String? fatherNameEdite;
+  EditMissingViewModel({required this.docId,required this.list});
+  @override
+  void init() {
+    setFatherName();
+    setFatherId();
+    setFatherPhoneNumber();
+    setNameOfMissing();
+    setAgeOfMissing();
+    setDateOfMissing();
+    setPlacesOfMissing();
+    setHeightOfMissing();
+    super.init();
+  }
+  setFatherName(){
+    fatherName.text=list["fatherName"];
+    notifyListeners();
+  }
+  setFatherId(){
+    fatherId.text=list["fatherId"];
+    notifyListeners();
+  }
+  setFatherPhoneNumber(){
+    fatherPhoneNumber.text=list["fatherPhoneNumber"];
+    notifyListeners();
+  }
+  setNameOfMissing(){
+    nameOfMissing.text=list["nameOfMissing"];
+    notifyListeners();
+  }
+  setAgeOfMissing(){
+    ageOfMissing.text=list["ageOfMissing"];
+    notifyListeners();
+  }
+  setPlacesOfMissing(){
+    placesOfMissing.text=list["placesOfMissing"];
+    notifyListeners();
+  }
+  setDateOfMissing(){
+    dateOfMissing.text=list["dateOfMissing"];
+    notifyListeners();
+  }
+  setHeightOfMissing(){
+    heightOfMissing.text=list["heightOfMissing"];
+    notifyListeners();
+  }
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController fatherName = TextEditingController();
   TextEditingController fatherId = TextEditingController();
@@ -36,7 +82,7 @@ class EditMissingViewModel extends ViewModel {
         "heightOfMissing": heightOfMissing.text,
         "userId":FirebaseAuth.instance.currentUser!.uid,
       });
-      Navigator.pushNamed(context, AppRouter.successfulmessage);
+      Navigator.pushNamed(context, AppRouter.successfulEditMessage);
     }
   }
 }

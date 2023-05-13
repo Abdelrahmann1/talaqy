@@ -16,9 +16,10 @@ class AppRouter{
   static const String registerScreen = "/RegisterScreen";
   static const String homeScreen = "/HomeScreen";
   static const String addMissingScreen = "/AddMissingScreen";
-  static const String addFoundedScreen = "/addFoundedScreen";
-  static const String successfulmessage = "/successfulmessage";
-  static const String editMissingScreen = "/editMissingScreen";
+  static const String addFoundedScreen = "/AddFoundedScreen";
+  static const String successfulMessage = "/SuccessfulMessage";
+  static const String editMissingScreen = "/EditMissingScreen";
+  static const String successfulEditMessage = "/SuccessfulEditMessage";
   Map<String, WidgetBuilder> routes() {
     return {
       AppRouter.splashScreen: (context) =>  const SplashScreen(),
@@ -27,7 +28,8 @@ class AppRouter{
       AppRouter.registerScreen: (context) =>  const RegisterScreen(),
       AppRouter.homeScreen: (context) =>  const HomeScreen(),
       AppRouter.addMissingScreen: (context) =>  const AddMissingPeople(),
-      AppRouter.successfulmessage: (context) =>  const SuccessfulMessage(),
+      AppRouter.successfulMessage: (context) =>  const SuccessfulMessage(),
       AppRouter.editMissingScreen: (context) =>   EditMissingScreen(),
+      AppRouter.successfulEditMessage: (context) =>   EditMissingScreen(),
     };
   }}

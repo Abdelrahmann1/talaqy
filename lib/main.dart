@@ -52,8 +52,7 @@ class MyApp extends StatelessWidget {
             ),
             home: StreamBuilder(
                 stream: FirebaseAuth.instance.userChanges(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                builder:(BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.hasData) {
                     return const PreviousReportsScreen();
                   } else {

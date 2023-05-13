@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 class MainFormField extends StatelessWidget {
+  final String? initialValue;
   final  TextEditingController controller;
   final TextInputType? textInputType;
   final  String labelText ;
   final String? Function(String?)? validator;
-  const MainFormField({Key? key, required this.controller, this.validator, required this.labelText, this.textInputType}) : super(key: key);
+  const MainFormField({Key? key, required this.controller, this.validator,this.initialValue, required this.labelText, this.textInputType,  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextFormField(
+        initialValue:initialValue,
         validator:validator,
         controller: controller,
         textAlign: TextAlign.right,
