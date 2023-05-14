@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +16,20 @@ class AddMissingPeopleViewModel extends ViewModel {
   TextEditingController placesOfMissing = TextEditingController();
   TextEditingController dateOfMissing = TextEditingController();
   TextEditingController heightOfMissing = TextEditingController();
+  DateTime? pickedDate;
   CollectionReference addMissingRef =
-      FirebaseFirestore.instance.collection("Missing People");
+  FirebaseFirestore.instance.collection("Missing People");
+  setDateTime()async{
+    pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2030));
+    {
+        dateOfMissing = pickedDate as TextEditingController;
+        notifyListeners();
+    }
+  }
   addMissing() async {
     var formData = formKey.currentState;
     if (formData!.validate()) {
@@ -30,7 +44,7 @@ class AddMissingPeopleViewModel extends ViewModel {
         "ageOfMissing": ageOfMissing.text,
         "placesOfMissing": placesOfMissing.text,
         "heightOfMissing": heightOfMissing.text,
-        "userId":FirebaseAuth.instance.currentUser!.uid,
+        "userId": FirebaseAuth.instance.currentUser!.uid,
       });
       Navigator.pushNamed(context, AppRouter.successfulMessage);
     }

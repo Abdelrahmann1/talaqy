@@ -116,7 +116,10 @@ class HomeView extends HookView<HomeViewModel> {
                               ),
                               MainButton(
                                 "الإبلاغ عن موجود",
-                                () {},
+                                () {
+                                  Navigator.pushNamed(context, AppRouter.addFoundedScreen);
+
+                                },
                                 bgColor: AppColors.primaryColor,
                               ),
                             ],
@@ -194,14 +197,14 @@ class HomeView extends HookView<HomeViewModel> {
                                     child: MissingContainer(
                                       onTap: () {},
                                       borderColor: Colors.blue,
-                                      ticketType: "ss",
-                                      price: "",
-                                      dateTime: "",
-                                      nameOfLine: "",
-                                      arrivalPoint: "",
-                                      bookingDate: "",
-                                      NameOfMissing: snapshot
+                                      ageOfMissing: snapshot
+                                          .data!.docs[index]["ageOfMissing"]
+                                          .toString(),
+                                      nameOfMissing: snapshot
                                           .data!.docs[index]["nameOfMissing"]
+                                          .toString(),
+                                      placesOfMissing: snapshot
+                                          .data!.docs[index]["placesOfMissing"]
                                           .toString(),
                                     )),
                               ),
@@ -214,54 +217,65 @@ class HomeView extends HookView<HomeViewModel> {
                   return const Center(child: CircularProgressIndicator());
                 },
               ),
-              AnimationLimiter(
-                child: ListView.builder(
-                  padding: EdgeInsets.all(_w / 25),
-                  physics: const BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  itemCount: 10,
-                  itemBuilder: (BuildContext context, int index) {
+              FutureBuilder(
+                future: viewModel.addFoundedRef.get(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+                  if (snapshot.hasData) {
                     return
-                      AnimationConfiguration.staggeredList(
-                      position: index,
-                      delay: const Duration(milliseconds: 100),
-                      child: SlideAnimation(
-                        duration: const Duration(milliseconds: 2500),
-                        curve: Curves.fastLinearToSlowEaseIn,
-                        child: FadeInAnimation(
-                          curve: Curves.fastLinearToSlowEaseIn,
-                          duration: const Duration(milliseconds: 2500),
-                          child: Container(
-                              margin: EdgeInsets.only(bottom: _w / 20),
-                              height: _w / 3,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
-                                    blurRadius: 40,
-                                    spreadRadius: 10,
-                                  ),
-                                ],
+                      AnimationLimiter(
+                      child: ListView.builder(
+                        padding: EdgeInsets.all(_w / 25),
+                        physics: const BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return AnimationConfiguration.staggeredList(
+                            position: index,
+                            delay: const Duration(milliseconds: 100),
+                            child: SlideAnimation(
+                              duration: const Duration(milliseconds: 2500),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              child: FadeInAnimation(
+                                curve: Curves.fastLinearToSlowEaseIn,
+                                duration: const Duration(milliseconds: 2500),
+                                child:
+                                Container(
+                                    margin: EdgeInsets.only(bottom: _w / 20),
+                                    height: _w / 3,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 40,
+                                          spreadRadius: 10,
+                                        ),
+                                      ],
+                                    ),
+                                    child: FoundedPeopleContainer(
+                                      onTap: () {},
+                                      borderColor: Colors.blue,
+                                      price: "",
+                                      dateTime: "",
+                                      bookingDate: "",
+                                      nameOfFounded: snapshot.data!.docs[index]["nameOfChild"],
+                                      dateOfReported: snapshot.data!.docs[index]["nameOfChild"],
+                                      placesOfChild:snapshot.data!.docs[index]["placesOfChild"],
+                                      ageOfChild: snapshot.data!.docs[index]["ageOfChild"],
+                                    )
+                                ),
                               ),
-                              child: FoundedPeopleContainer(
-                                onTap: () {},
-                                borderColor: Colors.blue,
-                                invoicesNumber: "aa",
-                                ticketType: "ss",
-                                price: "",
-                                dateTime: "",
-                                nameOfLine: "",
-                                arrivalPoint: "",
-                                bookingDate: "",
-                              )),
-                        ),
+                            ),
+                          );
+                        },
                       ),
                     );
-                  },
-                ),
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                },
               ),
             ],
           ),

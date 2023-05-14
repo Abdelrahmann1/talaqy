@@ -6,6 +6,8 @@ class HomeViewModel extends ViewModel {
   int currentIndex = 0;
  final  CollectionReference addMissingRef =
   FirebaseFirestore.instance.collection("Missing People");
+ final  CollectionReference addFoundedRef =
+  FirebaseFirestore.instance.collection("Founded People");
   final screens = [
     const HomeScreen(),
     const PreviousReportsScreen()

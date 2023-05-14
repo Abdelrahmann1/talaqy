@@ -153,8 +153,9 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                   height: 13,
                 ),
                 MainFormField(
-                  textInputType: TextInputType.datetime,
-
+                  onTap: ()async{
+                    viewModel.setDateTime();
+                  },
                   controller: viewModel.dateOfMissing,
                   labelText:'تاريخ فقد الطفل',
                 ),

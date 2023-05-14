@@ -2,15 +2,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:talaqy/pages/auth/login/login_view.dart';
+import 'package:talaqy/pages/home/home_view.dart';
 import 'package:talaqy/pages/previous_reports/previous_reports_view.dart';
 import 'package:talaqy/provider/auth_provider.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-   runApp(const MyApp());
+  runApp(const MyApp());
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,11 +21,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<UserProviderAuth>(
-              create: (context) => UserProviderAuth())],
-        child:MaterialApp(
+              create: (context) => UserProviderAuth())
+        ],
+        child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme:
-            ThemeData(
+            theme: ThemeData(
               fontFamily: "Alexandria",
               textTheme: const TextTheme(
                 displayLarge: TextStyle(
@@ -47,14 +49,16 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+              colorScheme:
+                  ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
               useMaterial3: true,
             ),
             home: StreamBuilder(
                 stream: FirebaseAuth.instance.userChanges(),
-                builder:(BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.hasData) {
-                    return const PreviousReportsScreen();
+                    return const HomeScreen();
                   } else {
                     return const LoginScreen();
                   }

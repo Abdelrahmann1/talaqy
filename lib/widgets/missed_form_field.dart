@@ -5,13 +5,16 @@ class MainFormField extends StatelessWidget {
   final  TextEditingController controller;
   final TextInputType? textInputType;
   final  String labelText ;
+  final Function? onTap;
+
   final String? Function(String?)? validator;
-  const MainFormField({Key? key, required this.controller, this.validator,this.initialValue, required this.labelText, this.textInputType,  }) : super(key: key);
+  const MainFormField({Key? key, required this.controller,this.onTap, this.validator,this.initialValue, required this.labelText, this.textInputType,  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextFormField(
+        onTap:onTap as void Function()? ,
         initialValue:initialValue,
         validator:validator,
         controller: controller,
