@@ -134,47 +134,321 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                 const SizedBox(
                   height: 13,
                 ),
-                Column(
-                  children: [
-                    const Text("الجنس", style: TextStyle(color: Colors.black)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Text(
-                          "ذكر",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        Radio(
-                            value: "aa",
-                            groupValue: "aa",
-                            onChanged: (value) {
-                              value = value;
-                            }),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Text(
-                          "ذكر",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        Radio(
-                            value: "aa",
-                            groupValue: "aa",
-                            onChanged: (value) {
-                              value = value;
-                            }),
-                      ],
-                    ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    Text(": الجنس",
+                        style: TextStyle(color: AppColors.fontSmoothGrey)),
                   ],
                 ),
-                MainButton(
-                    "الإبلاغ عن العثور علي طفل", bgColor: AppColors.blackColor, () async {
-                   viewModel.addFounded();
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "ذكر",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "ذكر",
+                        groupValue: viewModel.gender,
+                        onChanged: (value) {
+                          viewModel.setGender(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "أنثي",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "أنثي",
+                        groupValue: viewModel.gender,
+                        onChanged: (value) {
+                          viewModel.setGender(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    Text(" : لون البشرة",
+                        style: TextStyle(color: AppColors.fontSmoothGrey)),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "أسمر",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "أسمر",
+                        groupValue: viewModel.skinColor,
+                        onChanged: (value) {
+                          viewModel.setSkinColor(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "خمري",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "خمري",
+                        groupValue: viewModel.skinColor,
+                        onChanged: (value) {
+                          viewModel.setSkinColor(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "أبيض",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "أبيض",
+                        groupValue: viewModel.skinColor,
+                        onChanged: (value) {
+                          viewModel.setSkinColor(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    Text(" : لون العين",
+                        style: TextStyle(color: AppColors.fontSmoothGrey)),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "عسلي",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "عسلي",
+                        groupValue: viewModel.colorOfEye,
+                        onChanged: (value) {
+                          viewModel.setColorOfEye(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "خضراء",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "خضراء",
+                        groupValue: viewModel.colorOfEye,
+                        onChanged: (value) {
+                          viewModel.setColorOfEye(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "زرقاء",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "زرقاء",
+                        groupValue: viewModel.colorOfEye,
+                        onChanged: (value) {
+                          viewModel.setColorOfEye(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "سوداء",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "سوداء",
+                        groupValue: viewModel.colorOfEye,
+                        onChanged: (value) {
+                          viewModel.setColorOfEye(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    Text(": لون الشعر",
+                        style: TextStyle(color: AppColors.fontSmoothGrey)),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "أسود",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "أسود",
+                        groupValue: viewModel.hairColor,
+                        onChanged: (value) {
+                          viewModel.setHairColor(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "أشقر",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "أشقر",
+                        groupValue: viewModel.hairColor,
+                        onChanged: (value) {
+                          viewModel.setHairColor(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "بني",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "بني",
+                        groupValue: viewModel.hairColor,
+                        onChanged: (value) {
+                          viewModel.setHairColor(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    Text("هل الطفل من ذوي الاحتياجات الخاصة ؟",
+                        style: TextStyle(color: AppColors.fontSmoothGrey)),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "نعم",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "نعم",
+                        groupValue: viewModel.specialNeeds,
+                        onChanged: (value) {
+                          viewModel.setSpecialNeeds(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "لا",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "لا",
+                        groupValue: viewModel.specialNeeds,
+                        onChanged: (value) {
+                          viewModel.setSpecialNeeds(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    Text("هل يستطيع الطفل اخبار اسمه ؟",
+                        style: TextStyle(
+                          color: AppColors.fontSmoothGrey,
+                        )),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "نعم",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "نعم",
+                        groupValue: viewModel.canTalkHisName,
+                        onChanged: (value) {
+                          viewModel.setCanTalk(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "لا",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "لا",
+                        groupValue: viewModel.canTalkHisName,
+                        onChanged: (value) {
+                          viewModel.setCanTalk(value);
+                        }),
+                  ],
+                ),
+                Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextFormField(
+                      controller: viewModel.moreDetails,
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          labelText: "كتابة ملحوظة",
+                          fillColor: Colors.white,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            borderSide: const BorderSide(
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            borderSide: const BorderSide(
+                              color: AppColors.fontSmoothGrey,
+                              width: 2.0,
+                            ),
+                          ),
+                        ))),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: MainButton(
+                      "الإبلاغ عن العثور علي طفل", bgColor: AppColors.blackColor, () async {
+                     viewModel.addFounded();
 
 
-                })
+                  }),
+                )
               ],
             ).setPageHorizontalPadding(context),
           ),

@@ -133,6 +133,7 @@ class HomeView extends HookView<HomeViewModel> {
           ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: viewModel.currentIndex,
+            unselectedItemColor: AppColors.blackColor,
             selectedItemColor: AppColors.primaryColor,
             type: BottomNavigationBarType.fixed,
             backgroundColor: AppColors.white,
@@ -145,11 +146,11 @@ class HomeView extends HookView<HomeViewModel> {
             items: const [
               BottomNavigationBarItem(
                   icon: Icon(Icons.home),
-                  label: 'Home',
-                  backgroundColor: Colors.red),
+                  label: 'الرئيسية',
+                  backgroundColor: Colors.black),
               BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: 'Search',
+                icon: Icon(Icons.dehaze_rounded),
+                label: 'منشوراتي',
               ),
             ],
           ),

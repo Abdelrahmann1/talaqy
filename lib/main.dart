@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:talaqy/pages/auth/login/login_view.dart';
 import 'package:talaqy/pages/home/home_view.dart';
-import 'package:talaqy/pages/previous_reports/previous_reports_view.dart';
 import 'package:talaqy/provider/auth_provider.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';

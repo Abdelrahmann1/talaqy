@@ -112,7 +112,7 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                           });
                     }
                      if (snapshot.data!.docs.isEmpty){
-                       Text("a",style: TextStyle(color: Colors.white),);
+                       const Text("a",style: TextStyle(color: Colors.white),);
                      }
                     
                     return const Center(child: CircularProgressIndicator());

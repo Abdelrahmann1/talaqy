@@ -11,6 +11,37 @@ class AddFoundedPeopleViewModel extends ViewModel {
   TextEditingController clothesOfChild = TextEditingController();
   TextEditingController placesOfChild = TextEditingController();
   TextEditingController phoneNumberOfReported = TextEditingController();
+  TextEditingController moreDetails = TextEditingController();
+  String? gender;
+  String? skinColor;
+  String? colorOfEye;
+  String? hairColor;
+  String? specialNeeds;
+  String? canTalkHisName;
+  setGender(val){
+    gender = val;
+    notifyListeners();
+  }
+  setSkinColor(val){
+    skinColor = val;
+    notifyListeners();
+  }
+  setColorOfEye(val){
+    colorOfEye = val;
+    notifyListeners();
+  }
+  setHairColor(val){
+    hairColor = val;
+    notifyListeners();
+  }
+  setSpecialNeeds(val){
+    specialNeeds = val;
+    notifyListeners();
+  }
+  setCanTalk(val){
+    canTalkHisName = val;
+    notifyListeners();
+  }
   CollectionReference addMissingRef =
   FirebaseFirestore.instance.collection("Founded People");
   Future addFounded() async {
@@ -24,6 +55,13 @@ class AddFoundedPeopleViewModel extends ViewModel {
         "clothesOfChild": clothesOfChild.text,
         "placesOfChild": placesOfChild.text,
         "phoneNumberOfReported": phoneNumberOfReported.text,
+        "gender": gender.toString(),
+        "skinColor": skinColor.toString(),
+        "colorOfEye": colorOfEye.toString(),
+        "hairColor": hairColor.toString(),
+        "specialNeeds": specialNeeds.toString(),
+        "canTalkHisName": canTalkHisName.toString(),
+        "moreDetails": moreDetails.text,
         "userId":FirebaseAuth.instance.currentUser!.uid,
       });
       Navigator.pushNamed(context, AppRouter.successfulMessage);
