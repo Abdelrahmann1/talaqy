@@ -47,6 +47,7 @@ class OnBoardingView extends HookView<OnBoardingViewModel> {
                             const SizedBox(
                               height: 40,
                             ),
+
                             Image.asset(
                               onBoardingList[i].image!.toString(),
                               height:250,

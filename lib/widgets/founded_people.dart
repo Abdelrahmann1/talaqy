@@ -10,10 +10,14 @@ class FoundedPeopleContainer extends StatelessWidget {
   final String bookingDate;
   final Color borderColor;
   final Function? onTap;
-  const FoundedPeopleContainer({
+  var list;
+  String docId;
+   FoundedPeopleContainer({
     super.key,
     this.onTap,
     required this.borderColor,
+    required this.docId,
+    required this.list,
     required this.placesOfChild,
     required this.price,
     required this.dateTime,

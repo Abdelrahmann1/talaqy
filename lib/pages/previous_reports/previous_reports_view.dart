@@ -30,17 +30,6 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
           appBar: AppBar(
             backgroundColor: AppColors.white,
             elevation: 0,
-            actions: [
-              IconButton(
-                icon: const Icon(
-                  Icons.arrow_forward,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
             bottom: const TabBar(
               tabs: [
                 Tab(
@@ -60,14 +49,34 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
           backgroundColor: AppColors.backgroundGrey,
           body: TabBarView(
             children: [
+              viewModel.data==null?
+          Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                  children:[
+                    const Text(
+                      'لا توجد بلاغات سابقة',
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: AppColors.blackColor,
+                      ),
+                    ),SizedBox(height: 20,),
+                    Image.asset(
+                      'assets/images/notfound.png',
+                      width: 300,
+                    )])
+            ],
+          )
+
+                :
               FutureBuilder(
-                  future: viewModel.addMissingRef
-                      .where("userId",
-                          isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-                      .get(),
+                  future: viewModel.addMissingRef.where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).get(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
-                    if (snapshot.hasData) {
+                    viewModel.data = snapshot.data!;
+
+                    if (viewModel.data!.docs.isNotEmpty) {
                       return ListView.builder(
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -94,6 +103,82 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                         .toString(),
                                     onTapEdit: () {
                                       Navigator.of(context).push(
+                                            MaterialPageRoute(builder: (context) {
+                                        return EditMissingScreen(
+                                          docid: snapshot.data!.docs[index].id,
+                                          list: snapshot.data!.docs[index],
+                                        );
+                                      }));
+                                    },
+                                    onTapDelete: () async{
+                                      await viewModel.addMissingRef.doc(snapshot.data!.docs[index].id).delete();},
+                                    docId: snapshot.data!.docs[index].id,
+                                    list: snapshot.data!.docs[index],
+                                    statusOfChild: 'متغيب من',
+                                  )
+                                ],
+                              ),
+                            );
+                          });
+                    }
+                    if (snapshot.data!.docs.isEmpty){
+                      return
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                                children:[
+                                  const Text(
+                                    'لا توجد بلاغات سابقة',
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      color: AppColors.blackColor,
+                                    ),
+                                  ),SizedBox(height: 20,),
+                                  Image.asset(
+                                    'assets/images/notfound.png',
+                                    width: 300,
+                                  )])
+                          ],
+                        );
+                    }
+
+                    return const Center(child: CircularProgressIndicator());
+                  }),
+              FutureBuilder(
+                  future: viewModel.addFoundedRef
+                      .where("userId",
+                          isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                      .get(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+                    if (snapshot.data!.docs.isNotEmpty) {
+                      return ListView.builder(
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 8.0, bottom: 8),
+                              child: Column(
+                                children: [
+                                  ReportsCards(
+                                    dateOfMissing: snapshot
+                                        .data!.docs[index]["ageOfChild"]
+                                        .toString(),
+                                    nameOfMissing: snapshot
+                                        .data!.docs[index]["ageOfChild"]
+                                        .toString(),
+                                    dateOfBirthOfMissing: snapshot
+                                        .data!.docs[index]["ageOfChild"]
+                                        .toString(),
+                                    ageOfMissing: snapshot
+                                        .data!.docs[index]["ageOfChild"]
+                                        .toString(),
+                                    placeOfMissing: snapshot
+                                        .data!.docs[index]["ageOfChild"]
+                                        .toString(),
+                                    onTapEdit: () {
+                                      Navigator.of(context).push(
                                           MaterialPageRoute(builder: (context) {
                                         return EditMissingScreen(
                                           docid: snapshot.data!.docs[index].id,
@@ -105,23 +190,37 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                       await viewModel.addMissingRef.doc(snapshot.data!.docs[index].id).delete();},
                                     docId: snapshot.data!.docs[index].id,
                                     list: snapshot.data!.docs[index],
+                                    statusOfChild: 'موجود',
                                   )
                                 ],
                               ),
                             );
                           });
                     }
-                     if (snapshot.data!.docs.isEmpty){
-                       const Text("a",style: TextStyle(color: Colors.white),);
-                     }
-                    
+                    if (snapshot.data!.docs.isEmpty){
+                      return
+                        Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                              children:[
+                                const Text(
+                                  'لا توجد بلاغات سابقة',
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    color: AppColors.blackColor,
+                                ),
+                                ),SizedBox(height: 20,),
+                                Image.asset(
+                                  'assets/images/notfound.png',
+                                  width: 300,
+                                )])
+                        ],
+                      );
+                    }
+
                     return const Center(child: CircularProgressIndicator());
                   }),
-              Column(
-                children: const [
-                  Text("AAA")
-                ],
-              )
             ],
           ),
         ),

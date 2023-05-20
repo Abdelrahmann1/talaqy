@@ -11,6 +11,8 @@ class SignUpViewModel extends ViewModel {
   TextEditingController fullName = TextEditingController();
   TextEditingController passWord = TextEditingController();
   TextEditingController email = TextEditingController();
+  TextEditingController phoneNumber = TextEditingController();
+
   setCheckBoxValue(dynamic newBool) {
     isChecked = newBool;
     notifyListeners();
@@ -23,6 +25,7 @@ class SignUpViewModel extends ViewModel {
     FirebaseFirestore.instance.collection("users").add({
       "userName":fullName.text,
       "email":email.text,
+      "PhoneNumber":phoneNumber.text,
     })
         .then((value) => print('User data saved to Firestore'))
         .catchError((error) => print('Failed to save user data: $error'));

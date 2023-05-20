@@ -9,7 +9,8 @@ class MainButton extends StatelessWidget {
       {super.key, this.bgColor, this.textColor});
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return
+      SizedBox(
       width: MediaQuery.of(context).size.width / 1.2,
       height: 45,
       child: ElevatedButton(

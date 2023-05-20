@@ -36,7 +36,10 @@ class LoginViewModel extends ViewModel {
       print("Not Valid");
     }
     try {
+
       showLoading(context);
+      Navigator.of(context).pop();
+
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       return userCredential;

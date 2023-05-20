@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pmvvm/pmvvm.dart';
+
 import 'package:talaqy/extentions/padding_ext.dart';
 import 'package:talaqy/pages/people_status/add_missing/add_missing_people_view_model.dart';
 import 'package:talaqy/utils/app_colors.dart';
@@ -8,6 +12,7 @@ import '../../../widgets/missed_form_field.dart';
 
 class AddMissingPeople extends StatelessWidget {
   const AddMissingPeople({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MVVM(
@@ -21,6 +26,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
   const AddMissingPeopleView({Key? key, reactive = true});
   @override
   Widget render(context, viewModel) {
+
     return Scaffold(
         backgroundColor: AppColors.white,
         appBar: AppBar(
@@ -37,6 +43,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
               },
             ),
           ],
+          leading: Container(),
           centerTitle: true,
           title: Text(
             'الإبلاغ عن طفل مفقود',
@@ -48,7 +55,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 3,
                 ),
                 MainFormField(
@@ -88,7 +95,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                 MainFormField(
                   textInputType: TextInputType.number,
                   controller: viewModel.fatherPhoneNumber,
-                  labelText: 'رقم تليفون الاب / الوصي',
+                  labelText: 'رقم تليفون ',
                   validator: (value) {
                     if (value!.length > 11) {
                       return "لا يمكن ان يكون اكثر من 11 رقم";
@@ -153,12 +160,15 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                 const SizedBox(
                   height: 13,
                 ),
-                MainFormField(
-                  onTap: () async {
-                    viewModel.setDateTime();
-                  },
-                  controller: viewModel.dateOfMissing,
-                  labelText: 'تاريخ فقد الطفل',
+                GestureDetector(
+                  onTap:()=>viewModel.setDateTime(context),
+                  child: AbsorbPointer(
+                    child: MainFormField(
+                      readonly: true,
+                      controller: viewModel.dateOfMissing,
+                      labelText: 'تاريخ فقد الطفل' ,
+                    ),
+                  ),
                 ),
                 const SizedBox(
                   height: 13,
@@ -452,6 +462,123 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                         }),
                   ],
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    Text("إرفاق صورة",
+                        style: TextStyle(
+                          color: AppColors.blackColor,
+                        )),
+                  ],
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          viewModel.pickedImage!=null?
+                           Padding(
+                             padding: const EdgeInsets.all(8.0),
+                             child: Container(
+                               decoration: BoxDecoration(
+                                 borderRadius: BorderRadius.circular(20),
+                                 border: Border.all(color: Colors.black,width: 3),
+                               ),
+                              width: 150.00,
+                              height: 150,
+                              child:const Center(child: Text("تم اضافه الصوره",style: TextStyle(color: Colors.black),))
+
+                          ),
+                           ):
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: InkWell(
+                              onTap: ()async{
+                                viewModel.pickImage();
+                              },
+                              child: Container(
+                                width:150,
+                                height: 150,
+                                color: AppColors.backgroundGrey,
+                                child: const Icon(Icons.add,color: AppColors.white,size: 100,),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          viewModel.pickedImage3!=null?
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(color: Colors.black,width: 3),
+                                ),
+                                width: 150.00,
+                                height: 150,
+                                child:const Center(child: Text("تم اضافه الصوره",style: TextStyle(color: Colors.black),))
+
+                            ),
+                          ):
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: InkWell(
+                              onTap: ()async{
+                                viewModel.pickImage3();
+                              },
+                              child: Container(
+                                width:150,
+                                height: 150,
+                                color: AppColors.backgroundGrey,
+                                child: const Icon(Icons.add,color: AppColors.white,size: 100,),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          viewModel.pickedImage2!=null?
+                           Padding(
+                             padding: const EdgeInsets.all(8.0),
+                             child: Container(
+                               decoration: BoxDecoration(
+                                 borderRadius: BorderRadius.circular(20),
+                                 border: Border.all(color: Colors.black,width: 3),
+                               ),
+                              width: 150.00,
+                              height: 150,
+                              child:const Center(child: Text("تم اضافه الصوره",style: TextStyle(color: Colors.black),))
+
+                          ),
+                           ):
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: InkWell(
+                              onTap: ()async{
+                                viewModel.pickImage2();
+                              },
+                              child: Container(
+                                width:150,
+                                height: 150,
+                                color: AppColors.backgroundGrey,
+                                child: const Icon(Icons.add,color: AppColors.white,size: 100,),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
                 Directionality(
                     textDirection: TextDirection.rtl,
                     child: TextFormField(
@@ -478,7 +605,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                   padding: const EdgeInsets.all(10.0),
                   child: MainButton("الإبلاغ عن العثور علي طفل",
                       bgColor: AppColors.blackColor, () async {
-                    viewModel.addMissing();
+                    viewModel.addMissing(context);
                   }),
                 ),
               ],

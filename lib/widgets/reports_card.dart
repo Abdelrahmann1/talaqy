@@ -4,6 +4,7 @@ import 'package:talaqy/utils/app_colors.dart';
 class ReportsCards extends StatelessWidget {
   var list;
   String docId;
+  String statusOfChild;
   String nameOfMissing;
   String dateOfMissing;
   String placeOfMissing;
@@ -11,7 +12,7 @@ class ReportsCards extends StatelessWidget {
   String dateOfBirthOfMissing;
   final Function onTapEdit;
   final Function onTapDelete;
-   ReportsCards( {Key? key ,required this.dateOfMissing,required this.docId ,required this.nameOfMissing,required this.dateOfBirthOfMissing,required this.ageOfMissing,required this.placeOfMissing, required this.onTapEdit, required this.onTapDelete,required this.list}) : super(key: key);
+   ReportsCards( {Key? key ,required this.dateOfMissing,required this.docId ,required this.nameOfMissing,required this.dateOfBirthOfMissing,required this.ageOfMissing,required this.placeOfMissing, required this.onTapEdit, required this.onTapDelete,required this.list,required this.statusOfChild}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return
@@ -40,7 +41,8 @@ class ReportsCards extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 40.0,
-                  backgroundImage: NetworkImage('https://your-image-url.com'),
+                  backgroundImage:AssetImage("assets/images/person.jpg",),
+
                 ),
                 const SizedBox(
                   height: 5,
@@ -51,7 +53,7 @@ class ReportsCards extends StatelessWidget {
                   height: 8,
                 ),
 
-                Text("متغيب بتاريخ $dateOfMissing",
+                Text("$statusOfChild$dateOfMissing",
                     style: Theme.of(context).textTheme.displayMedium),
                 const SizedBox(
                   height: 8,

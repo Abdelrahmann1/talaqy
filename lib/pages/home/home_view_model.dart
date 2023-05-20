@@ -1,15 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pmvvm/pmvvm.dart';
-import 'package:talaqy/pages/home/home_view.dart';
 import 'package:talaqy/pages/previous_reports/previous_reports_view.dart';
+import '../all_missing_and_founded_Screen/all_missing_and_foundedview.dart';
 class HomeViewModel extends ViewModel {
   int currentIndex = 0;
- final  CollectionReference addMissingRef =
-  FirebaseFirestore.instance.collection("Missing People");
- final  CollectionReference addFoundedRef =
-  FirebaseFirestore.instance.collection("Founded People");
+
   final screens = [
-    const HomeScreen(),
+    const AllMissingAndFoundedScreen(),
     const PreviousReportsScreen()
   ];
   onPageChanged( index) {

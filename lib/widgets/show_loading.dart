@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 showLoading(context) {
-  return showDialog(
+  return
+    showDialog(
       context: context,
       builder: (context) {
-        return const AlertDialog(
+        return const
+        AlertDialog(
           title: Text("برجاء الانتظار"),
           content: SizedBox(
             height: 50,

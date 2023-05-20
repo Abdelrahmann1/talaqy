@@ -8,6 +8,7 @@ import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
 import 'package:talaqy/widgets/small_button.dart';
 import '../../../widgets/main_button.dart';
+import '../../../widgets/missed_form_field.dart';
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
   @override
@@ -189,37 +190,20 @@ class RegisterView extends HookView<SignUpViewModel> {
                       const SizedBox(
                         height: 13,
                       ),
-                      // Directionality(
-                      //   textDirection: TextDirection.rtl,
-                      //   child: TextFormField(
-                      //     obscureText: viewModel.isShowPassword,
-                      //     textAlign: TextAlign.right,
-                      //     autovalidateMode: AutovalidateMode.always,
-                      //     decoration: InputDecoration(
-                      //       suffixIcon: InkWell(
-                      //         child: const Icon(Icons.remove_red_eye_outlined,
-                      //             color: Colors.grey, size: 20),
-                      //         onTap: () {
-                      //           viewModel.showPassword();
-                      //         },
-                      //       ),
-                      //       labelText: 'تأكيد كلمة السر',
-                      //       contentPadding: const EdgeInsets.symmetric(
-                      //           horizontal: 20,
-                      //           vertical:
-                      //               10), // Adjust the padding around the input field
-                      //
-                      //       labelStyle:
-                      //           Theme.of(context).textTheme.displaySmall,
-                      //       alignLabelWithHint: true,
-                      //       border: OutlineInputBorder(
-                      //         borderSide: const BorderSide(
-                      //             color: AppColors.greyForFileds),
-                      //         borderRadius: BorderRadius.circular(8.0),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+                      MainFormField(
+                        textInputType: TextInputType.number,
+                        controller: viewModel.phoneNumber,
+                        labelText: 'رقم تليفون الاب / الوصي',
+                        validator: (value) {
+                          if (value!.length > 11) {
+                            return "لا يمكن ان يكون اكثر من 11 رقم";
+                          }
+                          if (value.length < 0) {
+                            return "لا يمكن ان يكون اقل من 3 حرف";
+                          }
+                          return null;
+                        },
+                      ),
                       const SizedBox(
                         height: 13,
                       ),

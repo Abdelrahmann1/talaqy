@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pmvvm/view_model.dart';
 import 'package:talaqy/models/onboarding_model.dart';
 
+import '../../utils/app_router.dart';
+
 class OnBoardingViewModel extends ViewModel{
   @override
   void init() {
@@ -21,7 +23,7 @@ class OnBoardingViewModel extends ViewModel{
     currentPage ++;
     if(currentPage >onBoardingList.length-1 ){
 
-      // Navigator.pushNamed(context, AppRouter.registerScreen);
+      Navigator.pushNamed(context, AppRouter.registerScreen);
     }else{
       pageController.animateToPage(
           currentPage,
