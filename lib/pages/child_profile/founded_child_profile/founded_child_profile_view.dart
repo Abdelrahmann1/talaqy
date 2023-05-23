@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:pmvvm/pmvvm.dart';
+import 'package:talaqy/models/onboarding_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../utils/app_colors.dart';
 import 'package:share_plus/share_plus.dart';
@@ -9,7 +12,8 @@ import 'founded_child_profile_view_model.dart';
 class FoundedChildProfileScreen extends StatelessWidget {
   var docid;
   var list;
-  FoundedChildProfileScreen({Key? key, this.docid, this.list}): super(key: key);
+  FoundedChildProfileScreen({Key? key, this.docid, this.list})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MVVM(
@@ -31,17 +35,48 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
               flex: 1,
               child: Stack(
                 children: [
-                  Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/person.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20)),
+                  SizedBox(
+                    child: CarouselSlider(
+                      items: [
+                        SizedBox(
+                          child: CachedNetworkImage(
+                              imageUrl: viewModel.list['imageUrl'],
+                              placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error_outline),
+                              fit: BoxFit.fill),
+                        ),
+                        SizedBox(
+                          child: CachedNetworkImage(
+                              imageUrl: viewModel.list['imageUrl2'],
+                              placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error_outline),
+                              fit: BoxFit.fill),
+                        ),
+                        SizedBox(
+                          child: CachedNetworkImage(
+                              imageUrl: viewModel.list['imageUrl3'],
+                              placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator()),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error_outline),
+                              fit: BoxFit.fill),
+                        ),
+                      ],
+                      carouselController: viewModel.buttonCarouselController,
+                      options: CarouselOptions(
+                          scrollDirection: Axis.horizontal,
+                          scrollPhysics: const BouncingScrollPhysics(),
+                          height: double.infinity,
+                          autoPlay: true,
+                          aspectRatio: 2,
+                          viewportFraction: 1,
+                          onPageChanged: (val, reason) {
+                            viewModel.onPageChanged(val);
+                          }),
                     ),
                   ),
                   Positioned(
@@ -88,26 +123,59 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                       ),
                     ),
                   ),
+                  Positioned(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0, top: 280),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ...List.generate(
+                              onBoardingList.length,
+                              (index) => AnimatedContainer(
+                                    margin: const EdgeInsets.only(right: 7),
+                                    duration: const Duration(milliseconds: 900),
+                                    width: viewModel.currentIndex == index
+                                        ? 30
+                                        : 13,
+                                    height: 10,
+                                    decoration: BoxDecoration(
+                                        color: AppColors.primaryColor,
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                  ))
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               )),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:  [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    "14/5/2023",
-                    style: TextStyle(
-                      color: AppColors.fontSmoothGrey,
-                      fontSize: 10,
+              children: [
+                Row(
+                  children:  [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        viewModel.list["dateOfSend"],
+                        style: const TextStyle(
+                          color: AppColors.fontSmoothGrey,
+                          fontSize: 10,
+                        ),
+                      ),
                     ),
-                  ),
+                    const Text(" : تاريخ الاعلان",
+                        style: TextStyle(
+                          color: AppColors.fontSmoothGrey,
+                          fontSize: 10,
+                        )),
+                  ],
                 ),
                 Text(
                   viewModel.list['nameOfChild'],
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
@@ -125,15 +193,24 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          viewModel.list['ageOfChild'],
-                          style: const TextStyle(
-                            color: AppColors.blackColor,
-                            fontSize: 13,
+                      Row(
+                        children: [
+                          const Text(" عام",
+                              style: TextStyle(
+                                color: AppColors.fontSmoothGrey,
+                                fontSize: 10,
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              viewModel.list['ageOfChild'],
+                              style: const TextStyle(
+                                color: AppColors.blackColor,
+                                fontSize: 13,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -148,7 +225,7 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          viewModel.list["placesOfChild"],
+                          viewModel.list["dateOfFounded"],
                           style: const TextStyle(
                             color: AppColors.blackColor,
                             fontSize: 13,
@@ -168,7 +245,7 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          viewModel.list["colorOfEye"],
+                          viewModel.list["clothesOfChild"],
                           style: const TextStyle(
                             color: AppColors.blackColor,
                             fontSize: 13,
@@ -194,7 +271,7 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          ": السن ",
+                          ": السن -",
                           style: TextStyle(
                               color: AppColors.greyForFileds,
                               fontSize: 12,
@@ -204,7 +281,7 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          ": مكان وجود الطفل ",
+                          ": مكان وجود الطفل -",
                           style: TextStyle(
                             color: AppColors.greyForFileds,
                             fontSize: 12,
@@ -214,7 +291,7 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          ": تاريخ العثور علي الطفل",
+                          ": تاريخ العثور علي الطفل -",
                           style: TextStyle(
                               color: AppColors.greyForFileds,
                               fontSize: 12,
@@ -224,7 +301,7 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          ": البشرة ",
+                          ": البشرة -",
                           style: TextStyle(
                               color: AppColors.greyForFileds,
                               fontSize: 12,
@@ -234,7 +311,7 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          ":لون العين  ",
+                          ":ملابس الطفل  -",
                           style: TextStyle(
                               color: AppColors.greyForFileds,
                               fontSize: 12,
@@ -244,7 +321,7 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          ":لون الشعر",
+                          ":لون الشعر -",
                           style: TextStyle(
                               color: AppColors.greyForFileds,
                               fontSize: 12,
@@ -259,30 +336,36 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                children: [
-                  const Text(
-                    ": ملاحظات عن الطفل",
-                    style: TextStyle(
-                        color: AppColors.greyForFileds,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: Text(
-                      viewModel.list["moreDetails"],
-                      style: const TextStyle(
-                        color: AppColors.blackColor,
-                        fontSize: 13,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 2.0, left: 2),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Text(
+                        ": ملاحظات عن الطفل",
+                        style: TextStyle(
+                            color: AppColors.greyForFileds,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold),
                       ),
-                    ),
+                      Text(
+                        viewModel.list["moreDetails"],
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: AppColors.blackColor,
+                          fontSize: 13,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      )
+                    ],
                   ),
-                  const SizedBox(
-                    height: 5,
-                  )
-                ],
+                ),
               ),
+
             ],
           ),
           Padding(
@@ -294,8 +377,9 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor),
                     onPressed: () async {
-                      launch(viewModel.fatherPhoneNumber.toString());
-                      await FlutterPhoneDirectCaller.callNumber(viewModel.fatherPhoneNumber.toString());
+                      launch(viewModel.phoneNumberOfReported.toString());
+                      await FlutterPhoneDirectCaller.callNumber(
+                          viewModel.phoneNumberOfReported.toString());
                     },
                     child: Text(
                       ("الاتصال "),

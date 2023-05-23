@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pmvvm/pmvvm.dart';
 import 'package:talaqy/pages/user_profile/user_profile_view_model.dart';
+import '../../provider/auth_provider.dart';
 import '../../utils/app_colors.dart';
 
 class UserProfileScreen extends StatelessWidget {
@@ -19,7 +20,7 @@ class UserProfileView extends HookView<UserProfileViewModel> {
   const UserProfileView({Key? key, reactive = true});
   @override
   Widget render(context, viewModel) {
-    return SafeArea(
+    final userProviderAuth = Provider.of<UserProviderAuth>(context);    return SafeArea(
         child: Scaffold(
       backgroundColor: AppColors.backgroundGrey,
       body: FutureBuilder(
@@ -183,7 +184,9 @@ class UserProfileView extends HookView<UserProfileViewModel> {
                                   Icons.arrow_back_ios,
                                   color: AppColors.greyForFileds,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  userProviderAuth.signOut(context);
+                                },
                               ),
                               const Text(
                                 "تسجيل الخروج    ",
@@ -195,7 +198,9 @@ class UserProfileView extends HookView<UserProfileViewModel> {
                                   color: AppColors.greyForFileds,
                                   size: 35,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  userProviderAuth.signOut(context);
+                                },
                               ),
                             ],
                           ),

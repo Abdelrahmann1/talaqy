@@ -38,6 +38,7 @@ class EditMissingView extends HookView<EditMissingViewModel> {
               },
             ),
           ],
+          leading: Container(),
           centerTitle: true,
           title: Text(
             'تعديل البيانات عن طفل مفقود',
@@ -180,45 +181,37 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                   controller: viewModel.heightOfMissing,
                   labelText: 'طول الطفل (اختياري)',
                 ),
-                Column(
-                  children: [
-                    const Text("الجنس", style: TextStyle(color: Colors.black)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Text(
-                          "ذكر",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        Radio(
-                            value: "aa",
-                            groupValue: "aa",
-                            onChanged: (value) {
-                              value = value;
-                            }),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Text(
-                          "ذكر",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        Radio(
-                            value: "aa",
-                            groupValue: "aa",
-                            onChanged: (value) {
-                              value = value;
-                            }),
-                      ],
-                    ),
-                  ],
-                ),
-                MainButton(" تعديل البيانات", bgColor: AppColors.blackColor,
-                    () async {
-                  viewModel.editMissing();
-                })
+                SizedBox(height: 10,),
+                Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextFormField(
+                        controller: viewModel.moreDetails,
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          labelText: "كتابة ملحوظة",
+                          fillColor: Colors.white,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            borderSide: const BorderSide(
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            borderSide: const BorderSide(
+                              color: AppColors.fontSmoothGrey,
+                              width: 2.0,
+                            ),
+                          ),
+                        ))),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: MainButton(" تعديل البيانات", bgColor: AppColors.blackColor,
+                      () async {
+                    viewModel.editMissing();
+                  }),
+                )
               ],
             ).setPageHorizontalPadding(context),
           ),

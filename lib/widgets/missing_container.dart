@@ -20,12 +20,13 @@ class MissingContainer extends StatelessWidget {
     required this.ageOfMissing,
     required this.nameOfMissing,
     required this.placesOfMissing,
-    required this.imageUrl, required this.dateOfMissing,
+    required this.imageUrl,
+    required this.dateOfMissing,
   });
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
@@ -33,6 +34,7 @@ class MissingContainer extends StatelessWidget {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   nameOfMissing,
@@ -101,18 +103,18 @@ class MissingContainer extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              width: 130.00,
-              height: 125,
-              child:
-              CachedNetworkImage(
-                imageUrl: imageUrl,
-                placeholder: (context, url) =>  const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) =>  const Icon(Icons.error_outline),
-                  fit: BoxFit.fill
-              ),
-            ),
+
           ],
+        ),
+        SizedBox(
+          height:double.infinity ,
+          width:150 ,
+          child: CachedNetworkImage(
+              imageUrl: imageUrl,
+              placeholder: (context, url) =>  const Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) =>  const Icon(Icons.error_outline),
+              fit: BoxFit.fill
+          ),
         ),
       ],
     );

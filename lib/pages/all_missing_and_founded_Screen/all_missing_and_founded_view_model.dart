@@ -7,18 +7,37 @@ class AllMissingAndFoundedViewModel extends ViewModel {
   int currentIndex = 0;
   QuerySnapshot? data;
 
-  final  CollectionReference addMissingRef =
-  FirebaseFirestore.instance.collection("Missing People");
-  final  CollectionReference addFoundedRef =
-  FirebaseFirestore.instance.collection("Founded People");
-  final screens = [
-    const HomeScreen(),
-    const PreviousReportsScreen()
-  ];
-  onPageChanged( index) {
+  final CollectionReference addMissingRef =
+      FirebaseFirestore.instance.collection("Missing People");
+  final CollectionReference addFoundedRef =
+      FirebaseFirestore.instance.collection("Founded People");
+
+  final screens = [const HomeScreen(), const PreviousReportsScreen()];
+  onPageChanged(index) {
     currentIndex = index;
     notifyListeners();
   }
 
-}
 
+  List<DocumentSnapshot> dataList = [];
+  bool isFetchingData = false;
+  @override
+  void init() {
+    super.init();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    isFetchingData = true;
+    notifyListeners();
+  }
+
+  Future<void> refreshData() async {
+    await fetchData();
+  }
+
+  setRefresh() {
+    dataList = data!.docs;
+    isFetchingData = false;
+  }
+}

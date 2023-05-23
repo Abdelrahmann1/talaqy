@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
 import 'package:talaqy/widgets/main_button.dart';
+
 class SuccessfulEditMessage extends StatelessWidget {
   const SuccessfulEditMessage({Key? key}) : super(key: key);
   @override
@@ -23,9 +24,7 @@ class SuccessfulEditMessage extends StatelessWidget {
                           padding: EdgeInsets.only(right: 8.0, left: 8),
                           child: Text(
                             " تم تعديل بياناتك بنجاح",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black),
+                            style: TextStyle(fontSize: 16, color: Colors.black),
                             textAlign: TextAlign.center,
                           ),
                         ),

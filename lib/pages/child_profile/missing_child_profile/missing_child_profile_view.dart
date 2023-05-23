@@ -140,7 +140,7 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
                                 width: viewModel.currentIndex==index?30:13,
                                 height: 10,
                                 decoration: BoxDecoration(
-                                    color: AppColors.blackColor,
+                                    color: AppColors.primaryColor,
                                     borderRadius: BorderRadius.circular(20)),
                               ))
                         ],

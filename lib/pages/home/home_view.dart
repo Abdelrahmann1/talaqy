@@ -16,7 +16,9 @@ class HomeScreen extends StatelessWidget {
 }
 
 class HomeView extends HookView<HomeViewModel> {
+
   const HomeView({Key? key, reactive = true});
+
   @override
 
   Widget render(context, viewModel) {

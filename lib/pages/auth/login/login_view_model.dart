@@ -1,14 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:pmvvm/pmvvm.dart';
 import '../../../widgets/show_loading.dart';
 
 class LoginViewModel extends ViewModel {
+
+
+
   UserCredential? user;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
   TextEditingController passWord = TextEditingController();
-  // var  passWord, email;
+  CollectionReference users =
+  FirebaseFirestore.instance.collection("users");
   bool? isChecked = false;
   bool loading = false;
   bool isShowPassword = true;
@@ -16,7 +22,6 @@ class LoginViewModel extends ViewModel {
     isChecked = newBool;
     notifyListeners();
   }
-
   showPassword() {
     isShowPassword = !isShowPassword;
     notifyListeners();
@@ -31,12 +36,11 @@ class LoginViewModel extends ViewModel {
       {required String email, required String password}) async {
     var formData = formKey.currentState;
     if (formData!.validate()) {
-      formData.save();
-    } else {
-      print("Not Valid");
-    }
-    try {
+      showLoading(context);
 
+      formData.save();
+    } else {}
+    try {
       showLoading(context);
       Navigator.of(context).pop();
 

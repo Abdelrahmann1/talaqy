@@ -6,4 +6,31 @@ class PreviousReportsViewModel extends ViewModel {
   final  CollectionReference addFoundedRef =
   FirebaseFirestore.instance.collection("Founded People");
   QuerySnapshot? data;
+  List<DocumentSnapshot> dataList = [];
+  bool isFetchingData = false;
+  String? gender;
+  setGender(val){
+    gender = val;
+    notifyListeners();
+  }
+
+  @override
+  void init() {
+    super.init();
+    fetchData();
+    notifyListeners();
+
+  }
+  Future<void> fetchData() async {
+    isFetchingData = true;
+    notifyListeners();
+  }
+  Future<void> refreshData() async {
+
+    await fetchData();
+  }
+  setRefresh(){
+    dataList = data!.docs;
+    isFetchingData = false;
+  }
 }

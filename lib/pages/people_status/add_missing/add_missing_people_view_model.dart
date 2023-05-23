@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,7 +12,6 @@ import 'package:talaqy/widgets/show_loading.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 class AddMissingPeopleViewModel extends ViewModel {
-  @override
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController fatherName = TextEditingController();
   TextEditingController fatherId = TextEditingController();
@@ -32,21 +29,21 @@ class AddMissingPeopleViewModel extends ViewModel {
   String? hairColor;
   String? specialNeeds;
   String? canTalkHisName;
-  var random ;
-  var random2 ;
-  var random3 ;
+  dynamic random ;
+  dynamic random2 ;
+  dynamic random3 ;
   File? file;
   File? file2;
   File? file3;
-  var pickedImage;
-  var pickedImage2;
-  var pickedImage3;
+  dynamic pickedImage;
+  dynamic pickedImage2;
+  dynamic pickedImage3;
   String? nameOfImagePicked;
   String? nameOfImagePicked2;
   String? nameOfImagePicked3;
-  var imageUrl;
-  var imageUrl2;
-  var imageUrl3;
+  dynamic imageUrl;
+  dynamic imageUrl2;
+  dynamic imageUrl3;
   Reference? ref;
   Reference? ref2;
   Reference? ref3;
@@ -86,11 +83,10 @@ class AddMissingPeopleViewModel extends ViewModel {
         "imageUrl3": await imageUrl3,
         "userId": FirebaseAuth.instance.currentUser!.uid,
       });
-      Navigator.pushNamed(context , AppRouter.successfulMessage);
+      Navigator.of(context).pop();
+      Navigator.pushReplacementNamed(context, AppRouter.successfulMessage);
     }
   }
-
-
   setGender(val){
     gender = val;
     notifyListeners();
@@ -151,8 +147,6 @@ class AddMissingPeopleViewModel extends ViewModel {
         initialDate: DateTime.now(),
         firstDate: DateTime(2000),
         lastDate: DateTime(2030));
-
-    //dateOfMissing = pickedDate  ;
 
 
       if (pickedDate != null && pickedDate != _selectedDate) {

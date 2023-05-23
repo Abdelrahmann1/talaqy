@@ -13,6 +13,7 @@ class EditMissingViewModel extends ViewModel {
   @override
   void init() {
     setFatherName();
+    setMoreDetails();
     setFatherId();
     setFatherPhoneNumber();
     setNameOfMissing();
@@ -54,6 +55,10 @@ class EditMissingViewModel extends ViewModel {
     heightOfMissing.text=list["heightOfMissing"];
     notifyListeners();
   }
+  setMoreDetails(){
+    moreDetails.text=list["MoreDetails"];
+    notifyListeners();
+  }
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController fatherName = TextEditingController();
   TextEditingController fatherId = TextEditingController();
@@ -63,6 +68,7 @@ class EditMissingViewModel extends ViewModel {
   TextEditingController placesOfMissing = TextEditingController();
   TextEditingController dateOfMissing = TextEditingController();
   TextEditingController heightOfMissing = TextEditingController();
+  TextEditingController moreDetails = TextEditingController();
   CollectionReference addMissingRef =
   FirebaseFirestore.instance.collection("Missing People");
   editMissing() async {
@@ -80,9 +86,10 @@ class EditMissingViewModel extends ViewModel {
         "ageOfMissing": ageOfMissing.text,
         "placesOfMissing": placesOfMissing.text,
         "heightOfMissing": heightOfMissing.text,
+        "MoreDetails": moreDetails.text,
         "userId":FirebaseAuth.instance.currentUser!.uid,
       });
-      Navigator.pushNamed(context, AppRouter.successfulEditMessage);
+      Navigator.popAndPushNamed(context, AppRouter.successfulEditMessage);
     }
   }
 }

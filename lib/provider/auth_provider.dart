@@ -1,11 +1,14 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:talaqy/utils/app_router.dart';
 class UserProviderAuth extends ChangeNotifier {
-  signOut() {
+  signOut(BuildContext context) {
     FirebaseAuth.instance.signOut();
-    notifyListeners();
+    Navigator.pushReplacementNamed(
+        context, AppRouter.loginScreen);    notifyListeners();
   }
   Future<UserCredential> signInWithGoogle() async {
       // Trigger the authentication flow
