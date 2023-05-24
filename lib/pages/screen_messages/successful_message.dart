@@ -56,9 +56,8 @@ class SuccessfulMessage extends StatelessWidget {
                             child: MainButton(
                               "الصفحة الرئيسية",
                               () {
-                                Navigator.pushNamed(
-                                    context, AppRouter.homeScreen);
-                              },
+                                Navigator.of(context).pop();
+                                Navigator.pushReplacementNamed(context, AppRouter.homeScreen);                              },
                               bgColor: AppColors.primaryColor,
                             )),
                       ],

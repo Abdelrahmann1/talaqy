@@ -5,6 +5,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:talaqy/pages/home/home_view.dart';
 import 'package:talaqy/pages/onboarding_screen/onboarding_view.dart';
 import 'package:talaqy/provider/auth_provider.dart';
+import 'package:talaqy/provider/search_bar%20provider.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -34,6 +35,8 @@ class MyApp extends StatelessWidget {
               create: (context) => UserProviderAuth()),
           ChangeNotifierProvider<AlertExitApp>(
               create: (context) => AlertExitApp()),
+          ChangeNotifierProvider<SearchBarProvider>(
+              create: (context) => SearchBarProvider()),
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -67,8 +70,7 @@ class MyApp extends StatelessWidget {
             ),
             home: StreamBuilder(
                 stream: FirebaseAuth.instance.userChanges(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   if (snapshot.hasData) {
                     return const HomeScreen();
                   } else {

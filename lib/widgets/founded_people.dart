@@ -102,13 +102,12 @@ class FoundedPeopleContainer extends StatelessWidget {
           ],
         ),
         Container(
-          width: 150 ,
+          width: 140 ,
           height: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20)
           ),
-          child:
-          CachedNetworkImage(
+          child: CachedNetworkImage(
               imageUrl: imageUrl,
               placeholder: (context, url) =>  const Center(child: CircularProgressIndicator()),
               errorWidget: (context, url, error) =>  const Icon(Icons.error_outline),

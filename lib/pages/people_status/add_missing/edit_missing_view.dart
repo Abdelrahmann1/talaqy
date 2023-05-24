@@ -181,7 +181,7 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                   controller: viewModel.heightOfMissing,
                   labelText: 'طول الطفل (اختياري)',
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Directionality(
                     textDirection: TextDirection.rtl,
                     child: TextFormField(

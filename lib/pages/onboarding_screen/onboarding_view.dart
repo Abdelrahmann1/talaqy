@@ -89,7 +89,7 @@ class OnBoardingView extends HookView<OnBoardingViewModel> {
                                 onPressed: () {
                                   viewModel.nextPage();
                                 },color: AppColors.primaryColor,textColor: Colors.white,
-                                child:  Text( viewModel.currentPage==2?"إبدأ":"التالي",style: Theme.of(context).textTheme.bodyMedium,),
+                                child:  Text( viewModel.currentPage==2?"إبدأ    ":"التالي",style: Theme.of(context).textTheme.bodyMedium,),
                               ),
                             ),
                             TextButton(onPressed: (){

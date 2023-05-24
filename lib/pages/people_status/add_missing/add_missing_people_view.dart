@@ -493,7 +493,8 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                                  ),
                                 width: 110.00,
                                 height: 130,
-                                child:const Center(child: Text("تم اضافه الصوره",style: TextStyle(color: Colors.black),))
+                                child:const Center(child: Text("تم اضافه الصوره",                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.black),))
 
                             ),
                              ):
@@ -526,7 +527,8 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                                   ),
                                   width: 110.00,
                                   height: 130,
-                                  child:const Center(child: Text("تم اضافه الصوره",style: TextStyle(color: Colors.black),))
+                                  child:const Center(child: Text("تم اضافه الصوره",                              textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.black),))
 
                               ),
                             ):
@@ -559,7 +561,12 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                                  ),
                                 width: 110.00,
                                 height: 130,
-                                child:const Center(child: Text("تم اضافه الصوره",style: TextStyle(color: Colors.black),))
+                                child:const
+                                Center(child: Text
+                                  ("تم اضافه الصوره",
+                                  textAlign: TextAlign.center,
+
+                                  style: TextStyle(color: Colors.black),))
 
                             ),
                              ):

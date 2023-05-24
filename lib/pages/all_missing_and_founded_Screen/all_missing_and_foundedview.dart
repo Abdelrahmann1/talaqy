@@ -2,14 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:pmvvm/pmvvm.dart';
-import 'package:talaqy/pages/all_missing_and_founded_Screen/all_missing_and_founded_view_model.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/widgets/founded_people.dart';
 import 'package:talaqy/widgets/missing_container.dart';
 import 'package:talaqy/widgets/not_found.dart';
 import '../../utils/app_router.dart';
+import '../../widgets/SearchBar.dart';
 import '../child_profile/founded_child_profile/founded_child_profile_view.dart';
 import '../child_profile/missing_child_profile/missing_child_profile_view.dart';
+import 'all_missing_and_founded_view_model.dart';
 
 class AllMissingAndFoundedScreen extends StatelessWidget {
   const AllMissingAndFoundedScreen({Key? key}) : super(key: key);
@@ -27,13 +28,22 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
   const AllMissingAndFoundedView({Key? key, reactive = true});
 
   @override
-  Widget render(context, viewModel) {
+  Widget render(context, viewModel)  {
     double _w = MediaQuery.of(context).size.width;
     return DefaultTabController(
       length: 2,
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {
+                  showSearch(context: context, delegate: SearchBar(hintText: "بحث"));
+                },
+              ),
+
+            ],
             backgroundColor: Colors.transparent,
             elevation: 0,
             bottom: const TabBar(
@@ -99,7 +109,8 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                     curve: Curves.fastLinearToSlowEaseIn,
                                     duration:
                                         const Duration(milliseconds: 2500),
-                                    child: Container(
+                                    child:
+                                    Container(
                                         margin:
                                             EdgeInsets.only(bottom: _w / 20),
                                         height: _w / 3,
@@ -160,7 +171,7 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                         );
                       } else {
                         return const NotFound(
-                          status: 'لا توجد بلاغات سابقة',
+                          status: 'لا توجد بلاغات ',
                           imageassets: 'assets/images/notfound.png',
                         );
                       }
@@ -266,7 +277,7 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                         );
                       }else{
                         return const NotFound(
-                          status: 'لا توجد بلاغات سابقة',
+                          status: 'لا توجد بلاغات ',
                           imageassets: 'assets/images/notfound.png',
                         );
                       }

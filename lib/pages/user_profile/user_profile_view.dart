@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pmvvm/pmvvm.dart';
 import 'package:talaqy/pages/user_profile/user_profile_view_model.dart';
 import '../../provider/auth_provider.dart';
 import '../../utils/app_colors.dart';
-
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
   @override
@@ -24,7 +24,7 @@ class UserProfileView extends HookView<UserProfileViewModel> {
         child: Scaffold(
       backgroundColor: AppColors.backgroundGrey,
       body: FutureBuilder(
-          future: viewModel.userData.get(),
+          future: viewModel.userData.where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).get(),
           builder: (BuildContext context,
               AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
             if (snapshot.hasData) {
@@ -55,32 +55,33 @@ class UserProfileView extends HookView<UserProfileViewModel> {
                             child: const CircleAvatar(
                               radius: 30,
                               backgroundImage: AssetImage(
-                                "assets/images/person.jpg",
+                                "assets/images/prof.jpg",
                               ),
                             ),
                           ),
                         ),
                       ),
-                      Positioned(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 202.0, top: 175),
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: const BoxDecoration(
-                              color: AppColors.circleAvatar,
-                              shape: BoxShape.circle,
-                            ),
-                            child: IconButton(
-                              icon: const Icon(
-                                Icons.camera_alt_outlined,
-                                color: AppColors.white,
-                              ),
-                              onPressed: () {},
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Positioned(
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.only(left: 202.0, top: 175),
+                      //     child: Container(
+                      //       width: 50,
+                      //       height: 50,
+                      //       decoration: const BoxDecoration(
+                      //         color: AppColors.circleAvatar,
+                      //         shape: BoxShape.circle,
+                      //       ),
+                      //       child: IconButton(
+                      //         icon: const Icon(
+                      //           Icons.camera_alt_outlined,
+                      //           color: AppColors.white,
+                      //         ),
+                      //         onPressed: () async{
+                      //         },
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       Positioned(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 300.0, top: 35),
@@ -110,7 +111,7 @@ class UserProfileView extends HookView<UserProfileViewModel> {
                     style: const TextStyle(color: Colors.black),
                   ),
                   const SizedBox(
-                    height: 5,
+                    height: 3,
                   ),
                    Text(
                     snapshot.data!.docs[0]["email"].toString(),
@@ -148,7 +149,8 @@ class UserProfileView extends HookView<UserProfileViewModel> {
                                   color: AppColors.greyForFileds,
                                   size: 35,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                },
                               ),
                             ],
                           ),
@@ -205,7 +207,23 @@ class UserProfileView extends HookView<UserProfileViewModel> {
                             ],
                           ),
                         ],
-                      ))
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 100.0),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "نسخه إصدار رقم  1.0 ",
+                          style: TextStyle(color: AppColors.greyForFileds),
+                        ),
+
+                        Text("من شركه اكسيم",
+                          style: TextStyle(color: AppColors.blackColor),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               );
             }

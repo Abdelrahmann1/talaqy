@@ -59,10 +59,7 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                   viewModel.refreshData();
                 },
                 child: FutureBuilder(
-                    future: viewModel.addMissingRef
-                        .where("userId",
-                            isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-                        .get(),
+                    future: viewModel.addMissingRef.where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).get(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
 
@@ -96,8 +93,7 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                               MaterialPageRoute(
                                                   builder: (context) {
                                             return EditMissingScreen(
-                                              docid:
-                                                  snapshot.data!.docs[index].id,
+                                              docid: snapshot.data!.docs[index].id,
                                               list: snapshot.data!.docs[index],
                                             );
                                           }));

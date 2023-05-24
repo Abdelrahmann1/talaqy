@@ -38,9 +38,8 @@ class SignUpViewModel extends ViewModel {
       "userName":fullName.text,
       "email":email.text,
       "PhoneNumber":phoneNumber.text,
-      "IpTokenForMobileToSendNotifications ":tokenId,
-
-    })
+      "userId": FirebaseAuth.instance.currentUser!.uid,
+      "IpTokenForMobileToSendNotifications ":tokenId,})
         .then((value) => print('User data saved to Firestore'))
         .catchError((error) => print('Failed to save user data: $error'));
 
@@ -62,7 +61,7 @@ class SignUpViewModel extends ViewModel {
           context: context,
           builder: (context) {
             return const AlertDialog(
-              title: Text("الباسورد ضعيف"),
+              title: Center(child: Text("الباسورد ضعيف",textAlign: TextAlign.center,style: TextStyle(fontSize: 14))),
             );
           },
         );
@@ -72,7 +71,7 @@ class SignUpViewModel extends ViewModel {
             context: context,
             builder: (context) {
               return const AlertDialog(
-                title: Text("الايميل موجود بالفعل"),
+                title: Center(child: Text("الايميل موجود بالفعل",textAlign: TextAlign.center,style: TextStyle(fontSize: 14),)),
               );
             },
           );

@@ -108,7 +108,7 @@ class MissingContainer extends StatelessWidget {
         ),
         SizedBox(
           height:double.infinity ,
-          width:150 ,
+          width:140 ,
           child: CachedNetworkImage(
               imageUrl: imageUrl,
               placeholder: (context, url) =>  const Center(child: CircularProgressIndicator()),
