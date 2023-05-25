@@ -35,24 +35,94 @@ class SearchBar extends SearchDelegate{
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    final searchBarProvider = Provider.of<SearchBarProvider>(context);
     List filterName = names.where((element) => element.startsWith(query)).toList();
-    return ListView.builder(
-        itemCount: query ==""? names.length : filterName.length,
-        itemBuilder: (context , i){
-          return InkWell(
-            onTap: (){
+    if (query == ""){
+      return         ListView.builder(
+          itemCount: query ==""? names.length : filterName.length,
+          itemBuilder: (context , i){
+            return InkWell(
+              onTap: (){
                 query= names[i] as String;
                 showResults(context);
-            },
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              child:query==""? Text("${names[i]}",style: const TextStyle(fontSize: 14,color: AppColors.greyForFileds))
-                  :
-              Text("${filterName[i]}",style: const TextStyle(fontSize: 12,color: AppColors.greyForFileds),),
-            ),
-          );
-         }
-        );
+              },
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                child:query==""? Text("${names[i]}",style: const TextStyle(fontSize: 14,color: AppColors.greyForFileds))
+                    :
+                Text("${filterName[i]}",style: const TextStyle(fontSize: 12,color: AppColors.greyForFileds),),
+              ),
+            );
+          }
+      );
+
+    }
+
+    return Column(
+      children: [
+        FutureBuilder(
+          future:searchBarProvider.addMissingRef.get(),
+          builder: (BuildContext context,
+              AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.data!.docs.isNotEmpty)
+              {
+                return ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    if(snapshot.data!.docs[index]["nameOfMissing"]
+                        .toString().toLowerCase().contains(query.toLowerCase()) ||
+                        snapshot.data!.docs[index]["fatherName"]
+                            .toString().toLowerCase().contains(query.toLowerCase())){
+                      return InkWell(
+                        onTap: () {
+                          names.add(query);
+                       showResults(context);
+                        },
+                        child: Text("${snapshot.data!.docs[index]["nameOfMissing"]} missing",style: TextStyle(color: Colors.black ,fontSize: 25),)
+                      );
+                    }
+
+                  },
+                );
+
+              }
+            }
+            return Text('');
+          },
+        ),
+        FutureBuilder(
+          future:searchBarProvider.addFoundedRef.get(),
+          builder: (BuildContext context,
+              AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.data!.docs.isNotEmpty)
+              {
+                return ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    if(snapshot.data!.docs[index]["nameOfChild"]
+                        .toString().toLowerCase().contains(query.toLowerCase())){
+                      return InkWell(
+                          onTap: () {
+                            names.add(query);
+                            showResults(context);
+                          },
+                          child: Text("${snapshot.data!.docs[index]["nameOfChild"]} founded",style: TextStyle(color: Colors.black,fontSize: 25),)
+                      );
+                    }
+                  },
+                );
+
+            }
+              }
+            return Text('');
+
+          }
+          )
+
+    ]
+    );
        }
   @override
   Widget buildResults(BuildContext context) {
@@ -100,9 +170,9 @@ class SearchBar extends SearchDelegate{
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (BuildContext context, int index) {
                           if(snapshot.data!.docs[index]["nameOfMissing"]
-                              .toString().toLowerCase().startsWith(query.toLowerCase()) ||
+                              .toString().toLowerCase().contains(query.toLowerCase()) ||
                               snapshot.data!.docs[index]["fatherName"]
-                              .toString().toLowerCase().startsWith(query.toLowerCase())){
+                              .toString().toLowerCase().contains(query.toLowerCase())){
                             return AnimationConfiguration.staggeredList(
                               position: index,
                               delay: const Duration(milliseconds: 100),
@@ -204,7 +274,7 @@ class SearchBar extends SearchDelegate{
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (BuildContext context, int index) {
                           if(snapshot.data!.docs[index]["nameOfChild"]
-                              .toString().toLowerCase().startsWith(query.toLowerCase())){
+                              .toString().toLowerCase().contains(query.toLowerCase())){
                             return AnimationConfiguration.staggeredList(
                                                   position: index,
                                                   delay: const Duration(milliseconds: 100),

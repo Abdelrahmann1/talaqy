@@ -5,10 +5,22 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:talaqy/utils/app_router.dart';
 class UserProviderAuth extends ChangeNotifier {
+  bool? isLogin=false;
   signOut(BuildContext context) {
-    FirebaseAuth.instance.signOut();
-    Navigator.pushReplacementNamed(
-        context, AppRouter.loginScreen);    notifyListeners();
+    try{
+      isLogin=true;
+      notifyListeners();
+
+      FirebaseAuth.instance.signOut();
+      Navigator.pushReplacementNamed(
+          context, AppRouter.loginScreen);
+      notifyListeners();
+
+    }on FirebaseAuthException catch (e){return null;}finally{
+      isLogin=false;
+      notifyListeners();
+    }
+
   }
   Future<UserCredential> signInWithGoogle() async {
       // Trigger the authentication flow
@@ -22,7 +34,6 @@ class UserProviderAuth extends ChangeNotifier {
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
-
       // Once signed in, return the UserCredential
       return await FirebaseAuth.instance.signInWithCredential(credential);
     }

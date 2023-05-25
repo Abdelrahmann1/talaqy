@@ -24,11 +24,11 @@ class LoginScreen extends StatelessWidget {
 
 class LoginView extends HookView<LoginViewModel> {
   const LoginView({super.key, reactive = true});
-
   @override
   Widget render(context, viewModel) {
     final userProviderAuth = Provider.of<UserProviderAuth>(context);
     return SafeArea(
+
       child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.transparent,
@@ -235,21 +235,25 @@ class LoginView extends HookView<LoginViewModel> {
                         height: 50,
                       ),
                       Row(
+
                         children: [
-                          MainButton(
+                          if(!viewModel.isLogin!)
+                            MainButton(
                             "تسجيل الدخول",
                             () async {
-                              if (viewModel.user != null) {
-                                Navigator.pushReplacementNamed(
-                                    context, AppRouter.homeScreen);
-                              }
                               viewModel.user =
-                                  await viewModel.signInWithEmailAndPassword(
-                                      email: viewModel.email.text,
-                                      password: viewModel.passWord.text);
+                                  await viewModel.signInWithEmailAndPassword();
                             },
                             bgColor: AppColors.primaryColor,
-                          )
+                          ),
+
+                          if(viewModel.isLogin!)
+                            MainButton(
+                              "جاري تسجيل الدخول",
+                                  () async {},
+                              bgColor: AppColors.blackColor,
+                            ),
+
                         ],
                       )
                     ],

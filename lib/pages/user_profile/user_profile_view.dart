@@ -200,9 +200,7 @@ class UserProfileView extends HookView<UserProfileViewModel> {
                                   color: AppColors.greyForFileds,
                                   size: 35,
                                 ),
-                                onPressed: () {
-                                  userProviderAuth.signOut(context);
-                                },
+                                onPressed: () {},
                               ),
                             ],
                           ),

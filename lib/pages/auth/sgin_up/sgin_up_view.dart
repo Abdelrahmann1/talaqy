@@ -283,22 +283,18 @@ class RegisterView extends HookView<SignUpViewModel> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {                              Navigator.pushNamed(
+                                context, AppRouter.loginScreen);
+                            },
                             child: const Text("تسجيل الدخول",
                                 style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
                                     color: AppColors.blackColor)),
                           ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, AppRouter.loginScreen);
-                            },
-                            child: Text(
-                              "لديك حساب ؟ ",
-                              style: Theme.of(context).textTheme.displaySmall,
-                            ),
+                          Text(
+                            "لديك حساب ؟ ",
+                            style: Theme.of(context).textTheme.displaySmall,
                           ),
                         ],
                       ),
