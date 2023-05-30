@@ -1,17 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:talaqy/pages/home/home_view.dart';
 import 'package:talaqy/pages/onboarding_screen/onboarding_view.dart';
+import 'package:talaqy/pages/people_status/add_missing/add_missing_people_view.dart';
+import 'package:talaqy/pages/splash_screen/splash_screen_view.dart';
 import 'package:talaqy/provider/auth_provider.dart';
 import 'package:talaqy/provider/search_bar%20provider.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 import 'provider/alert_provider.dart';
-
+int? initScreen;
 void main() async {
   AwesomeNotifications().initialize(null, [
     NotificationChannel(channelKey: 'channelKey', channelName: 'channelName', channelDescription: 'channelDescription')
@@ -22,6 +24,10 @@ void main() async {
     }
   });
   WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  initScreen = await prefs.getInt("initScreen");
+  await prefs.setInt("initScreen", 1);
+  print('initScreen ${initScreen}');
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -68,15 +74,8 @@ class MyApp extends StatelessWidget {
                   ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
               useMaterial3: true,
             ),
-            home: StreamBuilder(
-                stream: FirebaseAuth.instance.userChanges(),
-                builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                  if (snapshot.hasData) {
-                    return const HomeScreen();
-                  } else {
-                    return const OnBoardingScreen();
-                  }
-                }),
+            home: const HomeScreen(),
+            // initScreen==0|| initScreen == null?const OnBoardingScreen():const SplashScreen(),
             routes: AppRouter().routes()));
   }
 }

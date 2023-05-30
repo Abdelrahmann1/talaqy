@@ -15,18 +15,24 @@ class SignUpViewModel extends ViewModel {
 
   }
   UserCredential? response;
-  bool? isChecked = false;
+  bool? isCheckedPolicy = false;
+  bool? isCheckedVolunteering = false;
   bool isShowPassword = true;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController fullName = TextEditingController();
   TextEditingController passWord = TextEditingController();
   TextEditingController email = TextEditingController();
+  TextEditingController job = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   var fbm = FirebaseMessaging.instance;
   String? tokenId;
 
-  setCheckBoxValue(dynamic newBool) {
-    isChecked = newBool;
+  setCheckBoxValuePolicy(dynamic newBool) {
+    isCheckedPolicy = newBool;
+    notifyListeners();
+  }
+  setCheckBoxValueVolunteering(dynamic newBool) {
+    isCheckedVolunteering = newBool;
     notifyListeners();
   }
   showPassword() {
@@ -38,6 +44,7 @@ class SignUpViewModel extends ViewModel {
       "userName":fullName.text,
       "email":email.text,
       "PhoneNumber":phoneNumber.text,
+      "jobOfUser":job.text,
       "userId": FirebaseAuth.instance.currentUser!.uid,
       "IpTokenForMobileToSendNotifications ":tokenId,})
         .then((value) => print('User data saved to Firestore'))

@@ -3,8 +3,8 @@ import 'package:talaqy/utils/app_colors.dart';
 
 class NotFound extends StatelessWidget {
   final String status;
-  final String imageassets;
-  const NotFound({Key? key, required this.status, required this.imageassets}) : super(key: key);
+  final String imageAssets;
+  const NotFound({Key? key, required this.status, required this.imageAssets}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class NotFound extends StatelessWidget {
               ),const SizedBox(height: 20,),
               Center(
                 child: Image.asset(
-                  imageassets,
+                  imageAssets,
                   width: 300,
                 ),
               )])

@@ -22,6 +22,9 @@ class AddFoundedPeopleViewModel extends ViewModel {
   TextEditingController phoneNumberOfReported = TextEditingController();
   TextEditingController moreDetails = TextEditingController();
   String? gender;
+  String? CountryOfFounded;
+  String? SectionOfFounded;
+  String? CityOfFounded;
   String? skinColor;
   String? colorOfEye;
   String? hairColor;
@@ -46,6 +49,7 @@ class AddFoundedPeopleViewModel extends ViewModel {
   Reference? ref2;
   Reference? ref3;
   DateTime? _selectedDate;
+
 
   pickImage() async {
     pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -86,7 +90,21 @@ class AddFoundedPeopleViewModel extends ViewModel {
     gender = val;
     notifyListeners();
   }
-
+  setCountryOfFounded(val) {
+    CountryOfFounded = val;
+    CityOfFounded = null; // Reset selected country
+    SectionOfFounded = null;
+    notifyListeners();
+  }
+  setCityOfFounded(val) {
+    CityOfFounded = val;
+    SectionOfFounded = null;
+    notifyListeners();
+  }
+  setSectionOfFounded(val) {
+    SectionOfFounded = val;
+    notifyListeners();
+  }
   setSkinColor(val) {
     skinColor = val;
     notifyListeners();
@@ -143,6 +161,9 @@ class AddFoundedPeopleViewModel extends ViewModel {
         "clothesOfChild": clothesOfChild.text,
         "placesOfChild": placesOfChild.text,
         "phoneNumberOfReported": phoneNumberOfReported.text,
+        "CountryOfFounded": CountryOfFounded,
+        "CityOfFounded": CityOfFounded,
+        "SecitonOfFounded": SectionOfFounded,
         "gender": gender.toString(),
         "skinColor": skinColor.toString(),
         "colorOfEye": colorOfEye.toString(),

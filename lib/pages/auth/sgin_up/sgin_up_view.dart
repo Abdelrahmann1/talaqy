@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pmvvm/pmvvm.dart';
 import 'package:talaqy/extentions/padding_ext.dart';
@@ -9,6 +10,7 @@ import 'package:talaqy/utils/app_router.dart';
 import 'package:talaqy/widgets/small_button.dart';
 import '../../../widgets/main_button.dart';
 import '../../../widgets/missed_form_field.dart';
+
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
   @override
@@ -19,6 +21,7 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 }
+
 class RegisterView extends HookView<SignUpViewModel> {
   const RegisterView({super.key, reactive = true});
 
@@ -82,8 +85,7 @@ class RegisterView extends HookView<SignUpViewModel> {
                             }
                             return null;
                           },
-                          controller: viewModel.fullName ,
-
+                          controller: viewModel.fullName,
                           textAlign: TextAlign.right,
                           decoration: InputDecoration(
                             labelText: 'اسم المستخدم *',
@@ -147,7 +149,7 @@ class RegisterView extends HookView<SignUpViewModel> {
                       Directionality(
                         textDirection: TextDirection.rtl,
                         child: TextFormField(
-                         controller: viewModel.passWord,
+                          controller: viewModel.passWord,
                           validator: (value) {
                             if (value!.length > 50) {
                               return "لا يمكن ان يكون كلمه المرور اكير من 100 حرف";
@@ -160,7 +162,6 @@ class RegisterView extends HookView<SignUpViewModel> {
                           obscureText: viewModel.isShowPassword,
                           textAlign: TextAlign.right,
                           keyboardType: TextInputType.text,
-
                           decoration: InputDecoration(
                             labelText: ' كلمة السر',
                             contentPadding: const EdgeInsets.symmetric(
@@ -193,7 +194,7 @@ class RegisterView extends HookView<SignUpViewModel> {
                       MainFormField(
                         textInputType: TextInputType.number,
                         controller: viewModel.phoneNumber,
-                        labelText: 'رقم تليفون الاب / الوصي',
+                        labelText: 'رقم تليفون ',
                         validator: (value) {
                           if (value!.length > 11) {
                             return "لا يمكن ان يكون اكثر من 11 رقم";
@@ -207,8 +208,46 @@ class RegisterView extends HookView<SignUpViewModel> {
                       const SizedBox(
                         height: 13,
                       ),
+                      Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: TextFormField(
+                          controller: viewModel.job,
+                          validator: (value) {
+                            if (value!.length > 100) {
+                              return "لا يمكن ان يكون اكثر من 100 حرف";
+                            }
+                            if (value.length < 3) {
+                              return "لا يمكن ان يكون اقل من 3 حرف";
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.emailAddress,
+                          textAlign: TextAlign.right,
+                          decoration: InputDecoration(
+                            labelText: 'المهنة',
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical:
+                                    10), // Adjust the padding around the input field
+
+                            labelStyle:
+                                Theme.of(context).textTheme.displaySmall,
+
+                            alignLabelWithHint: true,
+
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: AppColors.greyForFileds),
+                              borderRadius: BorderRadius.circular(7.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 13,
+                      ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           const Text(
                             "انا أوافق علي السياسات والخصوصية",
@@ -221,10 +260,31 @@ class RegisterView extends HookView<SignUpViewModel> {
                                 side: const BorderSide(
                                     width: 100, color: Colors.blue),
                               ),
-                              value: viewModel.isChecked,
+                              value: viewModel.isCheckedPolicy,
                               activeColor: AppColors.primaryColor,
                               onChanged: (value) {
-                                viewModel.setCheckBoxValue(value);
+                                viewModel.setCheckBoxValuePolicy(value);
+                              }),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const Text(
+                            "هل انت علي استعداد التطوع ؟",
+                            style: TextStyle(
+                                fontSize: 10, color: AppColors.blackColor),
+                          ),
+                          Checkbox(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                                side: const BorderSide(
+                                    width: 100, color: Colors.blue),
+                              ),
+                              value: viewModel.isCheckedVolunteering,
+                              activeColor: AppColors.primaryColor,
+                              onChanged: (value) {
+                                viewModel.setCheckBoxValueVolunteering(value);
                               }),
                         ],
                       ),
@@ -268,9 +328,8 @@ class RegisterView extends HookView<SignUpViewModel> {
                               "Facebook", () {}, FontAwesomeIcons.facebook),
                           SmallButton(
                             "Google",
-                            () async{
-                             await userProviderAuth.signInWithGoogle();
-
+                            () async {
+                              await userProviderAuth.signInWithGoogle();
                             },
                             FontAwesomeIcons.google,
                           ),
@@ -283,8 +342,9 @@ class RegisterView extends HookView<SignUpViewModel> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(
-                            onPressed: () {                              Navigator.pushNamed(
-                                context, AppRouter.loginScreen);
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, AppRouter.loginScreen);
                             },
                             child: const Text("تسجيل الدخول",
                                 style: TextStyle(
@@ -305,14 +365,15 @@ class RegisterView extends HookView<SignUpViewModel> {
                         children: [
                           MainButton(
                             "إنشاء حساب",
-                            ()  async{
-                              viewModel.response = await viewModel.signUpWithEmailAndPassword(
-                                   email: viewModel.email.text,
-                                   password: viewModel.passWord.text);
-                              if (viewModel.response !=null){
+                            () async {
+                              viewModel.response =
+                                  await viewModel.signUpWithEmailAndPassword(
+                                      email: viewModel.email.text,
+                                      password: viewModel.passWord.text);
+                              if (viewModel.response != null) {
                                 viewModel.addUserToFireStore();
                                 Navigator.pushReplacementNamed(context, AppRouter.homeScreen);
-                              }else{
+                              } else {
                                 print("sign in failed");
                               }
                             },

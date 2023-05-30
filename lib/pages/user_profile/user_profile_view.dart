@@ -107,14 +107,14 @@ class UserProfileView extends HookView<UserProfileViewModel> {
                     ],
                   ),
                    Text(
-                    snapshot.data!.docs[0]["userName"].toString(),
+                    snapshot.data!.docs[0]["userName"].toString()??'aa',
                     style: const TextStyle(color: Colors.black),
                   ),
                   const SizedBox(
                     height: 3,
                   ),
                    Text(
-                    snapshot.data!.docs[0]["email"].toString(),
+                    snapshot.data!.docs[0]["email"].toString()??"ss",
                     style: const TextStyle(color: AppColors.greyForFileds),
                   ),
                   const SizedBox(

@@ -172,7 +172,7 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                       } else {
                         return const NotFound(
                           status: 'لا توجد بلاغات ',
-                          imageassets: 'assets/images/notfound.png',
+                          imageAssets: 'assets/images/notfound.png',
                         );
                       }
                     } else {
@@ -278,7 +278,7 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                       }else{
                         return const NotFound(
                           status: 'لا توجد بلاغات ',
-                          imageassets: 'assets/images/notfound.png',
+                          imageAssets: 'assets/images/notfound.png',
                         );
                       }
                     }

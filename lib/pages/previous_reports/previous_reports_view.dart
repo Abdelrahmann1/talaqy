@@ -6,6 +6,7 @@ import 'package:pmvvm/pmvvm.dart';
 import 'package:talaqy/pages/people_status/add_founded/edit_founded_view.dart';
 import 'package:talaqy/pages/previous_reports/previous_reports_view_model.dart';
 import 'package:talaqy/utils/app_colors.dart';
+import 'package:talaqy/utils/app_router.dart';
 import 'package:talaqy/widgets/not_found.dart';
 import 'package:talaqy/widgets/show_loading.dart';
 import '../../widgets/reports_card.dart';
@@ -27,7 +28,6 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
 
   @override
   Widget render(context, viewModel) {
-
     return DefaultTabController(
       length: 2,
       child: SafeArea(
@@ -59,10 +59,12 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                   viewModel.refreshData();
                 },
                 child: FutureBuilder(
-                    future: viewModel.addMissingRef.where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).get(),
+                    future: viewModel.addMissingRef
+                        .where("userId",
+                            isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                        .get(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
-
                       if (snapshot.connectionState == ConnectionState.done) {
                         viewModel.data = snapshot.data!;
 
@@ -93,27 +95,29 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                               MaterialPageRoute(
                                                   builder: (context) {
                                             return EditMissingScreen(
-                                              docid: snapshot.data!.docs[index].id,
+                                              docid:
+                                                  snapshot.data!.docs[index].id,
                                               list: snapshot.data!.docs[index],
                                             );
                                           }));
                                         },
                                         onTapDelete: () async {
-                                          AlertDialog(
-                                            title: Text('Alert Dialog'),
-                                            content: Text('This is an example of an alert dialog.'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () async{
-                                                  // await viewModel.addMissingRef.doc(snapshot.data!.docs[index].id).delete();
-                                                  // await FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl"]).delete();
-                                                  // await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl2"]).delete();
-                                                  // await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl3"]).delete();
-                                                },
-                                                child: Text('OK'),
-                                              ),
-                                            ],
-                                          );
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                      'Alert Dialog'),
+                                                  content: const Text(
+                                                      'This is an example of an alert dialog.'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () async {},
+                                                      child: const Text('OK'),
+                                                    ),
+                                                  ],
+                                                );
+                                              });
                                         },
                                         docId: snapshot.data!.docs[index].id,
                                         list: snapshot.data!.docs[index],
@@ -128,7 +132,7 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                         } else {
                           return const NotFound(
                             status: 'لا توجد بلاغات سابقة',
-                            imageassets: 'assets/images/notfound.png',
+                            imageAssets: 'assets/images/notfound.png',
                           );
                         }
                       }
@@ -180,72 +184,15 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                             );
                                           }));
                                         },
-                                        onTapDelete: ()  {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: const Text('من فضلك قم بتحديد أسباب إلغاء النشر',
-                                                  textAlign: TextAlign.start,
-                                                  style: TextStyle(fontSize: 13),),
-                                                content:Column(
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.end,
-                                                      children: [
-                                                        const Expanded(
-                                                          child: Text(
-                                                            "تم العثور علي الطفل من خلال التطبيق",
-                                                            textAlign: TextAlign.start,
-                                                            style: TextStyle(color: AppColors.blackColor,fontSize: 12),
-                                                          ),
-                                                        ),
-                                                        Radio(
-                                                            value: "ذكر",
-                                                            groupValue: viewModel.gender,
-                                                            onChanged: (value) {
-                                                              viewModel.setGender(value);
-                                                            }),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        const Expanded(
-                                                          child: Text(
-                                                            "تم العثور علي الطفل بطريقة أخري",
-                                                            textAlign: TextAlign.start,
+                                        onTapDelete: () async{
+                                          showLoading(context);
 
-                                                            style: TextStyle(color: AppColors.blackColor,fontSize: 12),
-                                                          ),
-                                                        ),
-                                                        Radio(
-                                                            value: "أنثي",
-                                                            groupValue: viewModel.gender,
-                                                            onChanged: (value) {
-                                                              viewModel.setGender(value);
-                                                            }),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.pop(context); // Close the dialog
-                                                    },
-                                                    child: Text('OK'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-
-
-                                          // await viewModel.addFoundedRef.doc(snapshot.data!.docs[index].id).delete();
-                                          // await FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl"]).delete();
-                                          // await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl2"]).delete();
-                                          // await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl3"]).delete();
+                                          await viewModel.addFoundedRef.doc(snapshot.data!.docs[index].id).delete();
+                                          await FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl"]).delete();
+                                          await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl2"]).delete();
+                                          await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl3"]).delete();
+                                          Navigator.of(context).pop();
+                                          Navigator.pushReplacementNamed(context, AppRouter.successfulMessage);
                                         },
                                         docId: snapshot.data!.docs[index].id,
                                         list: snapshot.data!.docs[index],
@@ -260,7 +207,7 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                         } else {
                           return const NotFound(
                             status: 'لا توجد بلاغات سابقة',
-                            imageassets: 'assets/images/notfound.png',
+                            imageAssets: 'assets/images/notfound.png',
                           );
                         }
                       }

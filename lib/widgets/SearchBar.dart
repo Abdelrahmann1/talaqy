@@ -11,10 +11,10 @@ import 'founded_people.dart';
 import 'not_found.dart';
 class SearchBar extends SearchDelegate{
   final String? hintText;
+
   @override
   String? get searchFieldLabel => hintText;
   List names=["شوقي","سامر","غامر","لبيب","حسن"];
-
   SearchBar({this.hintText});
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -36,97 +36,150 @@ class SearchBar extends SearchDelegate{
   @override
   Widget buildSuggestions(BuildContext context) {
     final searchBarProvider = Provider.of<SearchBarProvider>(context);
-    List filterName = names.where((element) => element.startsWith(query)).toList();
-    if (query == ""){
-      return         ListView.builder(
-          itemCount: query ==""? names.length : filterName.length,
-          itemBuilder: (context , i){
-            return InkWell(
-              onTap: (){
-                query= names[i] as String;
-                showResults(context);
-              },
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                child:query==""? Text("${names[i]}",style: const TextStyle(fontSize: 14,color: AppColors.greyForFileds))
-                    :
-                Text("${filterName[i]}",style: const TextStyle(fontSize: 12,color: AppColors.greyForFileds),),
-              ),
-            );
-          }
+    if (query == "" || query == " " || query == "  "){
+      return Padding(
+        padding: const EdgeInsets.only(right:12.0,top: 10),
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: ListView.builder(
+              itemCount:names.length,
+              itemBuilder: (context , i){
+                return InkWell(
+                  onTap: (){
+                    query= names[i] as String;
+                    showResults(context);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Text("${names[i]}",style: const TextStyle(fontSize: 20,color: AppColors.greyForFileds))
+                  ),
+                );
+              }
+          ),
+        ),
       );
 
     }
-
-    return Column(
-      children: [
-        FutureBuilder(
-          future:searchBarProvider.addMissingRef.get(),
-          builder: (BuildContext context,
-              AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.data!.docs.isNotEmpty)
-              {
-                return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    if(snapshot.data!.docs[index]["nameOfMissing"]
-                        .toString().toLowerCase().contains(query.toLowerCase()) ||
-                        snapshot.data!.docs[index]["fatherName"]
+    else{
+      return DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: const Text(""),
+            leadingWidth: 1,
+            title: const TabBar(
+              tabs: [
+                Tab(
+                  text: "مفقود",
+                ),
+                Tab(
+                  text: "موجود",
+                ),
+              ],
+            ),
+          ),
+          backgroundColor: AppColors.white,
+          body: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Padding(
+              padding: const EdgeInsets.only(right:12.0,top: 10),
+              child: TabBarView(
+                children: [
+                    FutureBuilder(
+                      future:searchBarProvider.addMissingRef.get(),
+                      builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.data!.docs.isNotEmpty) {
+                          return ListView.builder(
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder: (BuildContext context, int i) {
+                              if (snapshot.data!.docs[i]["fatherName"]
+                                  .toString().toLowerCase().contains(query.toLowerCase())||
+                                  snapshot.data!.docs[i]["nameOfMissing"]
+                                      .toString().toLowerCase().contains(query.toLowerCase())) {
+                                return InkWell(
+                                  onTap: () {
+                                    query = "${snapshot.data!
+                                        .docs[i]["nameOfMissing"]} ${snapshot.data!
+                                        .docs[i]["fatherName"]
+                                        .toString().toLowerCase()}";
+                                    names.add(query);
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) {
+                                              return MissingChildProfileScreen(
+                                                docid: snapshot
+                                                    .data!.docs[i].id,
+                                                list:
+                                                snapshot.data!.docs[i],
+                                              );
+                                            }));
+                                  },
+                                  child: Text(
+                                      "${snapshot.data!.docs[i]["nameOfMissing"]} ${snapshot.data!.docs[i]["fatherName"]}",
+                                      style: const TextStyle(fontSize: 20,
+                                          color: AppColors.greyForFileds)),
+                                );
+                              }
+                            },
+                          );
+                        }
+                      }
+                      return const Text('');
+                      },
+                    ),
+                    FutureBuilder(
+              future:searchBarProvider.addFoundedRef.get(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.data!.docs.isNotEmpty) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (BuildContext context, int i) {
+                        if(snapshot.data!.docs[i]["nameOfChild"]
                             .toString().toLowerCase().contains(query.toLowerCase())){
-                      return InkWell(
-                        onTap: () {
-                          names.add(query);
-                       showResults(context);
-                        },
-                        child: Text("${snapshot.data!.docs[index]["nameOfMissing"]} missing",style: TextStyle(color: Colors.black ,fontSize: 25),)
-                      );
-                    }
+                          return InkWell(
+                            onTap: () {
+                              query = "${snapshot.data!.docs[i]["nameOfChild"]}";
+                              names.add(query);
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) {
+                                        return FoundedChildProfileScreen(
+                                          docid: snapshot
+                                              .data!.docs[i].id,
+                                          list:
+                                          snapshot.data!.docs[i],
+                                        );
+                                      }));
+                            },
+                            child: Text(snapshot.data!.docs[i]["nameOfChild"].toString(),style: const TextStyle(fontSize: 20,color: AppColors.greyForFileds)),
+                          );
+                        }
 
-                  },
-                );
-
-              }
-            }
-            return Text('');
-          },
+                      },
+                    );
+                  }
+                }
+                return const Text('');
+              },
+        )
+                ],
+              ),
+            ),
+          ),
         ),
-        FutureBuilder(
-          future:searchBarProvider.addFoundedRef.get(),
-          builder: (BuildContext context,
-              AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.data!.docs.isNotEmpty)
-              {
-                return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    if(snapshot.data!.docs[index]["nameOfChild"]
-                        .toString().toLowerCase().contains(query.toLowerCase())){
-                      return InkWell(
-                          onTap: () {
-                            names.add(query);
-                            showResults(context);
-                          },
-                          child: Text("${snapshot.data!.docs[index]["nameOfChild"]} founded",style: TextStyle(color: Colors.black,fontSize: 25),)
-                      );
-                    }
-                  },
-                );
+      );
 
-            }
-              }
-            return Text('');
-
-          }
-          )
-
-    ]
-    );
-       }
+    }
+  }
   @override
   Widget buildResults(BuildContext context) {
-    if (query != "" && query != " " && query != null){
+    if (query != "" && query != " "){
       if (!names.contains(query) ) {
         names.add(query);
       }
@@ -242,7 +295,7 @@ class SearchBar extends SearchDelegate{
                           }else{
                             return const NotFound(
                               status: 'لا توجد بلاغات ',
-                              imageassets: 'assets/images/notfound.png',
+                              imageAssets: 'assets/images/notfound.png',
                             );
                           }
 
@@ -252,7 +305,7 @@ class SearchBar extends SearchDelegate{
                   } else {
                     return const NotFound(
                       status: 'لا توجد بلاغات ',
-                      imageassets: 'assets/images/notfound.png',
+                      imageAssets: 'assets/images/notfound.png',
                     );
                   }
                 } else {
@@ -353,7 +406,7 @@ class SearchBar extends SearchDelegate{
                           else{
                             return const NotFound(
                               status: 'لا توجد بلاغات ',
-                              imageassets: 'assets/images/notfound.png',
+                              imageAssets: 'assets/images/notfound.png',
                             );
                           }
 
@@ -363,7 +416,7 @@ class SearchBar extends SearchDelegate{
                   }else{
                     return const NotFound(
                       status: 'لا توجد بلاغات ',
-                      imageassets: 'assets/images/notfound.png',
+                      imageAssets: 'assets/images/notfound.png',
                     );
                   }
                 }
@@ -377,4 +430,3 @@ class SearchBar extends SearchDelegate{
   }
 
 }
-

@@ -10,9 +10,8 @@ class FoundedPeopleContainer extends StatelessWidget {
   final Function? onTap;
   dynamic list;
   final String imageUrl;
-
   String docId;
-   FoundedPeopleContainer({
+  FoundedPeopleContainer({
     super.key,
     this.onTap,
     required this.borderColor,
@@ -21,8 +20,8 @@ class FoundedPeopleContainer extends StatelessWidget {
     required this.placesOfChild,
     required this.nameOfFounded,
     required this.dateOfReported,
-     required this.ageOfChild,
-     required this.imageUrl,
+    required this.ageOfChild,
+    required this.imageUrl,
   });
   @override
   Widget build(BuildContext context) {
@@ -47,8 +46,9 @@ class FoundedPeopleContainer extends StatelessWidget {
                       dateOfReported,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    const SizedBox(width: 6,),
-
+                    const SizedBox(
+                      width: 6,
+                    ),
                     Text(
                       "تاريخ الإبلاغ",
                       style: Theme.of(context).textTheme.titleSmall,
@@ -82,7 +82,7 @@ class FoundedPeopleContainer extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         Text(
-                          " ${ageOfChild} ",
+                          " $ageOfChild ",
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         const SizedBox(
@@ -98,21 +98,19 @@ class FoundedPeopleContainer extends StatelessWidget {
                 ),
               ],
             ),
-
           ],
         ),
         Container(
-          width: 140 ,
+          width: 140,
           height: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20)
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
           child: CachedNetworkImage(
-              imageUrl: imageUrl,
-              placeholder: (context, url) =>  const Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) =>  const Icon(Icons.error_outline),
-              fit: BoxFit.fill,
-
+            imageUrl: imageUrl,
+            placeholder: (context, url) =>
+                const Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) =>
+                const Icon(Icons.error_outline),
+            fit: BoxFit.fill,
           ),
         ),
       ],

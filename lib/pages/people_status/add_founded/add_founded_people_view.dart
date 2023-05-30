@@ -19,8 +19,56 @@ class AddFoundedPeopleScreen extends StatelessWidget {
 
 class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
   const AddFoundedPeopleView({Key? key, reactive = true});
+
+
   @override
   Widget render(context, viewModel) {
+    Map<String, Map<String, List<String>>> citiesByCountry = {
+      'Africa': {
+        'Egypt': ['Cairo', 'Alexandria', 'Luxor'],
+        'Nigeria': ['Lagos', 'Abuja', 'Kano'],
+      },
+      'Asia': {
+        'India': ['Mumbai', 'Delhi', 'Bangalore'],
+        'China': ['Beijing', 'Shanghai', 'Guangzhou'],
+      },
+      'Europe': {
+        'France': ['Paris', 'Marseille', 'Lyon'],
+        'Germany': ['Berlin', 'Munich', 'Hamburg'],
+      },
+    };
+
+    List<DropdownMenuItem<String>> buildCountryDropdownItems() {
+      return citiesByCountry.keys.map((String continent) {
+        return DropdownMenuItem<String>(
+          value: continent,
+          child: Text(continent),
+        );
+      }).toList();
+    }
+
+    List<DropdownMenuItem<String>> buildCityDropdownItems() {
+      if (viewModel.CountryOfFounded == null) return [];
+
+      return citiesByCountry[viewModel.CountryOfFounded]!.keys.map((String country) {
+        return DropdownMenuItem<String>(
+          value: country,
+          child: Text(country),
+        );
+      }).toList();
+    }
+
+    List<DropdownMenuItem<String>> buildSectionDropdownItems() {
+      if (viewModel.CityOfFounded == null) return [];
+
+      return citiesByCountry[viewModel.CountryOfFounded]![viewModel.CityOfFounded]
+          !.map((String city) {
+        return DropdownMenuItem<String>(
+          value: city,
+          child: Text(city),
+        );
+      }).toList();
+    }
     return Scaffold(
         backgroundColor: AppColors.white,
         appBar: AppBar(
@@ -40,7 +88,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
           leading: Container(),
           centerTitle: true,
           title: Text(
-            'الإبلاغ عن طفل مفقود',
+            'الإبلاغ عن طفل موجود',
             style: Theme.of(context).textTheme.displayMedium,
           ),
         ),
@@ -116,6 +164,32 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                     }
                     return null;
                   },
+                ),
+                DropdownButton<String>(
+                  value: viewModel.CountryOfFounded,
+                  hint: const Text('Select Country'),
+                  onChanged: (value) {
+                   viewModel.setCountryOfFounded(value);
+                  },
+                  items: buildCountryDropdownItems(),
+                ),
+                const SizedBox(height: 16),
+                DropdownButton<String>(
+                  value: viewModel.CityOfFounded,
+                  hint: const Text('Select City'),
+                  onChanged: (value) {
+                    viewModel.setCityOfFounded(value);
+                  },
+                  items: buildCityDropdownItems(),
+                ),
+                const SizedBox(height: 16),
+                DropdownButton<String>(
+                  value: viewModel.SectionOfFounded,
+                  hint: const Text('Select Section'),
+                  onChanged: (value) {
+                    viewModel.setSectionOfFounded(value);
+                  },
+                  items: buildSectionDropdownItems(),
                 ),
                 const SizedBox(
                   height: 13,
