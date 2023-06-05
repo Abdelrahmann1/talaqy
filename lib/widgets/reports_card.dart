@@ -53,7 +53,8 @@ class ReportsCards extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ClipOval(
-                  child: CachedNetworkImage(
+                  child:
+                  CachedNetworkImage(
                       imageUrl: imageUrl,
                       width: 90,
                       height: 90,

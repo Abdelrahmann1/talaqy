@@ -14,9 +14,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
 class HomeView extends HookView<HomeViewModel> {
-
   const HomeView({Key? key, reactive = true});
 
   @override
@@ -37,7 +35,8 @@ class HomeView extends HookView<HomeViewModel> {
                   context: context,
                   builder: (builder) {
                     return Container(
-                      height: 200.0,
+                      height: MediaQuery.of(context).size.width/2,
+                      width: double.infinity,
                       color: Colors.transparent,
                       child: Container(
                           decoration: const BoxDecoration(

@@ -202,7 +202,7 @@ class LoginView extends HookView<LoginViewModel> {
                             "Google",
                             () async {
                               UserCredential cred =
-                                  await userProviderAuth.signInWithGoogle();
+                                  await userProviderAuth.logInWithGoogle(context);
                               print(cred);
                             },
                             FontAwesomeIcons.google,

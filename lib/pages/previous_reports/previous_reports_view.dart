@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -7,6 +8,7 @@ import 'package:talaqy/pages/people_status/add_founded/edit_founded_view.dart';
 import 'package:talaqy/pages/previous_reports/previous_reports_view_model.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
+import 'package:talaqy/widgets/SearchBar.dart';
 import 'package:talaqy/widgets/not_found.dart';
 import 'package:talaqy/widgets/show_loading.dart';
 import '../../widgets/reports_card.dart';
@@ -35,6 +37,99 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
           appBar: AppBar(
             backgroundColor: AppColors.white,
             elevation: 0,
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {
+                  showSearch(
+                      context: context,
+                      delegate: CustomSearchBar(hintText: "بحث"));
+                },
+              ),
+            ],
+            leading: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, AppRouter.userProfileScreen);
+              },
+              child:
+              FutureBuilder(
+                  future: viewModel.userData
+                      .where("userId",
+                      isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                      .get(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.data!.docs.isNotEmpty) {
+                        return
+                          Container(
+                            width: 200,
+                            height: 200,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: AppColors.white, width: 6)),
+                            child: ClipOval(
+                              child:
+                              CachedNetworkImage(
+                                  imageUrl:snapshot.data!.docs[0]["imageUrl"],
+                                  width: 90,
+                                  height: 90,
+                                  placeholder: (context, url) => const Center(
+                                      child: CircularProgressIndicator()),
+                                  errorWidget: (context, url, error) =>
+                                      Image.asset("assets/images/logo.png"),
+                                  fit: BoxFit.fill),
+                            ),
+                          );
+
+                      } else {
+                        return  Container(
+                          width: 200,
+                          height: 200,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: AppColors.white, width: 6)),
+                          child: ClipOval(
+                            child:
+                            CachedNetworkImage(
+                                imageUrl:snapshot.data!.docs[0]["imageUrl"],
+                                width: 90,
+                                height: 90,
+                                placeholder: (context, url) => const Center(
+                                    child: CircularProgressIndicator()),
+                                errorWidget: (context, url, error) =>
+                                    Image.asset("assets/images/logo.png"),
+                                fit: BoxFit.fill),
+                          ),
+                        );
+
+                      }
+                    }else{
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  }
+              ),
+
+              // Padding(
+              //   padding: const EdgeInsets.all(10.0),
+              //   child: Container(
+              //     width: 130,
+              //     height: 130,
+              //     decoration: const BoxDecoration(
+              //       shape: BoxShape.circle,
+              //       image: DecorationImage(
+              //           image: AssetImage('assets/images/logo.png'),
+              //           fit: BoxFit.fill),
+              //     ),
+              //   ),
+              // ),
+            ),
+
+
             bottom: const TabBar(
               tabs: [
                 Tab(
@@ -67,7 +162,6 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                         AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         viewModel.data = snapshot.data!;
-
                         if (viewModel.data!.docs.isNotEmpty) {
                           return ListView.builder(
                               itemCount: snapshot.data!.docs.length,

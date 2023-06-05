@@ -3,24 +3,28 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:pmvvm/pmvvm.dart';
+import 'package:talaqy/utils/app_colors.dart';
+import 'package:talaqy/utils/app_router.dart';
 
 class SignUpViewModel extends ViewModel {
   @override
   void init() {
     super.init();
     fbm.getToken().then((token) {
-      tokenId =token;
+      tokenId = token;
       notifyListeners();
     });
-
   }
+
   UserCredential? response;
+  var loading = false;
   bool? isCheckedPolicy = false;
   bool? isCheckedVolunteering = false;
   bool isShowPassword = true;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController fullName = TextEditingController();
   TextEditingController passWord = TextEditingController();
+  TextEditingController confirmPassWord = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController job = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
@@ -31,59 +35,118 @@ class SignUpViewModel extends ViewModel {
     isCheckedPolicy = newBool;
     notifyListeners();
   }
+
   setCheckBoxValueVolunteering(dynamic newBool) {
     isCheckedVolunteering = newBool;
     notifyListeners();
   }
+
   showPassword() {
     isShowPassword = !isShowPassword;
     notifyListeners();
   }
-  void addUserToFireStore()async{
-    FirebaseFirestore.instance.collection("users").add({
-      "userName":fullName.text,
-      "email":email.text,
-      "PhoneNumber":phoneNumber.text,
-      "jobOfUser":job.text,
-      "userId": FirebaseAuth.instance.currentUser!.uid,
-      "IpTokenForMobileToSendNotifications ":tokenId,})
-        .then((value) => print('User data saved to Firestore'))
-        .catchError((error) => print('Failed to save user data: $error'));
 
-  }
-  signUpWithEmailAndPassword({required String email, required String password}) async {
-    var formData = formKey.currentState;
-    if (formData!.validate()) {
-      formData.save();
-    } else {
-      print("Not Valid");
+  String? requiredValidator(String? text) {
+    if (text == null || text.trim().isEmpty) {
+      return "هذا الحقل مطلوب";
     }
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-      return userCredential;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == "weak-password") {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              title: Center(child: Text("الباسورد ضعيف",textAlign: TextAlign.center,style: TextStyle(fontSize: 14))),
-            );
-          },
-        );
-      } else if (e.code == "email-already-in-use") {
-        {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return const AlertDialog(
-                title: Center(child: Text("الايميل موجود بالفعل",textAlign: TextAlign.center,style: TextStyle(fontSize: 14),)),
-              );
-            },
+    return null;
+  }
+
+  String? confirmPasswordValidator(String? confirmPasswordText) {
+    if (confirmPasswordText == null || confirmPasswordText.trim().isEmpty) {
+      return "هذا الحقل مطلوب";
+    }
+    if (passWord.text != confirmPasswordText) {
+      return 'كلمة المرور غير متطابقة';
+    }
+    return null;
+  }
+
+  void handelSignUpErrors(FirebaseAuthException e) {
+    String messageToDisplay;
+    switch (e.code) {
+      case 'email-already-in-use':
+        messageToDisplay =
+            "عنوان البريد الإلكتروني قيد الاستخدام بالفعل من قبل حساب آخر";
+        break;
+      case 'invalid-email':
+        messageToDisplay = "عنوان البريد الإلكتروني منسق بشكل سيئ";
+        break;
+      case 'operation-not-allowed':
+        messageToDisplay = "العملية غير مسموح بها";
+        break;
+      case 'weak-password':
+        messageToDisplay = "يجب أن تتكون كلمة المرور من 6 أحرف أو أكثر.";
+        break;
+      default:
+        messageToDisplay = 'يوجد خطا ما';
+        break;
+    }
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("فشل تسجيل الدخول"),
+            content: Text(messageToDisplay),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("حسنا"))
+            ],
           );
-        }
-      }
+        });
+  }
+
+  signUpWithEmailAndPassword() async {
+    loading == true;
+    notifyListeners();
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email.text, password: passWord.text);
+      await FirebaseFirestore.instance
+          .collection("users")
+          .add({
+            "name": fullName.text,
+            "email": email.text,
+            "PhoneNumber": phoneNumber.text,
+            "jobOfUser": job.text,
+            "imageUrl": "",
+            "userId": FirebaseAuth.instance.currentUser!.uid,
+            "VolunteeringStatus": isCheckedVolunteering,
+            "IpTokenForMobileToSendNotifications ": tokenId
+          })
+          .then((value) => print('User data saved to Firestore'))
+          .catchError((error) => print('Failed to save user data: $error'));
+      await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                  backgroundColor: AppColors.white,
+                  title: Center(
+                      child: const Text("نجاح الاشتراك",
+                          style: TextStyle(fontSize: 12))),
+                  content: SingleChildScrollView(
+                      child: const Text(
+                    "تم انشاء الحساب بي نجاح يمكنك الان تسجيل الدخول",
+                    style: TextStyle(color: AppColors.blackColor),
+                  )),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("حسنا"))
+                  ]));
+      Navigator.pushReplacementNamed(context, AppRouter.homeScreen);
+    } on FirebaseAuthException catch (e) {
+      handelSignUpErrors(e);
+      loading = false;
+      notifyListeners();
+    } finally {
+      loading = false;
+      notifyListeners();
     }
   }
 }

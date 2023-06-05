@@ -39,7 +39,6 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
                     child: CarouselSlider(
                      items :[
                        SizedBox(
-
                          child: CachedNetworkImage(
                              imageUrl: viewModel.list['imageUrl'],
                              placeholder: (context, url) =>  const Center(child: CircularProgressIndicator()),
@@ -119,8 +118,7 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
                               color: AppColors.blackColor,
                             ),
                             onPressed: () async {
-                              Share.share(
-                                  'check out my website https://example.com');
+                              Share.share(viewModel.list.toString());
                             }),
                       ),
                     ),

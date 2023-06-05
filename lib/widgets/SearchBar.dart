@@ -9,13 +9,12 @@ import '../pages/child_profile/missing_child_profile/missing_child_profile_view.
 import '../utils/app_colors.dart';
 import 'founded_people.dart';
 import 'not_found.dart';
-class SearchBar extends SearchDelegate{
+class CustomSearchBar extends SearchDelegate{
   final String? hintText;
-
   @override
   String? get searchFieldLabel => hintText;
   List names=["شوقي","سامر","غامر","لبيب","حسن"];
-  SearchBar({this.hintText});
+  CustomSearchBar({this.hintText});
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -24,7 +23,6 @@ class SearchBar extends SearchDelegate{
       }, icon: const Icon(Icons.close)),
     ];
   }
-
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(onPressed: (){
@@ -32,7 +30,6 @@ class SearchBar extends SearchDelegate{
     }, icon: const Icon(Icons.arrow_back));
 
   }
-
   @override
   Widget buildSuggestions(BuildContext context) {
     final searchBarProvider = Provider.of<SearchBarProvider>(context);

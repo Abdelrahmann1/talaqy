@@ -23,52 +23,6 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
 
   @override
   Widget render(context, viewModel) {
-    Map<String, Map<String, List<String>>> citiesByCountry = {
-      'Africa': {
-        'Egypt': ['Cairo', 'Alexandria', 'Luxor'],
-        'Nigeria': ['Lagos', 'Abuja', 'Kano'],
-      },
-      'Asia': {
-        'India': ['Mumbai', 'Delhi', 'Bangalore'],
-        'China': ['Beijing', 'Shanghai', 'Guangzhou'],
-      },
-      'Europe': {
-        'France': ['Paris', 'Marseille', 'Lyon'],
-        'Germany': ['Berlin', 'Munich', 'Hamburg'],
-      },
-    };
-
-    List<DropdownMenuItem<String>> buildCountryDropdownItems() {
-      return citiesByCountry.keys.map((String continent) {
-        return DropdownMenuItem<String>(
-          value: continent,
-          child: Text(continent),
-        );
-      }).toList();
-    }
-
-    List<DropdownMenuItem<String>> buildCityDropdownItems() {
-      if (viewModel.CountryOfFounded == null) return [];
-
-      return citiesByCountry[viewModel.CountryOfFounded]!.keys.map((String country) {
-        return DropdownMenuItem<String>(
-          value: country,
-          child: Text(country),
-        );
-      }).toList();
-    }
-
-    List<DropdownMenuItem<String>> buildSectionDropdownItems() {
-      if (viewModel.CityOfFounded == null) return [];
-
-      return citiesByCountry[viewModel.CountryOfFounded]![viewModel.CityOfFounded]
-          !.map((String city) {
-        return DropdownMenuItem<String>(
-          value: city,
-          child: Text(city),
-        );
-      }).toList();
-    }
     return Scaffold(
         backgroundColor: AppColors.white,
         appBar: AppBar(
@@ -151,6 +105,103 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                 const SizedBox(
                   height: 13,
                 ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(7.0),
+                      border: Border.all(
+                        color: AppColors.blackColor,
+                        width: 1.0,
+                      )),
+                  width: double.infinity,
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: DropdownButtonFormField<String>(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please select an option';
+                        }
+                        return null;
+                      },
+                      value: viewModel.countryOfFounded,
+                      style: Theme.of(context).textTheme.displaySmall,
+                      hint: Text(
+                        'اختار البلد',
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                      onChanged: (value) {
+                        viewModel.setCountryOfFounded(value);
+                      },
+                      items: viewModel.buildCountryDropdownItems(),
+                      alignment: Alignment.center,
+
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(7.0),
+                      border: Border.all(
+                        color: AppColors.blackColor,
+                        width: 1.0,
+                      )),
+                  width: double.infinity,
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: DropdownButtonFormField<String>(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please select an option';
+                        }
+                        return null;
+                      },
+                      value: viewModel.cityOfFounded,
+                      style: Theme.of(context).textTheme.displaySmall,
+                      hint: Text('اختار المحافظه',
+                          style: Theme.of(context).textTheme.displaySmall),
+                      onChanged: (value) {
+                        viewModel.setCityOfFounded(value);
+                      },
+                      alignment: Alignment.center,
+                      items: viewModel.buildCityDropdownItems(),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(7.0),
+                      border: Border.all(
+                        color: AppColors.blackColor,
+                        width: 1.0,
+                      )),
+                  width: double.infinity,
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: DropdownButtonFormField<String>(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please select an option';
+                        }
+                        return null;
+                      },
+                      value: viewModel.sectionOfFounded,
+                      style: Theme.of(context).textTheme.displaySmall,
+                      hint: Text(
+                        'اختار الحي',
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                      onChanged: (value) {
+                        viewModel.setSectionOfFounded(value);
+                      },
+                      alignment: Alignment.center,
+                      items: viewModel.buildSectionDropdownItems(),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 13,
+                ),
                 MainFormField(
                   textInputType: TextInputType.text,
                   controller: viewModel.placesOfChild,
@@ -164,32 +215,6 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                     }
                     return null;
                   },
-                ),
-                DropdownButton<String>(
-                  value: viewModel.CountryOfFounded,
-                  hint: const Text('Select Country'),
-                  onChanged: (value) {
-                   viewModel.setCountryOfFounded(value);
-                  },
-                  items: buildCountryDropdownItems(),
-                ),
-                const SizedBox(height: 16),
-                DropdownButton<String>(
-                  value: viewModel.CityOfFounded,
-                  hint: const Text('Select City'),
-                  onChanged: (value) {
-                    viewModel.setCityOfFounded(value);
-                  },
-                  items: buildCityDropdownItems(),
-                ),
-                const SizedBox(height: 16),
-                DropdownButton<String>(
-                  value: viewModel.SectionOfFounded,
-                  hint: const Text('Select Section'),
-                  onChanged: (value) {
-                    viewModel.setSectionOfFounded(value);
-                  },
-                  items: buildSectionDropdownItems(),
                 ),
                 const SizedBox(
                   height: 13,
@@ -224,9 +249,9 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                 const SizedBox(
                   height: 13,
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
+                  children: [
                     Text(": الجنس",
                         style: TextStyle(color: AppColors.fontSmoothGrey)),
                   ],
@@ -261,9 +286,9 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                         }),
                   ],
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
+                  children: [
                     Text(" : لون البشرة",
                         style: TextStyle(color: AppColors.fontSmoothGrey)),
                   ],
@@ -313,9 +338,9 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                         }),
                   ],
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
+                  children: [
                     Text(" : لون العين",
                         style: TextStyle(color: AppColors.fontSmoothGrey)),
                   ],
@@ -380,9 +405,9 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                         }),
                   ],
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
+                  children: [
                     Text(": لون الشعر",
                         style: TextStyle(color: AppColors.fontSmoothGrey)),
                   ],
@@ -432,9 +457,9 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                         }),
                   ],
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
+                  children: [
                     Text("هل الطفل من ذوي الاحتياجات الخاصة ؟",
                         style: TextStyle(color: AppColors.fontSmoothGrey)),
                   ],
@@ -469,9 +494,9 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                         }),
                   ],
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
+                  children: [
                     Text("هل يستطيع الطفل اخبار اسمه ؟",
                         style: TextStyle(
                           color: AppColors.fontSmoothGrey,
@@ -508,9 +533,49 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                         }),
                   ],
                 ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(": DNA ",
+                        style: TextStyle(color: AppColors.fontSmoothGrey)),
+
+                    Text("هل يوجد تحليل ",
+                        style: TextStyle(color: AppColors.fontSmoothGrey)),
+                  ],
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
+                  children: [
+                    const Text(
+                      "نعم",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "نعم",
+                        groupValue: viewModel.selectDna,
+                        onChanged: (value) {
+                          viewModel.setSelectDna(value);
+                        }),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    const Text(
+                      "لا",
+                      style: TextStyle(color: AppColors.blackColor),
+                    ),
+                    Radio(
+                        value: "لا",
+                        groupValue: viewModel.selectDna,
+                        onChanged: (value) {
+                          viewModel.setSelectDna(value);
+                        }),
+                  ],
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
                     Text("إرفاق صورة",
                         style: TextStyle(
                           color: AppColors.blackColor,

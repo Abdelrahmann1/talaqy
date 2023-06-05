@@ -27,6 +27,7 @@ class AddMissingPeopleViewModel extends ViewModel {
   DateTime? _selectedDate;
   String? gender;
   String? countryOfMissing;
+  String? selectDna;
   String? cityOfMissing;
   String? sectionOfMissing;
   String? skinColor;
@@ -35,11 +36,8 @@ class AddMissingPeopleViewModel extends ViewModel {
   String? specialNeeds;
   String? canTalkHisName;
   dynamic random;
-
   dynamic random2;
-
   dynamic random3;
-
   File? file;
   File? file2;
   File? file3;
@@ -67,7 +65,8 @@ class AddMissingPeopleViewModel extends ViewModel {
               child: Text(
             "برجاء ادخال صوره",
             style: TextStyle(color: Colors.black),
-          )))..show();
+          )))
+        ..show();
     }
     var formData = formKey.currentState;
     if (formData!.validate()) {
@@ -83,8 +82,7 @@ class AddMissingPeopleViewModel extends ViewModel {
         "fatherName": fatherName.text,
         "fatherId": fatherId.text,
         "dateOfMissing": dateOfMissing.value.text.toString(),
-        "dateOfSend":
-            DateFormat('yyyy/MM/dd').format(DateTime.now()).toString(),
+        "dateOfSend": DateFormat('yyyy/MM/dd').format(DateTime.now()).toString(),
         "fatherPhoneNumber": fatherPhoneNumber.text,
         "nameOfMissing": nameOfMissing.text,
         "ageOfMissing": ageOfMissing.text,
@@ -96,6 +94,7 @@ class AddMissingPeopleViewModel extends ViewModel {
         "MoreDetails": moreDetails.text,
         "urRoleOfChild": urRoleOfChild.text,
         "gender": gender.toString(),
+        "DNA": selectDna.toString(),
         "skinColor": skinColor.toString(),
         "colorOfEye": colorOfEye.toString(),
         "hairColor": hairColor.toString(),
@@ -163,6 +162,10 @@ class AddMissingPeopleViewModel extends ViewModel {
     canTalkHisName = val;
     notifyListeners();
   }
+  setSelectDna(val) {
+    selectDna = val;
+    notifyListeners();
+  }
 
   pickImage() async {
     pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -218,16 +221,48 @@ class AddMissingPeopleViewModel extends ViewModel {
   Map<String, Map<String, List<String>>> citiesByCountry = {
     'مصر': {
       'القاهرة': [
-        'المعادي',
-        'الزمالك',
-        'مصر الجديدة',
-        'الدقي',
-        'المهندسين',
-        'مدينة نصر',
-        'جاردن سيتي',
-        'العجوزة',
-        'محرم بك',
-        'القاهرة الجديدة',
+        "حى الزيتون",
+        "حى الساحل",
+        "حى الشرابية",
+        "حى حدائق القبة",
+        "حى روض الفرج",
+        "حى شبرا",
+        "الشروق",
+        "مدينة بدر",
+        "القاهرة الجديدة",
+        'حى 15 مايو',
+        'حى البساتين',
+        'حى التبين',
+        'حى الخليفة',
+        'حى السيدة زينب',
+        'حى المعادى',
+        'حى المعصرة',
+        'حى المقطم',
+        'حى حلوان',
+        'حى دار السلام',
+        'حى طرة',
+        'حى مصر القديمة',
+        'حى الأميرية',
+        'حى الزاوية الحمراء',
+        'حى مدينة نصر غرب',
+        'حى مصر الجديدة',
+        'حى الأزبكية',
+        'حى الموسكى',
+        'حى الوايلى',
+        'حى باب الشعرية',
+        'حى بولاق',
+        'حى عابدين',
+        'حى غرب',
+        'حى منشأة ناصر',
+        'حى وسط',
+        'حى السلام ثانى',
+        'حى المرج',
+        ' حى المطرية',
+        'حى النزهة',
+        'حى عين شمس',
+        'حى مدينة نصر شرق',
+        "حى السلام أول",
+
       ],
       'الإسكندرية': [
         'الرمل',
@@ -241,31 +276,31 @@ class AddMissingPeopleViewModel extends ViewModel {
         'العطارين',
         'أبو قير',
       ],
-      'الإسماعيلية':[
-  'الشهداء',
-  'القصاصين',
-  'المنتزه',
-  'الشيخ زايد',
-  'التل الكبير',
-  'فايد',
-  'التل الصغير',
-  'المنشية',
-  'الحي السادس',
-  'الحي السابع',
-  ],
+      'الإسماعيلية': [
+      "المنتزة",
+      "شرق الإسكندرية",
+      "وسط الإسكندرية",
+      "الجمرك",
+      "العجمي",
+      "العامرية",
+      "برج العرب",
+        "يرج العرب الجديد",
+        "المنتزة ثان",
+        "حي العامري ثان",
+      ],
       'أسوان': [
-  'مدينة أسوان',
-  'النصر',
-  'الساحل الشمالي',
-  'منطقة السد',
-  'السوق الشعبي',
-  'الهدايا',
-  'المنيل',
-  'الجلاء',
-  'دروة الرمال',
-  'منطقة الحي السكني',
-  ],
-      'أسيوط':[
+        'مدينة أسوان',
+        'النصر',
+        'الساحل الشمالي',
+        'منطقة السد',
+        'السوق الشعبي',
+        'الهدايا',
+        'المنيل',
+        'الجلاء',
+        'دروة الرمال',
+        'منطقة الحي السكني',
+      ],
+      'أسيوط': [
         'المدينة الجديدة',
         'الكوثر',
         'الأزهري',
@@ -276,19 +311,156 @@ class AddMissingPeopleViewModel extends ViewModel {
         'الجامعة',
         'السلام',
         'البداري',
+        "ديروط",
+        "القوصية",
+        "الفتح",
+        "منفلوط",
       ],
-      'الأقصر':
-      ['Lagos', 'Abuja', 'Kano'],
-      'البحر الأحمر': ['Lagos', 'Abuja', 'Kano'],
-      'البحيرة': ['Lagos', 'Abuja', 'Kano'],
-      'بني سويف': ['Lagos', 'Abuja', 'Kano'],
-      'بورسعيد': ['Lagos', 'Abuja', 'Kano'],
-      'جنوب سيناء': ['Lagos', 'Abuja', 'Kano'],
-      'الجيزة': ['Lagos', 'Abuja', 'Kano'],
-      'الدقهلية': ['Lagos', 'Abuja', 'Kano'],
-      'دمياط': ['Lagos', 'Abuja', 'Kano'],
-      'سوهاج': ['Lagos', 'Abuja', 'Kano'],
-      'السويس': ['Lagos', 'Abuja', 'Kano'],
+      'البحر الأحمر': [
+        "حي السقالة",
+        "حي الدهار",
+        "حي الأحياء",
+        "رأس غارب",
+        "القُصير",
+        " سفاجا",
+        "مرسى علم",
+        " حلايب",
+        "شلاتين",
+      ],
+      'البحيرة': [
+        "رشيد",
+        "شبراخيت",
+        "ايتاي البارود",
+        "أبو حمص",
+        "حوش عيسي",
+        "كفر الدوار",
+        "الدلنجات",
+        "كوم حمادة",
+        "دمنهور",
+        "المحمودية",
+        "ادكو",
+        "أبو المطامير",
+        "الرحمانية",
+        "وادي النطرون",
+        "بدر",
+        "النوبارية الجديدة",
+      ],
+      'بني سويف': [
+        "بني سويف",
+        "بني سويف الجديدة",
+        "ناصر",
+        "اهناسيا",
+        "ببا",
+        "سمسطا",
+        "الفشن",
+      ],
+      'بورسعيد': [
+        "شرق بورسعيد",
+        "غرب بورسعيد",
+        "جنوب بورسعيد",
+        "العرب",
+        "المناخ",
+        "الضواحي",
+        "الزهور",
+        "بور فؤاد",
+      ],
+      'جنوب سيناء':
+      [
+        "أبو رديس",
+        "أبو زنيمة",
+        "نويبع",
+        "طابا",
+        "رأس سدر",
+        "دهب",
+        "شرم الشيخ",
+        "سانت كاترين",
+        "طور سيناء",
+      ],
+      'الجيزة': [
+        "المهندسين",
+        "حى شمال الجيزه",
+        "حى الدقى",
+        "حى العجوزه",
+        "بولاق الدكرور",
+        "حى العمرانيه",
+        "حى الهرم",
+        "حى الوراق",
+        "حى جنوب الجيزه",
+        "الشيخ زايد",
+        "منشأه القناطر",
+        "اوسيم",
+        "الواحات البحرية",
+        "أبو النمرس",
+        "البدرشين",
+        "العياط",
+        "الصف",
+        "اطفيح",
+        "الباويطي",
+        "السادس من أكتوبر",
+        "الحوامدية",
+        "كرداسة",
+        "حي العمرانية",
+        "حي الوراق",
+      ],
+      'الدقهلية':
+      [
+          'المنصورة',
+          'شرق المنصورة',
+          'غرب المنصورة',
+          'طلخا',
+          'ميت غمر',
+          'المنزلة',
+          'دكرنس',
+          'منية النصر',
+          'اجا',
+          'السنبلاوين',
+        "بني عبيد",
+        "الجمالية",
+        "شربين",
+
+      ],
+      'دمياط':
+      [
+        "دمياط",
+        "دمياط الجديدة",
+        "عزبة البرج",
+        "فاركو",
+        "الروضة",
+        "الزرقا",
+        "السرو",
+        "كفر سعد",
+        "ميت أبو غالب",
+        "كفر البطيخ",
+        "راس البر",
+      ],
+      'سوهاج': [
+        " سوهاج",
+        "حي شرق سوهاج",
+        "حي غرب سوهاج",
+        "حي الكوثر",
+        "اخميم",
+        "البلينا",
+        "المراغة",
+        "المنشاة",
+        "دار السلام",
+        "جرجا",
+        "جهينة",
+        "ساقلتة",
+        "طما",
+        "طهطا",
+        "العسيرات",
+        "سوهاج الجديدة",
+        "أخميم الجديدة",
+        "الزمالك",
+      ],
+      'السويس': [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+      ],
       'الشرقية': ['Lagos', 'Abuja', 'Kano'],
       'شمال سيناء': ['Lagos', 'Abuja', 'Kano'],
       'الغربية': ['Lagos', 'Abuja', 'Kano'],
@@ -310,7 +482,6 @@ class AddMissingPeopleViewModel extends ViewModel {
       'Germany': ['Berlin', 'Munich', 'Hamburg'],
     },
   };
-
   List<DropdownMenuItem<String>> buildCountryDropdownItems() {
     return citiesByCountry.keys.map((String continent) {
       return DropdownMenuItem<String>(
@@ -322,7 +493,6 @@ class AddMissingPeopleViewModel extends ViewModel {
 
   List<DropdownMenuItem<String>> buildCityDropdownItems() {
     if (countryOfMissing == null) return [];
-
     return citiesByCountry[countryOfMissing]!.keys.map((String country) {
       return DropdownMenuItem<String>(
         value: country,

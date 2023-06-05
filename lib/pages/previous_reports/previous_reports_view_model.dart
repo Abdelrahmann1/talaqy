@@ -5,6 +5,8 @@ class PreviousReportsViewModel extends ViewModel {
   FirebaseFirestore.instance.collection("Missing People");
   final  CollectionReference addFoundedRef =
   FirebaseFirestore.instance.collection("Founded People");
+  final CollectionReference userData =
+  FirebaseFirestore.instance.collection("users");
   QuerySnapshot? data;
   List<DocumentSnapshot> dataList = [];
   bool isFetchingData = false;

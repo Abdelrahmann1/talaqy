@@ -36,7 +36,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   pmvvm: ^2.3.0
-  awesome_notifications: ^0.7.4+1
   shared_preferences: ^2.1.1
   font_awesome_flutter: ^10.4.0
   flutter_staggered_animations: ^1.1.1
@@ -49,7 +48,7 @@ dependencies:
   awesome_dialog: ^3.0.2
   google_sign_in: ^6.0.2
   flutter_facebook_auth: ^3.5.0
-  share_plus: ^7.0.0
+  share_plus: ^7.0.2
   flutter_phone_direct_caller: ^2.1.1
   url_launcher: ^6.1.11
   image_picker: ^0.8.7+5

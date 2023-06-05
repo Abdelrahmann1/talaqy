@@ -313,9 +313,9 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                     controller: viewModel.heightOfMissing,
                     labelText: 'طول الطفل (اختياري)',
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
+                    children: [
                       Text(": الجنس",
                           style: TextStyle(color: AppColors.fontSmoothGrey)),
                     ],
@@ -350,9 +350,9 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                           }),
                     ],
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
+                    children: [
                       Text(" : لون البشرة",
                           style: TextStyle(color: AppColors.fontSmoothGrey)),
                     ],
@@ -402,9 +402,9 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                           }),
                     ],
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
+                    children: [
                       Text(" : لون العين",
                           style: TextStyle(color: AppColors.fontSmoothGrey)),
                     ],
@@ -469,9 +469,9 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                           }),
                     ],
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
+                    children: [
                       Text(": لون الشعر",
                           style: TextStyle(color: AppColors.fontSmoothGrey)),
                     ],
@@ -521,9 +521,9 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                           }),
                     ],
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
+                    children: [
                       Text("هل الطفل من ذوي الاحتياجات الخاصة ؟",
                           style: TextStyle(color: AppColors.fontSmoothGrey)),
                     ],
@@ -558,9 +558,9 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                           }),
                     ],
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
+                    children: [
                       Text("هل يستطيع الطفل اخبار اسمه ؟",
                           style: TextStyle(
                             color: AppColors.fontSmoothGrey,
@@ -597,15 +597,56 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                           }),
                     ],
                   ),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(": DNA ",
+                          style: TextStyle(color: AppColors.fontSmoothGrey)),
+
+                      Text("هل يوجد تحليل ",
+                          style: TextStyle(color: AppColors.fontSmoothGrey)),
+                    ],
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
+                    children: [
+                      const Text(
+                        "نعم",
+                        style: TextStyle(color: AppColors.blackColor),
+                      ),
+                      Radio(
+                          value: "نعم",
+                          groupValue: viewModel.selectDna,
+                          onChanged: (value) {
+                            viewModel.setSelectDna(value);
+                          }),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const Text(
+                        "لا",
+                        style: TextStyle(color: AppColors.blackColor),
+                      ),
+                      Radio(
+                          value: "لا",
+                          groupValue: viewModel.selectDna,
+                          onChanged: (value) {
+                            viewModel.setSelectDna(value);
+                          }),
+                    ],
+                  ),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
                       Text("إرفاق صورة",
                           style: TextStyle(
                             color: AppColors.blackColor,
                           )),
                     ],
                   ),
+
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(

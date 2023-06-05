@@ -2,10 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pmvvm/pmvvm.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
 class LoginViewModel extends ViewModel {
   UserCredential? user;
+  int? firstTime;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
   TextEditingController passWord = TextEditingController();
@@ -34,8 +36,12 @@ class LoginViewModel extends ViewModel {
     isLogin=true;
     notifyListeners();
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+     UserCredential userCredential= await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email.text, password: passWord.text);
+     final prefs = await SharedPreferences.getInstance();
+     await prefs.setString('uidToken',userCredential.user!.uid );
+     print(userCredential.user);
+
       Navigator.pushNamed(context, AppRouter.homeScreen);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
