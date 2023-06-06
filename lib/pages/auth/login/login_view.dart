@@ -201,9 +201,7 @@ class LoginView extends HookView<LoginViewModel> {
                           SmallButton(
                             "Google",
                             () async {
-                              UserCredential cred =
                                   await userProviderAuth.logInWithGoogle(context);
-                              print(cred);
                             },
                             FontAwesomeIcons.google,
                           ),

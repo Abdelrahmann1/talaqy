@@ -40,7 +40,6 @@ class LoginViewModel extends ViewModel {
           email: email.text, password: passWord.text);
      final prefs = await SharedPreferences.getInstance();
      await prefs.setString('uidToken',userCredential.user!.uid );
-     print(userCredential.user);
 
       Navigator.pushNamed(context, AppRouter.homeScreen);
     } on FirebaseAuthException catch (e) {
@@ -62,7 +61,7 @@ class LoginViewModel extends ViewModel {
           content: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(failureMassage,style: TextStyle(color: AppColors.blackColor),),
+              Text(failureMassage,style: const TextStyle(color: AppColors.blackColor),),
             ],
           ),
           actions: [

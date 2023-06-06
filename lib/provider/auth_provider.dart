@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
 class UserProviderAuth extends ChangeNotifier {
@@ -38,13 +39,11 @@ class UserProviderAuth extends ChangeNotifier {
         return;
       }
       final googleSignInAuthentication =
-          await googleSignInAccount!.authentication;
-      final credential = GoogleAuthProvider.credential(
-
-      accessToken: googleSignInAuthentication.accessToken,
-          idToken: googleSignInAuthentication.idToken);
-
+      await googleSignInAccount!.authentication;
+      final credential = GoogleAuthProvider.credential(accessToken: googleSignInAuthentication.accessToken,idToken: googleSignInAuthentication.idToken);
       await FirebaseAuth.instance.signInWithCredential(credential);
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('uidToken',FirebaseAuth.instance.currentUser!.uid );
       await FirebaseFirestore.instance.collection("users").add({
         'email': googleSignInAccount.email,
         'imageUrl': googleSignInAccount.photoUrl,
@@ -85,7 +84,7 @@ class UserProviderAuth extends ChangeNotifier {
                     style: const TextStyle(color: AppColors.blackColor),
                   )),
                   actions: [
-                    TextButton(
+                    TextButton (
                         onPressed: () {
                           Navigator.of(context).pop();
                         },

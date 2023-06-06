@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:talaqy/pages/auth/login/login_view.dart';
-import 'package:talaqy/pages/home/home_view.dart';
 import 'package:talaqy/pages/onboarding_screen/onboarding_view.dart';
 import 'package:talaqy/pages/splash_screen/splash_screen_view.dart';
 import 'package:talaqy/provider/auth_provider.dart';
@@ -15,7 +13,7 @@ int? initScreen;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  initScreen = await prefs.getInt("initScreen");
+  initScreen = prefs.getInt("initScreen");
   await prefs.setInt("initScreen", 1);
   await Firebase.initializeApp();
   runApp(const MyApp());

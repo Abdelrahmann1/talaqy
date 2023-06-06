@@ -65,16 +65,11 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
               },
               child:
               FutureBuilder(
-                  future: viewModel.userData
-                      .where("userId",
-                          isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-                      .get(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+                  future: viewModel.userData.where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).get(),
+                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       if (snapshot.data!.docs.isNotEmpty) {
-                        return
-                          Container(
+                        return Container(
                             width: 200,
                             height: 200,
                             decoration: BoxDecoration(
@@ -95,7 +90,6 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                   fit: BoxFit.fill),
                             ),
                           );
-
                     } else {
                         return  Container(
                           width: 200,
@@ -118,14 +112,12 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                 fit: BoxFit.fill),
                           ),
                         );
-
                       }
                     }else{
                       return const Center(child: CircularProgressIndicator());
                     }
                   }
                   ),
-
               // Padding(
               //   padding: const EdgeInsets.all(10.0),
               //   child: Container(
