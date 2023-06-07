@@ -32,22 +32,12 @@ class RegisterView extends HookView<SignUpViewModel> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            actions: [
-              IconButton(
-                icon: const Icon(
-                  Icons.arrow_forward,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
             centerTitle: true,
             title: Text(
               'هيا نبدأ',
               style: Theme.of(context).textTheme.displayLarge,
             ),
+            leading: const SizedBox(),
           ),
           backgroundColor: AppColors.white,
           body: SingleChildScrollView(
@@ -334,10 +324,10 @@ class RegisterView extends HookView<SignUpViewModel> {
                         height: 13,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SmallButton(
-                              "Facebook", () {}, FontAwesomeIcons.facebook),
+                          // SmallButton(
+                          //     "Facebook", () {}, FontAwesomeIcons.facebook),
                           SmallButton(
                             "Google",
                             () async {

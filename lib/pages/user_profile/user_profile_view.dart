@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pmvvm/pmvvm.dart';
 import 'package:talaqy/pages/user_profile/user_profile_view_model.dart';
+import 'package:talaqy/utils/app_router.dart';
 import '../../provider/auth_provider.dart';
 import '../../utils/app_colors.dart';
 
@@ -27,7 +28,8 @@ class UserProfileView extends HookView<UserProfileViewModel> {
         child: Scaffold(
       backgroundColor: AppColors.backgroundGrey,
       body: FutureBuilder(
-          future: viewModel.userData.where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          future: viewModel.userData.where("userId",
+                  isEqualTo: FirebaseAuth.instance.currentUser!.uid)
               .get(),
           builder: (BuildContext context,
               AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
@@ -45,34 +47,31 @@ class UserProfileView extends HookView<UserProfileViewModel> {
                                   MediaQuery.of(context).size.width, 150.0)),
                         ),
                       ),
-
-                        Positioned(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 115.0, top: 70),
-                            child: Container(
-                              width: 150,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      color: AppColors.white, width: 6)),
-                              child: ClipOval(
-                                child:
-                                CachedNetworkImage(
-                                    imageUrl:snapshot.data!.docs[0]["imageUrl"],
-                                    width: 90,
-                                    height: 90,
-                                    placeholder: (context, url) => const Center(
-                                        child: CircularProgressIndicator()),
-                                    errorWidget: (context, url, error) =>
-                                         Image.asset("assets/images/prof.jpg"),
-                                    fit: BoxFit.fill),
-                              ),
+                      Positioned(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 115.0, top: 70),
+                          child: Container(
+                            width: 150,
+                            height: 150,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: AppColors.white, width: 6)),
+                            child: ClipOval(
+                              child: CachedNetworkImage(
+                                  imageUrl: snapshot.data!.docs[0]["imageUrl"],
+                                  width: 90,
+                                  height: 90,
+                                  placeholder: (context, url) => const Center(
+                                      child: CircularProgressIndicator()),
+                                  errorWidget: (context, url, error) =>
+                                      Image.asset("assets/images/prof.jpg"),
+                                  fit: BoxFit.fill),
                             ),
                           ),
                         ),
+                      ),
                       // Positioned(
                       //   child: Padding(
                       //     padding: const EdgeInsets.only(left: 202.0, top: 175),
@@ -118,19 +117,22 @@ class UserProfileView extends HookView<UserProfileViewModel> {
                       ),
                     ],
                   ),
-                  snapshot.data!.docs[0]["name"]!=null?
-                  Text(
-                    snapshot.data!.docs[0]["name"].toString(),
-                    style: const TextStyle(color: Colors.black),
-                  ):const Text("No Name"),
+                  snapshot.data!.docs[0]["name"] != null
+                      ? Text(
+                          snapshot.data!.docs[0]["name"].toString(),
+                          style: const TextStyle(color: Colors.black),
+                        )
+                      : const Text("No Name"),
                   const SizedBox(
                     height: 3,
                   ),
-                  snapshot.data!.docs[0]["email"]!=null?
-                  Text(
-                    snapshot.data!.docs[0]["email"].toString(),
-                    style: const TextStyle(color: AppColors.greyForFileds),
-                  ):const Text("no email "),
+                  snapshot.data!.docs[0]["email"] != null
+                      ? Text(
+                          snapshot.data!.docs[0]["email"].toString(),
+                          style:
+                              const TextStyle(color: AppColors.greyForFileds),
+                        )
+                      : const Text("no email "),
                   const SizedBox(
                     height: 10,
                   ),
@@ -193,13 +195,16 @@ class UserProfileView extends HookView<UserProfileViewModel> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
+
                               IconButton(
                                 icon: const Icon(
                                   Icons.arrow_back_ios,
                                   color: AppColors.greyForFileds,
                                 ),
-                                onPressed: () {
-                                  userProviderAuth.signOut(context);
+                                onPressed: () async{
+                                  FirebaseAuth.instance.signOut();
+                                  Navigator.pushReplacementNamed(context, AppRouter.loginScreen);
+
                                 },
                               ),
                               const Text(

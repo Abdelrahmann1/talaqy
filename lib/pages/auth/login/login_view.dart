@@ -33,17 +33,7 @@ class LoginView extends HookView<LoginViewModel> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            actions: [
-              IconButton(
-                icon: const Icon(
-                  Icons.arrow_forward,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
+            leading: const SizedBox(),
             centerTitle: true,
             title: Text(
               'مرحبا بك',
@@ -194,10 +184,10 @@ class LoginView extends HookView<LoginViewModel> {
                         height: 20,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SmallButton(
-                              "Facebook", () {},FontAwesomeIcons.facebook),
+                          // SmallButton(
+                          //     "Facebook", () {},FontAwesomeIcons.facebook),
                           SmallButton(
                             "Google",
                             () async {
