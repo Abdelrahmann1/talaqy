@@ -125,7 +125,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                       value: viewModel.countryOfFounded,
                       style: Theme.of(context).textTheme.displaySmall,
                       hint: Text(
-                        'اختار البلد',
+                        '   اختار البلد',
                         style: Theme.of(context).textTheme.displaySmall,
                       ),
                       onChanged: (value) {
@@ -157,7 +157,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                       },
                       value: viewModel.cityOfFounded,
                       style: Theme.of(context).textTheme.displaySmall,
-                      hint: Text('اختار المحافظه',
+                      hint: Text('   اختار المحافظه',
                           style: Theme.of(context).textTheme.displaySmall),
                       onChanged: (value) {
                         viewModel.setCityOfFounded(value);
@@ -187,8 +187,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                       },
                       value: viewModel.sectionOfFounded,
                       style: Theme.of(context).textTheme.displaySmall,
-                      hint: Text(
-                        'اختار الحي',
+                      hint: Text('   اختار الحي',
                         style: Theme.of(context).textTheme.displaySmall,
                       ),
                       onChanged: (value) {
@@ -205,7 +204,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                 MainFormField(
                   textInputType: TextInputType.text,
                   controller: viewModel.placesOfChild,
-                  labelText: 'مكان العثور علي الطفل',
+                  labelText: 'مكان العثور علي الطفل بي التفصيل',
                   validator: (value) {
                     if (value!.length > 100) {
                       return "لا يمكن ان يكون اكثر من 100 حرف";

@@ -12,6 +12,8 @@ import 'package:talaqy/widgets/show_loading.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+import '../../../utils/app_colors.dart';
+
 class AddMissingPeopleViewModel extends ViewModel {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController fatherName = TextEditingController();
@@ -87,9 +89,9 @@ class AddMissingPeopleViewModel extends ViewModel {
         "nameOfMissing": nameOfMissing.text,
         "ageOfMissing": ageOfMissing.text,
         "placesOfMissing": placesOfMissing.text,
-        "CountryOfFounded": countryOfMissing,
-        "CityOfFounded": cityOfMissing,
-        "SecitonOfFounded": sectionOfMissing,
+        "CountryOfMissing": countryOfMissing,
+        "CityOfMissing": cityOfMissing,
+        "SecitonOfMissing": sectionOfMissing,
         "heightOfMissing": heightOfMissing.text,
         "MoreDetails": moreDetails.text,
         "urRoleOfChild": urRoleOfChild.text,
@@ -628,5 +630,37 @@ class AddMissingPeopleViewModel extends ViewModel {
         child: Text(city),
       );
     }).toList();
+  }
+  Future<void> showAlertDialog(BuildContext context, String title, String message) {
+    return showDialog<void>(
+      context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: AppColors.white,
+            title: const Center(
+                child: Text(
+                  "خطا في تسجيل الدخول ",
+                  style: TextStyle(fontSize: 12),
+                )),
+            content: const Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "failureMassage",
+                  style: TextStyle(color: AppColors.blackColor),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("حسنا"))
+            ],
+          );
+        }
+
+    ).then((value) => Future.value()); // Return a non-nullable Future with a value of null
   }
 }

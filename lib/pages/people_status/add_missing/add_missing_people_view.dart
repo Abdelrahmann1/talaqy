@@ -145,23 +145,6 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                   const SizedBox(
                     height: 13,
                   ),
-                  MainFormField(
-                    textInputType: TextInputType.text,
-                    controller: viewModel.placesOfMissing,
-                    labelText: 'مكان فقد الطفل',
-                    validator: (value) {
-                      if (value!.length > 100) {
-                        return "لا يمكن ان يكون اكثر من 100 حرف";
-                      }
-                      if (value.length < 3) {
-                        return "لا يمكن ان يكون اقل من 3 حرف";
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 13,
-                  ),
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(7.0),
@@ -182,7 +165,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                         value: viewModel.countryOfMissing,
                         style: Theme.of(context).textTheme.displaySmall,
                         hint: Text(
-                          'اختار البلد',
+                          '   اختار البلد',
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                         onChanged: (value) {
@@ -214,7 +197,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                         },
                         value: viewModel.cityOfMissing,
                         style: Theme.of(context).textTheme.displaySmall,
-                        hint: Text('اختار المحافظه',
+                        hint: Text('   اختار المحافظه',
                             style: Theme.of(context).textTheme.displaySmall),
                         onChanged: (value) {
                           viewModel.setCityOfMissing(value);
@@ -245,7 +228,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                         value: viewModel.sectionOfMissing,
                         style: Theme.of(context).textTheme.displaySmall,
                         hint: Text(
-                          'اختار الحي',
+                          '    اختار الحي ',
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                         onChanged: (value) {
@@ -262,7 +245,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                   MainFormField(
                     textInputType: TextInputType.text,
                     controller: viewModel.placesOfMissing,
-                    labelText: ' مكان فقد الطفل بي التفصيل',
+                    labelText: 'مكان فقد الطفل بي التفصيل',
                     validator: (value) {
                       if (value!.length > 100) {
                         return "لا يمكن ان يكون اكثر من 100 حرف";

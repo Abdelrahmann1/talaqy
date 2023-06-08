@@ -278,12 +278,12 @@ class CustomSearchBar extends SearchDelegate{
                                           docId:
                                           snapshot.data!.docs[index].id,
                                           list: snapshot.data!.docs[index],
-                                          imageUrl: snapshot
-                                              .data!.docs[index]["imageUrl"]
-                                              .toString(),
+                                          imageUrl: snapshot.data!.docs[index]["imageUrl"].toString(),
                                           dateOfMissing: snapshot.data!
                                               .docs[index]["dateOfMissing"]
                                               .toString(),
+                                          locationOfCity: snapshot.data!.docs[index]["CityOfMissing"].toString(),
+                                          locationOfSection: snapshot.data!.docs[index]["SecitonOfMissing"].toString(),
                                         ),
                                       )),
                                 ),
@@ -383,6 +383,12 @@ class CustomSearchBar extends SearchDelegate{
                                                                 imageUrl: snapshot
                                                                     .data!.docs[index]["imageUrl"]
                                                                     .toString(),
+                                                                locationOfSection: snapshot
+                                                                    .data!.docs[index]["sectionOfFounded"]
+                                                                    .toString(),
+                                                                locationOfCity:snapshot
+                                                                    .data!.docs[index]["CityOfFounded"]
+                                                                  .toString(),
                                                               )
                                                             // FoundedPeopleContainer(
                                                             //   onTap: () {},

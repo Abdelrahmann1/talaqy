@@ -145,8 +145,7 @@ class LoginView extends HookView<LoginViewModel> {
                         children: [
                           TextButton(
                               onPressed: () {
-                                print(viewModel.email);
-                                print(viewModel.passWord);
+                               Navigator.pushNamed(context, AppRouter.forgetPasswordScreen);
                               },
                               child: const Text(
                                 "نسيت كلمة السر ؟",
@@ -234,7 +233,6 @@ class LoginView extends HookView<LoginViewModel> {
                             },
                             bgColor: AppColors.primaryColor,
                           ),
-
                           if(viewModel.isLogin!)
                             MainButton(
                               "جاري تسجيل الدخول",

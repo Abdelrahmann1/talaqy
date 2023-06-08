@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 class FoundedPeopleContainer extends StatelessWidget {
   final String nameOfFounded;
   final String dateOfReported;
+  final String locationOfSection;
+  final String locationOfCity;
   final String placesOfChild;
   final String ageOfChild;
   final Color borderColor;
@@ -21,7 +23,7 @@ class FoundedPeopleContainer extends StatelessWidget {
     required this.nameOfFounded,
     required this.dateOfReported,
     required this.ageOfChild,
-    required this.imageUrl,
+    required this.imageUrl, required this.locationOfSection, required this.locationOfCity,
   });
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class FoundedPeopleContainer extends StatelessWidget {
                   nameOfFounded,
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
+                const SizedBox(height: 5,),
                 Row(
                   children: [
                     Text(
@@ -55,6 +58,7 @@ class FoundedPeopleContainer extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(height: 5,),
                 Row(
                   children: [
                     Row(
@@ -67,7 +71,7 @@ class FoundedPeopleContainer extends StatelessWidget {
                           width: 5,
                         ),
                         const Icon(
-                          Icons.location_on_outlined,
+                          Icons.bloodtype_outlined,
                           size: 15,
                         ),
                       ],
@@ -90,6 +94,45 @@ class FoundedPeopleContainer extends StatelessWidget {
                         ),
                         const Icon(
                           Icons.calendar_today_outlined,
+                          size: 15,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5,),
+                Row(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          locationOfSection,
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        const Icon(
+                          Icons.location_on_outlined,
+                          size: 15,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Row(
+
+                      children: [
+                        Text(
+                          locationOfCity,
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        const Icon(
+                          Icons.location_city_outlined,
                           size: 15,
                         ),
                       ],

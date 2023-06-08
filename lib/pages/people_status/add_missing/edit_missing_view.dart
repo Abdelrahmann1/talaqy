@@ -166,9 +166,7 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                   height: 13,
                 ),
                 MainFormField(
-                  // initialValue: viewModel.list["dateOfMissing"].toString(),
-
-                  textInputType: TextInputType.datetime,
+                  textInputType: TextInputType.text,
                   controller: viewModel.dateOfMissing,
                   labelText: 'تاريخ فقد الطفل',
                 ),

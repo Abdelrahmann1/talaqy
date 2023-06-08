@@ -3,9 +3,9 @@ import 'package:pmvvm/pmvvm.dart';
 import 'package:talaqy/extentions/padding_ext.dart';
 import 'package:talaqy/pages/people_status/add_founded/edit_founded_view_model.dart';
 import 'package:talaqy/utils/app_colors.dart';
+import 'package:talaqy/utils/app_router.dart';
 import 'package:talaqy/widgets/main_button.dart';
 import '../../../widgets/missed_form_field.dart';
-
 class EditFoundedScreen extends StatelessWidget {
   var docid;
   var list;
@@ -142,6 +142,12 @@ class EditFoundedView extends HookView<EditFoundedViewModel> {
                 const SizedBox(
                   height: 13,
                 ),
+                MainFormField(
+                  textInputType: TextInputType.text,
+                  controller: viewModel.dateOfFounded,
+                  labelText: 'تاريخ فقد الطفل',
+                ),
+
                 const SizedBox(
                   height: 13,
                 ),
@@ -173,7 +179,9 @@ class EditFoundedView extends HookView<EditFoundedViewModel> {
                 MainButton(" تعديل البيانات", bgColor: AppColors.blackColor,
                         () async {
                       viewModel.editFounded();
-                    })
+                      Navigator.popAndPushNamed(context, AppRouter.successfulEditMessage);
+
+                        })
               ],
             ).setPageHorizontalPadding(context),
           ),

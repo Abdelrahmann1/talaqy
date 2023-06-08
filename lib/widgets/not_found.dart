@@ -23,7 +23,8 @@ class NotFound extends StatelessWidget {
               Center(
                 child: Image.asset(
                   imageAssets,
-                  width: 300,
+                  width: double.infinity,
+
                 ),
               )])
       ],

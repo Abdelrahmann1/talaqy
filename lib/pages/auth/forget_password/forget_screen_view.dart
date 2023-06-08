@@ -4,6 +4,7 @@ import 'package:talaqy/extentions/padding_ext.dart';
 import 'package:talaqy/pages/auth/forget_password/forget_view_model.dart';
 
 import 'package:talaqy/utils/app_colors.dart';
+import 'package:talaqy/utils/app_router.dart';
 
 import '../../../widgets/main_button.dart';
 
@@ -40,6 +41,7 @@ class ForgetView extends HookView<ForgetViewModel> {
               ),
             ],
             centerTitle: true,
+            leading: const SizedBox(),
             title: Text(
               ' نسيت كلمة السر',
               style: Theme.of(context).textTheme.displayLarge,
@@ -48,11 +50,14 @@ class ForgetView extends HookView<ForgetViewModel> {
           backgroundColor: AppColors.white,
           body: Column(
 
+
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height:80,),
+                  const SizedBox(
+                    height: 80,
+                  ),
                   Text(
                     "قم بإدخال البريد الإلكتروني",
                     style: Theme.of(context).textTheme.displayMedium,
@@ -65,12 +70,13 @@ class ForgetView extends HookView<ForgetViewModel> {
               Column(
 
                 children: [
-
-                  const SizedBox(height:13,),
-
+                  const SizedBox(
+                    height: 13,
+                  ),
                   Directionality(
                     textDirection: TextDirection.rtl,
                     child: TextFormField(
+                      controller: viewModel.emailForgetPassword,
                       textAlign: TextAlign.right,
                       autovalidateMode: AutovalidateMode.always,
                       decoration: InputDecoration(
@@ -78,7 +84,7 @@ class ForgetView extends HookView<ForgetViewModel> {
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 20,
                             vertical:
-                            10), // Adjust the padding around the input field
+                                10), // Adjust the padding around the input field
 
                         labelStyle: Theme.of(context).textTheme.displaySmall,
 
@@ -86,24 +92,23 @@ class ForgetView extends HookView<ForgetViewModel> {
 
                         border: OutlineInputBorder(
                           borderSide:
-                          const BorderSide(color: AppColors.greyForFileds),
+                              const BorderSide(color: AppColors.greyForFileds),
                           borderRadius: BorderRadius.circular(7.0),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height:13,),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: MainButton(
+                      "إعادة تعيين الآن",
+                      () {
+                        viewModel.forgetPassword();
+                        Navigator.popAndPushNamed(context, AppRouter.loginScreen);
 
-                  const SizedBox(height:20,),
-
-                  const SizedBox(height:20,),
-
-                  const SizedBox(height:50,),
-
-                  Row(
-                    children: [
-                      MainButton("التالي", (){},bgColor: AppColors.primaryColor,)
-                    ],
+                      },
+                      bgColor: AppColors.primaryColor,
+                    ),
                   )
                 ],
               ),

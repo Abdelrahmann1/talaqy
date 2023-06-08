@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:pmvvm/pmvvm.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
 
@@ -106,6 +107,8 @@ class SignUpViewModel extends ViewModel {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email.text, password: passWord.text);
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('uidToken',FirebaseAuth.instance.currentUser!.uid );
       await FirebaseFirestore.instance
           .collection("users")
           .add({
@@ -124,12 +127,12 @@ class SignUpViewModel extends ViewModel {
           context: context,
           builder: (context) => AlertDialog(
                   backgroundColor: AppColors.white,
-                  title: Center(
-                      child: const Text("نجاح الاشتراك",
+                  title: const Center(
+                      child: Text("نجاح الاشتراك",
                           style: TextStyle(fontSize: 12))),
-                  content: SingleChildScrollView(
-                      child: const Text(
-                    "تم انشاء الحساب بي نجاح يمكنك الان تسجيل الدخول",
+                  content: const SingleChildScrollView(
+                      child: Text(
+                    "تم انشاء الحساب بي نجاح يمكنك الان الدخول",
                     style: TextStyle(color: AppColors.blackColor),
                   )),
                   actions: [

@@ -199,7 +199,6 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                             }));
                                           },
                                           child: MissingContainer(
-                                            onTap: () {},
                                             borderColor: Colors.blue,
                                             ageOfMissing: snapshot.data!
                                                 .docs[index]["ageOfMissing"]
@@ -208,17 +207,18 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                                 .docs[index]["nameOfMissing"]
                                                 .toString(),
                                             placesOfMissing: snapshot.data!
-                                                .docs[index]["placesOfMissing"]
+                                                .docs[index]["gender"]
                                                 .toString(),
                                             docId:
                                                 snapshot.data!.docs[index].id,
                                             list: snapshot.data!.docs[index],
-                                            imageUrl: snapshot
-                                                .data!.docs[index]["imageUrl"]
-                                                .toString(),
+                                            imageUrl: snapshot.data!.docs[index]["imageUrl"].toString(),
                                             dateOfMissing: snapshot.data!
                                                 .docs[index]["dateOfMissing"]
                                                 .toString(),
+                                            locationOfCity:  snapshot.data!.docs[index]["CityOfMissing"].toString(),
+                                            locationOfSection: snapshot.data!.docs[index]["SecitonOfMissing"].toString(),
+
                                           ),
                                         )),
                                   ),
@@ -302,7 +302,7 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                                   snapshot.data!.docs[index].id,
                                               list: snapshot.data!.docs[index],
                                               placesOfChild: snapshot.data!
-                                                  .docs[index]["placesOfChild"]
+                                                  .docs[index]["gender"]
                                                   .toString(),
                                               nameOfFounded: snapshot.data!
                                                   .docs[index]["nameOfChild"]
@@ -315,6 +315,12 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                                   .toString(),
                                               imageUrl: snapshot
                                                   .data!.docs[index]["imageUrl"]
+                                                  .toString(),
+                                              locationOfSection: snapshot
+                                                  .data!.docs[index]["sectionOfFounded"]
+                                                  .toString(),
+                                              locationOfCity: snapshot
+                                                  .data!.docs[index]["CityOfFounded"]
                                                   .toString(),
                                             )
                                             // FoundedPeopleContainer(

@@ -4,6 +4,7 @@ import 'package:talaqy/pages/home/home_view.dart';
 import 'package:talaqy/pages/people_status/add_missing/edit_missing_view.dart';
 import 'package:talaqy/pages/user_profile/user_profile_view.dart';
 
+import '../pages/auth/forget_password/forget_screen_view.dart';
 import '../pages/auth/sgin_up/sgin_up_view.dart';
 import '../pages/child_profile/founded_child_profile/founded_child_profile_view.dart';
 import '../pages/child_profile/missing_child_profile/missing_child_profile_view.dart';
@@ -19,6 +20,7 @@ class AppRouter{
   static const String onBoardingScreen = "/OnboardingScreen";
   static const String loginScreen = "/LoginScreen";
   static const String registerScreen = "/RegisterScreen";
+  static const String forgetPasswordScreen = "/ForgetPasswordScreen";
   static const String homeScreen = "/HomeScreen";
   static const String addMissingScreen = "/AddMissingScreen";
   static const String addFoundedScreen = "/AddFoundedScreen";
@@ -34,6 +36,7 @@ class AppRouter{
       AppRouter.onBoardingScreen: (context) =>  const OnBoardingScreen(),
       AppRouter.loginScreen: (context) =>  const LoginScreen(),
       AppRouter.registerScreen: (context) =>  const RegisterScreen(),
+      AppRouter.forgetPasswordScreen: (context) =>  const ForgetScreen(),
       AppRouter.homeScreen: (context) =>  const HomeScreen(),
       AppRouter.addMissingScreen: (context) =>  const AddMissingPeople(),
       AppRouter.addFoundedScreen: (context) =>  const AddFoundedPeopleScreen(),

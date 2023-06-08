@@ -75,7 +75,6 @@ class EditFoundedViewModel extends ViewModel {
         "moreDetails":moreDetails.text,
         "userId": FirebaseAuth.instance.currentUser!.uid,
       });
-      Navigator.pushNamed(context, AppRouter.successfulEditMessage);
     }
   }
 }

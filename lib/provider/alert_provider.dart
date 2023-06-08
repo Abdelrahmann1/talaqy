@@ -5,12 +5,12 @@ class AlertExitApp extends ChangeNotifier {
   Future<bool> alertExitApp(BuildContext context) {
     AwesomeDialog(
       context: context,
-      dialogType: DialogType.info,
+      dialogType: DialogType.warning,
       animType: AnimType.rightSlide,
-      title: "title",
+      title: "هل انت متاكيد من الخروج",
       desc: "desc",
       btnCancelOnPress: (){},
-      btnOkOnPress: (){}).show();
+      btnOkOnPress: (){Navigator.pop(context);}).show();
     notifyListeners();
     return Future.value(true);
   }

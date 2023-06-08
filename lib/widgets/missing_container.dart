@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:talaqy/extentions/padding_ext.dart';
 
 class MissingContainer extends StatelessWidget {
   var list;
@@ -10,6 +11,8 @@ class MissingContainer extends StatelessWidget {
   final String ageOfMissing;
   final Color borderColor;
   final String dateOfMissing;
+  final String locationOfCity;
+  final String locationOfSection;
   final Function? onTap;
   MissingContainer({
     super.key,
@@ -21,7 +24,7 @@ class MissingContainer extends StatelessWidget {
     required this.nameOfMissing,
     required this.placesOfMissing,
     required this.imageUrl,
-    required this.dateOfMissing,
+    required this.dateOfMissing, required this.locationOfCity, required this.locationOfSection,
   });
   @override
   Widget build(BuildContext context) {
@@ -29,6 +32,7 @@ class MissingContainer extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -40,9 +44,10 @@ class MissingContainer extends StatelessWidget {
                   nameOfMissing,
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
+                SizedBox(height: 5,),
+
                 Row(
                   children: [
-
                       Text(
                         dateOfMissing,
                         style: Theme.of(context).textTheme.titleSmall,
@@ -57,6 +62,8 @@ class MissingContainer extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(height: 5,),
+
                 Row(
                   children: [
                     Row(
@@ -69,7 +76,7 @@ class MissingContainer extends StatelessWidget {
                           width: 5,
                         ),
                         const Icon(
-                          Icons.location_on_outlined,
+                          Icons.bloodtype_outlined,
                           size: 15,
                         ),
                       ],
@@ -101,11 +108,51 @@ class MissingContainer extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(height: 5,),
+                Row(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          locationOfSection,
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        const Icon(
+                          Icons.location_on_outlined,
+                          size: 15,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Row(
+
+                      children: [
+                        Text(
+                          locationOfCity,
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        const Icon(
+                          Icons.location_city_outlined,
+                          size: 15,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ],
             ),
 
           ],
         ),
+
         SizedBox(
           height:double.infinity ,
           width:140 ,
