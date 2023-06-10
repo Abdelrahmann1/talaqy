@@ -196,22 +196,32 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                           }));
                                         },
                                         onTapDelete: () async {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: const Text(
-                                                      'Alert Dialog'),
-                                                  content: const Text(
-                                                      'This is an example of an alert dialog.'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () async {},
-                                                      child: const Text('OK'),
-                                                    ),
-                                                  ],
-                                                );
-                                              });
+                                          showLoading(context);
+                                          await viewModel.addMissingRef.doc(snapshot.data!.docs[index].id).delete();
+                                          await FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl"]).delete();
+                                          await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl2"]).delete();
+                                          await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl3"]).delete();
+                                          Navigator.of(context).pop();
+                                          showDialog(context: context, builder: (context){
+                                            return AlertDialog(
+                                              backgroundColor: AppColors.white,
+                                              title:const Center(child: Text("إلغاء",style: TextStyle(fontSize: 12),)),
+                                              content: Row(
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                children: [
+                                                  Text("تم إلغاء المنشور بنجاح",style: const TextStyle(color: AppColors.blackColor),),
+                                                ],
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: (){
+                                                      Navigator.pushNamedAndRemoveUntil(context, AppRouter.homeScreen,(Route<dynamic> route) => false);
+
+                                                    },
+                                                    child: const Text("حسنا"))
+                                              ],
+                                            );
+                                          });
                                         },
                                         docId: snapshot.data!.docs[index].id,
                                         list: snapshot.data!.docs[index],
@@ -280,13 +290,31 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                         },
                                         onTapDelete: () async{
                                           showLoading(context);
-
                                           await viewModel.addFoundedRef.doc(snapshot.data!.docs[index].id).delete();
                                           await FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl"]).delete();
                                           await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl2"]).delete();
                                           await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl3"]).delete();
                                           Navigator.of(context).pop();
-                                          Navigator.pushReplacementNamed(context, AppRouter.successfulMessage);
+                                          showDialog(context: context, builder: (context){
+                                            return AlertDialog(
+                                              backgroundColor: AppColors.white,
+                                              title:const Center(child: Text("إلغاء",style: TextStyle(fontSize: 12),)),
+                                              content: Row(
+                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                children: [
+                                                  Text("تم إلغاء المنشور بنجاح",style: const TextStyle(color: AppColors.blackColor),),
+                                                ],
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: (){
+                                                      Navigator.pushNamedAndRemoveUntil(context, AppRouter.homeScreen,(Route<dynamic> route) => false);
+
+                                                    },
+                                                    child: const Text("حسنا"))
+                                              ],
+                                            );
+                                          });
                                         },
                                         docId: snapshot.data!.docs[index].id,
                                         list: snapshot.data!.docs[index],

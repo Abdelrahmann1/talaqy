@@ -278,15 +278,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                     textInputType: TextInputType.text,
                     controller: viewModel.urRoleOfChild,
                     labelText: 'صفتك بي النسبه للطفل',
-                    validator: (value) {
-                      if (value!.length > 100) {
-                        return "لا يمكن ان يكون اكثر من 100 حرف";
-                      }
-                      if (value.length < 3) {
-                        return "لا يمكن ان يكون اقل من 3 حرف";
-                      }
-                      return null;
-                    },
+
                   ),
                   const SizedBox(
                     height: 13,

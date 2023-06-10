@@ -66,8 +66,7 @@ class AddFoundedPeopleViewModel extends ViewModel {
       file2 = File(pickedImage2.path);
       random2 = Random().nextInt(100000);
       nameOfImagePicked2 = basename(pickedImage2.path);
-      ref2 =
-          FirebaseStorage.instance.ref("images").child("$nameOfImagePicked2");
+      ref2 = FirebaseStorage.instance.ref("images").child("$nameOfImagePicked2");
     }
     notifyListeners();
   }

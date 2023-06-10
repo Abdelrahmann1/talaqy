@@ -42,6 +42,33 @@ class ForgetViewModel extends ViewModel {
       try {
         await FirebaseAuth.instance
             .sendPasswordResetEmail(email: emailForgetPassword.text);
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                backgroundColor: AppColors.white,
+                title: const Center(
+                    child: Text(
+                      "تم ارسال رساله عبر ايميلك الالكتروني",
+                      style: TextStyle(fontSize: 12),
+                    )),
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(failureMassage, style: const TextStyle(color: AppColors.blackColor),
+                    ),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text("حسنا"))
+                ],
+              );
+            });
+
       } on FirebaseAuthException catch (e) {
         switch (e.code) {
           case "invalid-email":

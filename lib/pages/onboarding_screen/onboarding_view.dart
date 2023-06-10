@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pmvvm/pmvvm.dart';
+import 'package:talaqy/extentions/padding_ext.dart';
 import 'package:talaqy/models/onboarding_model.dart';
 import 'package:talaqy/pages/onboarding_screen/onboarding_view_model.dart';
 import 'package:talaqy/utils/app_colors.dart';
@@ -40,7 +41,7 @@ class OnBoardingView extends HookView<OnBoardingViewModel> {
                               padding: const EdgeInsets.only(right: 8.0,left: 8),
                               child: Text(
                                 onBoardingList[i].title!,
-                                style:Theme.of(context).textTheme.displayLarge,
+                                style:const TextStyle(fontSize: 16,color: AppColors.blackColor),
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -94,13 +95,15 @@ class OnBoardingView extends HookView<OnBoardingViewModel> {
                             ),
                             TextButton(onPressed: (){
                               Navigator.pushNamed(context, AppRouter.registerScreen);
-                            },child: const Text("تخطي",style: TextStyle(color: AppColors.primaryColor),))
+                            },child: const Text("تخطي",style: TextStyle(color: AppColors.blackColor),))
                           ],
                         ),
 
                       ],
                     )),
               ],
-            )));
+            ).setPageHorizontalPadding(context)
+        )
+    );
   }
 }

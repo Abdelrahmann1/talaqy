@@ -76,9 +76,9 @@ class ForgetView extends HookView<ForgetViewModel> {
                   Directionality(
                     textDirection: TextDirection.rtl,
                     child: TextFormField(
+                      keyboardType: TextInputType.emailAddress,
                       controller: viewModel.emailForgetPassword,
                       textAlign: TextAlign.right,
-                      autovalidateMode: AutovalidateMode.always,
                       decoration: InputDecoration(
                         labelText: 'البريد الالكتروني',
                         contentPadding: const EdgeInsets.symmetric(
@@ -104,7 +104,6 @@ class ForgetView extends HookView<ForgetViewModel> {
                       "إعادة تعيين الآن",
                       () {
                         viewModel.forgetPassword();
-                        Navigator.popAndPushNamed(context, AppRouter.loginScreen);
 
                       },
                       bgColor: AppColors.primaryColor,

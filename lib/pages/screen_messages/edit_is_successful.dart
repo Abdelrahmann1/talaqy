@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:talaqy/extentions/padding_ext.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
 import 'package:talaqy/widgets/main_button.dart';
@@ -59,7 +60,7 @@ class SuccessfulEditMessage extends StatelessWidget {
                               bgColor: AppColors.primaryColor,
                             )),
                       ],
-                    ),
+                    ).setPageHorizontalPadding(context)
                   ],
                 )),
               ],

@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:pmvvm/pmvvm.dart';
+import 'package:talaqy/extentions/padding_ext.dart';
 import 'package:talaqy/models/onboarding_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../utils/app_colors.dart';
@@ -264,10 +265,10 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                       ),
                     ],
                   ),
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
+                    children: [
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
@@ -387,7 +388,8 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                     )),
               )),
         ],
-      )),
+      ).setPageHorizontalPadding(context)
+      ),
     );
   }
 }

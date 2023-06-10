@@ -40,8 +40,7 @@ class LoginViewModel extends ViewModel {
           email: email.text, password: passWord.text);
      final prefs = await SharedPreferences.getInstance();
      await prefs.setString('uidToken',userCredential.user!.uid );
-
-      Navigator.pushNamed(context, AppRouter.homeScreen);
+     Navigator.pushNamedAndRemoveUntil(context, AppRouter.homeScreen,(Route<dynamic> route) => false);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case "user-not-found":

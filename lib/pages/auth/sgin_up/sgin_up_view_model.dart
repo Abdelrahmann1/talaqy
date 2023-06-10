@@ -133,7 +133,7 @@ class SignUpViewModel extends ViewModel {
                   content: const SingleChildScrollView(
                       child: Text(
                     "تم انشاء الحساب بي نجاح يمكنك الان الدخول",
-                    style: TextStyle(color: AppColors.blackColor),
+                    style: TextStyle(color: AppColors.blackColor),textAlign: TextAlign.center,
                   )),
                   actions: [
                     TextButton(
@@ -142,7 +142,7 @@ class SignUpViewModel extends ViewModel {
                         },
                         child: const Text("حسنا"))
                   ]));
-      Navigator.pushReplacementNamed(context, AppRouter.homeScreen);
+      Navigator.pushNamedAndRemoveUntil(context, AppRouter.homeScreen,(Route<dynamic> route) => false);
     } on FirebaseAuthException catch (e) {
       handelSignUpErrors(e);
       loading = false;

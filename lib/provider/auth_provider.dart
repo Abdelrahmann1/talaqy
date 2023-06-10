@@ -47,7 +47,7 @@ class UserProviderAuth extends ChangeNotifier {
         'name': googleSignInAccount.email,
         'userId':  FirebaseAuth.instance.currentUser!.uid,
       });
-      Navigator.pushReplacementNamed(context, AppRouter.homeScreen);
+      Navigator.pushNamedAndRemoveUntil(context, AppRouter.homeScreen,(Route<dynamic> route) => false);
     } on FirebaseAuthException catch (e) {
       var content = '';
       switch (e.code) {

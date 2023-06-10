@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:talaqy/extentions/padding_ext.dart';
 import 'package:talaqy/utils/app_colors.dart';
 
 class NotFound extends StatelessWidget {
@@ -28,6 +29,6 @@ class NotFound extends StatelessWidget {
                 ),
               )])
       ],
-    );
+    ).setPageHorizontalPadding(context);
   }
 }

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:pmvvm/pmvvm.dart';
+import 'package:talaqy/extentions/padding_ext.dart';
 import 'package:talaqy/pages/child_profile/missing_child_profile/missing_child_profile_view_model.dart';
 import '../../../models/onboarding_model.dart';
 import '../../../utils/app_colors.dart';
@@ -260,10 +261,10 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
                       ),
                     ],
                   ),
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
+                    children: [
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
@@ -383,7 +384,8 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
                     )),
               )),
         ],
-      )),
+      ).setPageHorizontalPadding(context)
+      ),
     );
   }
 }
