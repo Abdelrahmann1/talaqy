@@ -88,7 +88,7 @@ class ReportsCards extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          " عام $ageOfMissingِ",
+                          "  $ageOfMissing السنِ",
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         const SizedBox(

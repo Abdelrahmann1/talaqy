@@ -40,11 +40,20 @@ class MissingContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  nameOfMissing,
-                  style: Theme.of(context).textTheme.displayMedium,
+                Row(
+                  children: [
+                    Text(
+                      nameOfMissing,
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
+
+                    const Icon(
+                      Icons.person,
+                      size: 15,
+                    ),
+                  ],
                 ),
-                SizedBox(height: 5,),
+                const SizedBox(height: 5,),
 
                 Row(
                   children: [
@@ -55,14 +64,17 @@ class MissingContainer extends StatelessWidget {
                     const SizedBox(
                       width: 5,
                     ),
-
                     Text(
                       "متغيبة بتاريخ ",
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
+                    const Icon(
+                      Icons.date_range,
+                      size: 15,
+                    ),
                   ],
                 ),
-                SizedBox(height: 5,),
+                const SizedBox(height: 5,),
 
                 Row(
                   children: [
@@ -86,10 +98,7 @@ class MissingContainer extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Text(
-                          "عام",
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
+
                         const SizedBox(
                           width: 3,
                         ),
@@ -100,15 +109,24 @@ class MissingContainer extends StatelessWidget {
                         const SizedBox(
                           width: 4,
                         ),
+                        Text(
+                          "السن",
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+
+
                         const Icon(
-                          Icons.calendar_today_outlined,
+                          Icons.view_agenda_outlined,
                           size: 15,
                         ),
                       ],
                     ),
                   ],
                 ),
-                SizedBox(height: 5,),
+                const SizedBox(height: 5,),
                 Row(
                   children: [
                     Row(

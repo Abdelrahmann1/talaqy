@@ -19,14 +19,21 @@ class MissingChildProfileViewModel extends ViewModel {
      notifyListeners();
 
   }
+  void shareData() {
+    Map<String, dynamic> sharedData = {
+      "اسم الطفل المفقود": list["nameOfMissing"],
+      "مدينة الطفل المفقود": list["CityOfMissing"],
+      "عمر المفقود": list["ageOfMissing"],
+      "تاريخ المفقود": list["dateOfMissing"],
+      "اسم الأب": list["fatherName"],
+      "ماكن الفقد": list["placesOfMissing"],
+      "صورة الطفل": list["imageUrl"],
+    };
+    Share.share(sharedData.toString());
 
-  void shareStrings(List<String> strings) {
-    // Concatenate the strings into a single message
-    String message = strings.join('\n');
-
-    // Share the message using the share_plus package
-    Share.share(message);
   }
+
+
   onPageChanged( index){
     currentIndex=index;
     notifyListeners();

@@ -8,11 +8,9 @@ import '../../../models/onboarding_model.dart';
 import '../../../utils/app_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:share_plus/share_plus.dart';
-
 class MissingChildProfileScreen extends StatelessWidget {
-  var docid;
-  var list;
+  dynamic docid;
+  dynamic list;
   MissingChildProfileScreen({Key? key, this.docid, this.list})
       : super(key: key);
   @override
@@ -30,6 +28,7 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
   Widget render(context, viewModel) {
     return SafeArea(
       child: Scaffold(
+
           body: Column(
         children: [
           Expanded(
@@ -81,47 +80,47 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
 
                     ),
                   ),
-                  Positioned(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 300.0, top: 25),
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          color: AppColors.greyForFileds,
-                          shape: BoxShape.circle,
-                        ),
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            color: AppColors.blackColor,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 50,
+                          height: 50,
+                          decoration: const BoxDecoration(
+                            color: AppColors.backgroundGrey,
+                            shape: BoxShape.circle,
                           ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
+                          child: IconButton(
+                              icon: const Icon(
+                                Icons.share,
+                                color: AppColors.blackColor,
+                              ),
+                              onPressed: () async {
+                                viewModel.shareData();
+
+                              }),
                         ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 30.0, top: 25),
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          color: AppColors.greyForFileds,
-                          shape: BoxShape.circle,
-                        ),
-                        child: IconButton(
+                        Container(
+                          width: 50,
+                          height: 50,
+                          decoration: const BoxDecoration(
+                            color: AppColors.backgroundGrey,
+                            shape: BoxShape.circle,
+                          ),
+                          child: IconButton(
                             icon: const Icon(
-                              Icons.share,
+                              Icons.arrow_forward_ios_outlined,
                               color: AppColors.blackColor,
                             ),
-                            onPressed: () async {
-                              Share.share(viewModel.list.toString());
-                            }),
-                      ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+
+                      ],
                     ),
                   ),
                   Positioned(
@@ -139,7 +138,7 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
                                 width: viewModel.currentIndex==index?30:13,
                                 height: 10,
                                 decoration: BoxDecoration(
-                                    color: AppColors.primaryColor,
+                                    color: AppColors.backgroundGrey,
                                     borderRadius: BorderRadius.circular(20)),
                               ))
                         ],
@@ -194,7 +193,7 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
                       Row(
                         children: [
                           const Text(" عام", style: TextStyle(
-                            color: AppColors.fontSmoothGrey,
+                            color: AppColors.blackColor,
                             fontSize: 10,)),
 
                           Padding(

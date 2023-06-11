@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,24 +9,15 @@ import 'package:talaqy/utils/app_router.dart';
 class UserProviderAuth extends ChangeNotifier {
   bool? isLogin = false;
   bool? loading = false;
+  var fbm = FirebaseMessaging.instance;
+  String? tokenId;
 
-  // signOut(BuildContext context) {
-  //   isLogin = true;
-  //   notifyListeners();
-  //   try {
-  //     FirebaseAuth.instance.signOut();
-  //     Navigator.pushReplacementNamed(context, AppRouter.loginScreen);
-  //     notifyListeners();
-  //   } on FirebaseAuthException catch (e) {
-  //     return null;
-  //   } finally {
-  //     isLogin = false;
-  //     notifyListeners();
-  //   }
-  // }
 
-   logInWithGoogle(BuildContext context) async {
+  logInWithGoogle(BuildContext context) async {
     loading = true;
+    fbm.getToken().then((value) {
+      tokenId = value;
+      notifyListeners();});
     notifyListeners();
     final googleSignIn = GoogleSignIn(scopes: ['email']);
     try {
@@ -45,6 +37,8 @@ class UserProviderAuth extends ChangeNotifier {
         'email': googleSignInAccount.email,
         'imageUrl': googleSignInAccount.photoUrl,
         'name': googleSignInAccount.email,
+        "IpTokenForMobileToSendNotifications ": tokenId,
+
         'userId':  FirebaseAuth.instance.currentUser!.uid,
       });
       Navigator.pushNamedAndRemoveUntil(context, AppRouter.homeScreen,(Route<dynamic> route) => false);
@@ -91,6 +85,7 @@ class UserProviderAuth extends ChangeNotifier {
       loading = false;
       notifyListeners();
     }
+
   }
 
 }

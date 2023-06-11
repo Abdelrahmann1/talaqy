@@ -48,25 +48,27 @@ class UserProfileView extends HookView<UserProfileViewModel> {
                       ),
                       Positioned(
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 135.0, top: 70),
-                          child: Container(
-                            width: 150,
-                            height: 150,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: AppColors.white, width: 6)),
-                            child: ClipOval(
-                              child: CachedNetworkImage(
-                                  imageUrl: snapshot.data!.docs[0]["imageUrl"],
-                                  width: 90,
-                                  height: 90,
-                                  placeholder: (context, url) => const Center(
-                                      child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) =>
-                                      Image.asset("assets/images/prof.jpg"),
-                                  fit: BoxFit.fill),
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Center(
+                            child: Container(
+                              width: 150,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      color: AppColors.white, width: 6)),
+                              child: ClipOval(
+                                child: CachedNetworkImage(
+                                    imageUrl: snapshot.data!.docs[0]["imageUrl"],
+                                    width: 90,
+                                    height: 90,
+                                    placeholder: (context, url) => const Center(
+                                        child: CircularProgressIndicator()),
+                                    errorWidget: (context, url, error) =>
+                                        Image.asset("assets/images/prof.jpg"),
+                                    fit: BoxFit.fill),
+                              ),
                             ),
                           ),
                         ),
@@ -93,32 +95,37 @@ class UserProfileView extends HookView<UserProfileViewModel> {
                       //   ),
                       // ),
                       Positioned(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 300.0, top: 35),
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: const BoxDecoration(
-                              color: AppColors.circleAvatar,
-                              shape: BoxShape.circle,
-                            ),
-                            child: IconButton(
-                              icon: const Icon(
-                                Icons.arrow_forward_outlined,
-                                color: AppColors.blackColor,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: const BoxDecoration(
+                                  color: AppColors.circleAvatar,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: IconButton(
+                                  icon: const Icon(
+                                    Icons.arrow_forward_outlined,
+                                    color: AppColors.blackColor,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
                               ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
                             ),
-                          ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                   snapshot.data!.docs[0]["name"] != null
                       ? Text(
-                          snapshot.data!.docs[0]["name"].toString(),
+                          snapshot.data!.docs[0]["name"].toString().split("@")[0],
                           style: const TextStyle(color: Colors.black),
                         )
                       : const Text("No Name"),

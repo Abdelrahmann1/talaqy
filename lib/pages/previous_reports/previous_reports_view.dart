@@ -62,25 +62,28 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                     if (snapshot.connectionState == ConnectionState.done) {
                       if (snapshot.data!.docs.isNotEmpty) {
                         return
-                          Container(
-                            width: 200,
-                            height: 200,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: AppColors.white, width: 6)),
-                            child: ClipOval(
-                              child:
-                              CachedNetworkImage(
-                                  imageUrl:snapshot.data!.docs[0]["imageUrl"],
-                                  width: 90,
-                                  height: 90,
-                                  placeholder: (context, url) => const Center(
-                                      child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) =>
-                                      Image.asset("assets/images/logo.png"),
-                                  fit: BoxFit.fill),
+                          Padding(
+                            padding: const EdgeInsets.all(7.0),
+                            child: Container(
+                              width: 200,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      color: AppColors.primaryColor, width: 3)),
+                              child: ClipOval(
+                                child:
+                                CachedNetworkImage(
+                                    imageUrl:snapshot.data!.docs[0]["imageUrl"],
+                                    width: 90,
+                                    height: 90,
+                                    placeholder: (context, url) => const Center(
+                                        child: CircularProgressIndicator()),
+                                    errorWidget: (context, url, error) =>
+                                        Image.asset("assets/images/logo.png"),
+                                    fit: BoxFit.fill),
+                              ),
                             ),
                           );
 
@@ -206,10 +209,10 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                             return AlertDialog(
                                               backgroundColor: AppColors.white,
                                               title:const Center(child: Text("إلغاء",style: TextStyle(fontSize: 12),)),
-                                              content: Row(
+                                              content: const Row(
                                                 mainAxisAlignment: MainAxisAlignment.end,
                                                 children: [
-                                                  Text("تم إلغاء المنشور بنجاح",style: const TextStyle(color: AppColors.blackColor),),
+                                                  Text("تم إلغاء المنشور بنجاح",style: TextStyle(color: AppColors.blackColor),),
                                                 ],
                                               ),
                                               actions: [
@@ -226,8 +229,7 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                         docId: snapshot.data!.docs[index].id,
                                         list: snapshot.data!.docs[index],
                                         statusOfChild: 'متغيب من',
-                                        imageUrl: snapshot.data!.docs[index]
-                                            ["imageUrl"],
+                                        imageUrl: snapshot.data!.docs[index]["imageUrl"],
                                       )
                                     ],
                                   ),
@@ -299,10 +301,10 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                             return AlertDialog(
                                               backgroundColor: AppColors.white,
                                               title:const Center(child: Text("إلغاء",style: TextStyle(fontSize: 12),)),
-                                              content: Row(
+                                              content: const Row(
                                                 mainAxisAlignment: MainAxisAlignment.end,
                                                 children: [
-                                                  Text("تم إلغاء المنشور بنجاح",style: const TextStyle(color: AppColors.blackColor),),
+                                                  Text("تم إلغاء المنشور بنجاح",style: TextStyle(color: AppColors.blackColor),),
                                                 ],
                                               ),
                                               actions: [
@@ -319,8 +321,7 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                         docId: snapshot.data!.docs[index].id,
                                         list: snapshot.data!.docs[index],
                                         statusOfChild: 'موجود',
-                                        imageUrl: snapshot.data!.docs[index]
-                                            ["imageUrl"],
+                                        imageUrl: snapshot.data!.docs[index]["imageUrl"],
                                       )
                                     ],
                                   ),

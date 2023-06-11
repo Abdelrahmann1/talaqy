@@ -69,27 +69,30 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       if (snapshot.data!.docs.isNotEmpty) {
-                        return Container(
-                            width: 200,
-                            height: 200,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: AppColors.white, width: 6)),
-                            child: ClipOval(
-                              child:
-                              CachedNetworkImage(
-                                  imageUrl:snapshot.data!.docs[0]["imageUrl"],
-                                  width: 90,
-                                  height: 90,
-                                  placeholder: (context, url) => const Center(
-                                      child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) =>
-                                      Image.asset("assets/images/logo.png"),
-                                  fit: BoxFit.fill),
+                        return Padding(
+                          padding: const EdgeInsets.all(7.0),
+                          child: Container(
+                              width: 200,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      color: AppColors.primaryColor, width: 3)),
+                              child: ClipOval(
+                                child:
+                                CachedNetworkImage(
+                                    imageUrl:snapshot.data!.docs[0]["imageUrl"],
+                                    width: 90,
+                                    height: 90,
+                                    placeholder: (context, url) => const Center(
+                                        child: CircularProgressIndicator()),
+                                    errorWidget: (context, url, error) =>
+                                        Image.asset("assets/images/logo.png"),
+                                    fit: BoxFit.fill),
+                              ),
                             ),
-                          );
+                        );
                     } else {
                         return  Container(
                           width: 200,

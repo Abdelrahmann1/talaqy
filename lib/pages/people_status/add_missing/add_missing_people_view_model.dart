@@ -108,7 +108,7 @@ class AddMissingPeopleViewModel extends ViewModel {
         "userId": FirebaseAuth.instance.currentUser!.uid,
       });
       Navigator.of(context).pop();
-      Navigator.pushReplacementNamed(context, AppRouter.successfulMessage);
+      Navigator.pushNamedAndRemoveUntil(context, AppRouter.successfulMessage,(Route<dynamic> route) => false);
     }
   }
 

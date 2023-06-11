@@ -50,7 +50,9 @@ class HomeView extends HookView<HomeViewModel> {
                               IconButton(
                                 iconSize: 30,
                                 color: Colors.black,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
                                 icon: const Icon(
                                   Icons.backspace_outlined,
                                 ),
@@ -97,7 +99,7 @@ class HomeView extends HookView<HomeViewModel> {
                   label: 'الرئيسية',
                   backgroundColor: Colors.black),
               BottomNavigationBarItem(
-                icon: Icon(Icons.dehaze_rounded),
+                icon: Icon(Icons.receipt),
                 label: 'بلاغاتي',
               ),
             ],

@@ -23,7 +23,9 @@ class FoundedPeopleContainer extends StatelessWidget {
     required this.nameOfFounded,
     required this.dateOfReported,
     required this.ageOfChild,
-    required this.imageUrl, required this.locationOfSection, required this.locationOfCity,
+    required this.imageUrl,
+    required this.locationOfSection,
+    required this.locationOfCity,
   });
   @override
   Widget build(BuildContext context) {
@@ -38,11 +40,21 @@ class FoundedPeopleContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  nameOfFounded,
-                  style: Theme.of(context).textTheme.displayMedium,
+                Row(
+                  children: [
+                    Text(
+                      nameOfFounded,
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
+                    const Icon(
+                      Icons.person,
+                      size: 15,
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 Row(
                   children: [
                     Text(
@@ -56,9 +68,18 @@ class FoundedPeopleContainer extends StatelessWidget {
                       "تاريخ الإبلاغ",
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
+                    const SizedBox(
+                      width: 6,
+                    ),
+                    const Icon(
+                      Icons.date_range,
+                      size: 15,
+                    ),
                   ],
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 Row(
                   children: [
                     Row(
@@ -82,25 +103,25 @@ class FoundedPeopleContainer extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          " عام ",
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                        Text(
                           " $ageOfChild ",
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
-                        const SizedBox(
-                          width: 5,
+                        Text(
+                          " السن ",
+                          style: Theme.of(context).textTheme.titleSmall,
                         ),
+                        const SizedBox(width: 5),
                         const Icon(
-                          Icons.calendar_today_outlined,
+                          Icons.view_agenda_outlined,
                           size: 15,
                         ),
                       ],
                     ),
                   ],
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 Row(
                   children: [
                     Row(
@@ -122,7 +143,6 @@ class FoundedPeopleContainer extends StatelessWidget {
                       width: 5,
                     ),
                     Row(
-
                       children: [
                         Text(
                           locationOfCity,
