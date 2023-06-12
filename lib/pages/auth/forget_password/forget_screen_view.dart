@@ -44,75 +44,77 @@ class ForgetView extends HookView<ForgetViewModel> {
             leading: const SizedBox(),
             title: Text(
               ' نسيت كلمة السر',
-              style: Theme.of(context).textTheme.displayLarge,
+              style: Theme.of(context).textTheme.displayMedium,
             ),
           ),
           backgroundColor: AppColors.white,
-          body: Column(
+          body: SingleChildScrollView(
+            child: Column(
 
 
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 80,
-                  ),
-                  Text(
-                    "قم بإدخال البريد الإلكتروني",
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 80,
+                    ),
+                    Text(
+                      "قم بإدخال البريد الإلكتروني",
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Column(
 
-                children: [
-                  const SizedBox(
-                    height: 13,
-                  ),
-                  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: viewModel.emailForgetPassword,
-                      textAlign: TextAlign.right,
-                      decoration: InputDecoration(
-                        labelText: 'البريد الالكتروني',
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical:
-                                10), // Adjust the padding around the input field
+                  children: [
+                    const SizedBox(
+                      height: 13,
+                    ),
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        controller: viewModel.emailForgetPassword,
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          labelText: 'البريد الالكتروني',
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical:
+                                  10), // Adjust the padding around the input field
 
-                        labelStyle: Theme.of(context).textTheme.displaySmall,
+                          labelStyle: Theme.of(context).textTheme.displaySmall,
 
-                        alignLabelWithHint: true,
+                          alignLabelWithHint: true,
 
-                        border: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: AppColors.greyForFileds),
-                          borderRadius: BorderRadius.circular(7.0),
+                          border: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: AppColors.greyForFileds),
+                            borderRadius: BorderRadius.circular(7.0),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: MainButton(
-                      "إعادة تعيين الآن",
-                      () {
-                        viewModel.forgetPassword();
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40),
+                      child: MainButton(
+                        "إعادة تعيين الآن",
+                        () {
+                          viewModel.forgetPassword();
 
-                      },
-                      bgColor: AppColors.primaryColor,
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ).setPageHorizontalPadding(context)),
+                        },
+                        bgColor: AppColors.primaryColor,
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ).setPageHorizontalPadding(context),
+          )),
     );
   }
 }

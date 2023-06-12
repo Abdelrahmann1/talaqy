@@ -7,6 +7,7 @@ import 'package:talaqy/provider/auth_provider.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
 import 'package:talaqy/widgets/small_button.dart';
+import '../../../utils/privacy_and_policy.dart';
 import '../../../widgets/main_button.dart';
 import '../../../widgets/missed_form_field.dart';
 
@@ -282,29 +283,23 @@ class RegisterView extends HookView<SignUpViewModel> {
                                       textAlign: TextAlign.center,
                                       style: TextStyle(fontSize: 16.0,decoration: TextDecoration.underline,decorationThickness: 2.0),
                                     ),
-                                    content: const SizedBox(
+                                    content:  SizedBox(
                                       height: 400,
                                       child: SingleChildScrollView(
-                                        padding: EdgeInsets.all(8.0),
+                                        padding: const EdgeInsets.all(8.0),
                                         child: Column(
                                           mainAxisAlignment: MainAxisAlignment.start,
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisSize: MainAxisSize.min,
                                           children: <Widget>[
                                             Padding(
-                                              padding: EdgeInsets.all(8.0),
+                                              padding: const EdgeInsets.all(8.0),
                                               child: Expanded(
                                                 child: Column(
                                                   children: [
-                                                    Text(
-                                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
-                                                          ' ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud'
-                                                          ' exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-                                                          ' Duis aute irure dolor in reprehenderit in voluptate velit esse cillum '
-                                                          'dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,'
-                                                          ' sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                                                    Text(PrivacyPolicyText.getPrivacyText(),
                                                       textAlign: TextAlign.right,
-                                                      style: TextStyle(fontSize: 12,color: AppColors.blackColor),
+                                                      style: const TextStyle(fontSize: 12,color: AppColors.blackColor),
                                                     ),
                                                   ],
                                                 ),
@@ -364,13 +359,15 @@ class RegisterView extends HookView<SignUpViewModel> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Container(
-                              height: 1.0,
-                              width: 130.0,
-                              color: AppColors.greyForFileds,
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Container(
+                                height: 1.0,
+                                width: 130.0,
+                                color: AppColors.greyForFileds,
+                              ),
                             ),
                           ),
                           const Text(
@@ -378,13 +375,15 @@ class RegisterView extends HookView<SignUpViewModel> {
                             style: TextStyle(
                                 color: AppColors.greyForFileds, fontSize: 10),
                           ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Container(
-                                height: 1.0,
-                                width: 130.0,
-                                color: AppColors.greyForFileds),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Container(
+                                  height: 1.0,
+                                  width: 130.0,
+                                  color: AppColors.greyForFileds),
+                            ),
                           ),
                         ],
                       ),
@@ -398,9 +397,7 @@ class RegisterView extends HookView<SignUpViewModel> {
                           //     "Facebook", () {}, FontAwesomeIcons.facebook),
                           SmallButton(
                             "Google",
-                            () async {
-                              await userProviderAuth.logInWithGoogle(context);
-                            },
+                            () async {await userProviderAuth.logInWithGoogle(context);},
                             FontAwesomeIcons.google,
                           ),
                         ],

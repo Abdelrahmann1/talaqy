@@ -157,12 +157,14 @@ class LoginView extends HookView<LoginViewModel> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Container(
-                              height: 1.0,
-                              width: 130.0,
-                              color: AppColors.greyForFileds,
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Container(
+                                height: 1.0,
+                                width: 130.0,
+                                color: AppColors.greyForFileds,
+                              ),
                             ),
                           ),
                           const Text(
@@ -170,12 +172,14 @@ class LoginView extends HookView<LoginViewModel> {
                             style: TextStyle(
                                 color: AppColors.greyForFileds, fontSize: 10),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Container(
-                                height: 1.0,
-                                width: 130.0,
-                                color: AppColors.greyForFileds),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Container(
+                                  height: 1.0,
+                                  width: 130.0,
+                                  color: AppColors.greyForFileds),
+                            ),
                           ),
                         ],
                       ),

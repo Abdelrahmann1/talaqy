@@ -188,146 +188,150 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Row(
-                        children: [
-                          const Text(" عام",
-                              style: TextStyle(
-                                color: AppColors.blackColor,
-                                fontSize: 10,
-                              )),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              viewModel.list['ageOfChild'],
-                              style: const TextStyle(
-                                color: AppColors.blackColor,
-                                fontSize: 13,
+                  SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Row(
+                          children: [
+                            const Text(" عام",
+                                style: TextStyle(
+                                  color: AppColors.blackColor,
+                                  fontSize: 10,
+                                )),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                viewModel.list['ageOfChild'],
+                                style: const TextStyle(
+                                  color: AppColors.blackColor,
+                                  fontSize: 13,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          viewModel.list["placesOfChild"],
-                          style: const TextStyle(
-                            color: AppColors.blackColor,
-                            fontSize: 10,
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            viewModel.list["placesOfChild"],
+                            style: const TextStyle(
+                              color: AppColors.blackColor,
+                              fontSize: 10,
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          viewModel.list["dateOfFounded"],
-                          style: const TextStyle(
-                            color: AppColors.blackColor,
-                            fontSize: 13,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            viewModel.list["dateOfFounded"],
+                            style: const TextStyle(
+                              color: AppColors.blackColor,
+                              fontSize: 13,
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          viewModel.list["skinColor"],
-                          style: const TextStyle(
-                            color: AppColors.blackColor,
-                            fontSize: 13,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            viewModel.list["skinColor"],
+                            style: const TextStyle(
+                              color: AppColors.blackColor,
+                              fontSize: 13,
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          viewModel.list["clothesOfChild"],
-                          style: const TextStyle(
-                            color: AppColors.blackColor,
-                            fontSize: 13,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            viewModel.list["clothesOfChild"],
+                            style: const TextStyle(
+                              color: AppColors.blackColor,
+                              fontSize: 13,
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          viewModel.list["hairColor"],
-                          style: const TextStyle(
-                            color: AppColors.blackColor,
-                            fontSize: 13,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            viewModel.list["hairColor"],
+                            style: const TextStyle(
+                              color: AppColors.blackColor,
+                              fontSize: 13,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          ": السن -",
-                          style: TextStyle(
-                              color: AppColors.greyForFileds,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          ": مكان وجود الطفل -",
-                          style: TextStyle(
-                            color: AppColors.greyForFileds,
-                            fontSize: 12,fontWeight: FontWeight.bold
+                  SingleChildScrollView(
+                    child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            ": السن -",
+                            style: TextStyle(
+                                color: AppColors.greyForFileds,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          ": تاريخ العثور علي الطفل -",
-                          style: TextStyle(
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            ": مكان وجود الطفل -",
+                            style: TextStyle(
                               color: AppColors.greyForFileds,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold),
+                              fontSize: 12,fontWeight: FontWeight.bold
+                            ),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          ": البشرة -",
-                          style: TextStyle(
-                              color: AppColors.greyForFileds,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            ": تاريخ العثور علي الطفل -",
+                            style: TextStyle(
+                                color: AppColors.greyForFileds,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          ":ملابس الطفل  -",
-                          style: TextStyle(
-                              color: AppColors.greyForFileds,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            ": البشرة -",
+                            style: TextStyle(
+                                color: AppColors.greyForFileds,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          ":لون الشعر -",
-                          style: TextStyle(
-                              color: AppColors.greyForFileds,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            ":ملابس الطفل  -",
+                            style: TextStyle(
+                                color: AppColors.greyForFileds,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            ":لون الشعر -",
+                            style: TextStyle(
+                                color: AppColors.greyForFileds,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               )),

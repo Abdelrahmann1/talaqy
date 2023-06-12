@@ -32,74 +32,78 @@ class OnBoardingView extends HookView<OnBoardingViewModel> {
                       } ,
                       itemCount: onBoardingList.length,
                       itemBuilder: (context, i) {
-                        return Column(
-                          children: [
-                            const SizedBox(
-                              height: 80,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8.0,left: 8),
-                              child: Text(
-                                onBoardingList[i].title!,
-                                style:const TextStyle(fontSize: 16,color: AppColors.blackColor),
-                                textAlign: TextAlign.center,
+                        return SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 80,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8.0,left: 8),
+                                child: Text(
+                                  onBoardingList[i].title!,
+                                  style:const TextStyle(fontSize: 16,color: AppColors.blackColor),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 40,
+                              ),
 
-                            Image.asset(
-                              onBoardingList[i].image!.toString(),
-                              height:250,
-                              fit: BoxFit.contain,
-                            )
+                              Image.asset(
+                                onBoardingList[i].image!.toString(),
+                                height:250,
+                                fit: BoxFit.contain,
+                              )
 
-                          ],
+                            ],
+                          ),
                         );
                       }),
                 ),
                 Expanded(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ...List.generate(
-                                onBoardingList.length,
-                                    (index) => AnimatedContainer(
-                                  margin: const EdgeInsets.only(right: 7),
-                                  duration: const Duration(milliseconds: 900),
-                                  width: viewModel.currentPage==index?30:13,
-                                  height: 10,
-                                  decoration: BoxDecoration(
-                                      color: AppColors.primaryColor,
-                                      borderRadius: BorderRadius.circular(20)),
-                                ))
-                          ],
-                        ),
-                        const SizedBox(height: 10,),
-                        Column(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(35)),
-                              margin: const EdgeInsets.only(bottom: 40),
-                              height: 50,
-                              child: MaterialButton(
-                                padding: const EdgeInsets.symmetric(horizontal: 100,vertical: 0),
-                                onPressed: () {
-                                  viewModel.nextPage();
-                                },color: AppColors.primaryColor,textColor: Colors.white,
-                                child:  Text( viewModel.currentPage==2?"إبدأ    ":"التالي",style: Theme.of(context).textTheme.bodyMedium,),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ...List.generate(
+                                  onBoardingList.length,
+                                      (index) => AnimatedContainer(
+                                    margin: const EdgeInsets.only(right: 7),
+                                    duration: const Duration(milliseconds: 900),
+                                    width: viewModel.currentPage==index?30:13,
+                                    height: 10,
+                                    decoration: BoxDecoration(
+                                        color: AppColors.primaryColor,
+                                        borderRadius: BorderRadius.circular(20)),
+                                  ))
+                            ],
+                          ),
+                          const SizedBox(height: 10,),
+                          Column(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(35)),
+                                margin: const EdgeInsets.only(bottom: 40),
+                                height: 50,
+                                child: MaterialButton(
+                                  padding: const EdgeInsets.symmetric(horizontal: 100,vertical: 0),
+                                  onPressed: () {
+                                    viewModel.nextPage();
+                                  },color: AppColors.primaryColor,textColor: Colors.white,
+                                  child:  Text( viewModel.currentPage==2?"إبدأ    ":"التالي",style: Theme.of(context).textTheme.bodyMedium,),
+                                ),
                               ),
-                            ),
-                            TextButton(onPressed: (){
-                              Navigator.pushNamed(context, AppRouter.registerScreen);
-                            },child: const Text("تخطي",style: TextStyle(color: AppColors.blackColor),))
-                          ],
-                        ),
+                              TextButton(onPressed: (){
+                                Navigator.pushNamed(context, AppRouter.registerScreen);
+                              },child: const Text("تخطي",style: TextStyle(color: AppColors.blackColor),))
+                            ],
+                          ),
 
-                      ],
+                        ],
+                      ),
                     )),
               ],
             ).setPageHorizontalPadding(context)

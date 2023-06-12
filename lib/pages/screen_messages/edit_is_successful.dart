@@ -54,8 +54,7 @@ class SuccessfulEditMessage extends StatelessWidget {
                             child: MainButton(
                               "الصفحة الرئيسية",
                               () {
-                                Navigator.pushNamed(
-                                    context, AppRouter.homeScreen);
+                                Navigator.pushNamedAndRemoveUntil(context, AppRouter.homeScreen,(Route<dynamic> route) => false);
                               },
                               bgColor: AppColors.primaryColor,
                             )),

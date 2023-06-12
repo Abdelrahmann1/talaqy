@@ -4,6 +4,7 @@ class AlertExitApp extends ChangeNotifier {
 
   Future<bool> alertExitApp(BuildContext context) {
     AwesomeDialog(
+
       context: context,
       dialogType: DialogType.warning,
       animType: AnimType.rightSlide,

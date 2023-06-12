@@ -16,31 +16,33 @@ class SuccessfulMessage extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: PageView.builder(itemBuilder: (context, i) {
-                    return Column(
-                      children: [
-                        const SizedBox(
-                          height: 80,
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(right: 8.0, left: 8),
-                          child: Text(
-                            "تم الإبلاغ عن الطفل بنجاح",
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black),
-                            textAlign: TextAlign.center,
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 80,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Image.asset(
-                          "assets/images/successful.png",
-                          height: 250,
-                          fit: BoxFit.contain,
-                        )
-                      ],
+                          const Padding(
+                            padding: EdgeInsets.only(right: 8.0, left: 8),
+                            child: Text(
+                              "تم الإبلاغ عن الطفل بنجاح",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          Image.asset(
+                            "assets/images/successful.png",
+                            height: 250,
+                            fit: BoxFit.contain,
+                          )
+                        ],
+                      ),
                     );
                   }),
                 ),
@@ -54,12 +56,16 @@ class SuccessfulMessage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(35)),
                             margin: const EdgeInsets.only(bottom: 40),
                             height: 50,
-                            child: MainButton(
-                              "الصفحة الرئيسية",
-                              () {
-                                Navigator.of(context).pop();
-                                Navigator.pushReplacementNamed(context, AppRouter.homeScreen);                              },
-                              bgColor: AppColors.primaryColor,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: MainButton(
+                                "الصفحة الرئيسية",
+                                () {
+                                  Navigator.of(context).pop();
+                                  Navigator.pushNamedAndRemoveUntil(context, AppRouter.homeScreen,(Route<dynamic> route) => false);
+                                  },
+                                bgColor: AppColors.primaryColor,
+                              ),
                             )),
                       ],
                     ).setPageHorizontalPadding(context)

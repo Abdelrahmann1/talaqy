@@ -589,7 +589,7 @@ class AddFoundedPeopleViewModel extends ViewModel {
         "userId": FirebaseAuth.instance.currentUser!.uid,
       });
       Navigator.of(context).pop();
-      Navigator.pushNamedAndRemoveUntil(context, AppRouter.successfulEditMessage,(Route<dynamic> route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, AppRouter.successfulMessage,(Route<dynamic> route) => false);
 
     }
   }
