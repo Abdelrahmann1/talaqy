@@ -150,10 +150,27 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
               )),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      viewModel.list['nameOfChild'],
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const Icon(
+                      Icons.person,
+                      size: 17,
+                    ),
+
+                  ],
+                ),
+                Row(mainAxisAlignment: MainAxisAlignment.center,
                   children:  [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -172,13 +189,7 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                         )),
                   ],
                 ),
-                Text(
-                  viewModel.list['nameOfChild'],
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
+
               ],
             ),
           ),

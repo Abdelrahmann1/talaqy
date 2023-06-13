@@ -189,15 +189,17 @@ class LoginView extends HookView<LoginViewModel> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // SmallButton(
-                          //     "Facebook", () {},FontAwesomeIcons.facebook),
-                          SmallButton(
+                          if(!userProviderAuth.loading!)
+                            SmallButton(
                             "Google",
                             () async {
                                   await userProviderAuth.logInWithGoogle(context);
                             },
                             FontAwesomeIcons.google,
                           ),
+                          if(userProviderAuth.loading!)
+                            const Center(child: CircularProgressIndicator(),)
+
                         ],
                       ),
                       const SizedBox(

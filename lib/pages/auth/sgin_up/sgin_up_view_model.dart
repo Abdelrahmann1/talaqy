@@ -18,7 +18,7 @@ class SignUpViewModel extends ViewModel {
   }
 
   UserCredential? response;
-  var loading = false;
+  bool? loading = false;
   bool? isCheckedPolicy = false;
   bool? isCheckedVolunteering = false;
   bool isShowPassword = true;
@@ -63,7 +63,6 @@ class SignUpViewModel extends ViewModel {
     }
     return null;
   }
-
   void handelSignUpErrors(FirebaseAuthException e) {
     String messageToDisplay;
     switch (e.code) {
@@ -100,9 +99,8 @@ class SignUpViewModel extends ViewModel {
           );
         });
   }
-
   signUpWithEmailAndPassword() async {
-    loading == true;
+    loading = true;
     notifyListeners();
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(

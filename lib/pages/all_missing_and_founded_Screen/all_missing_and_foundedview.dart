@@ -13,10 +13,8 @@ import '../../utils/app_router.dart';
 import '../child_profile/founded_child_profile/founded_child_profile_view.dart';
 import '../child_profile/missing_child_profile/missing_child_profile_view.dart';
 import 'all_missing_and_founded_view_model.dart';
-
 class AllMissingAndFoundedScreen extends StatelessWidget {
   const AllMissingAndFoundedScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MVVM(
@@ -25,10 +23,8 @@ class AllMissingAndFoundedScreen extends StatelessWidget {
     );
   }
 }
-
 class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
   const AllMissingAndFoundedView({Key? key, reactive = true});
-
   @override
   Widget render(context, viewModel) {
     double _w = MediaQuery.of(context).size.width;
@@ -63,8 +59,7 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
               onTap: () {
                 Navigator.pushNamed(context, AppRouter.userProfileScreen);
               },
-              child:
-              FutureBuilder(
+              child: FutureBuilder(
                   future: viewModel.userData.where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).get(),
                   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
@@ -120,21 +115,7 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                       return const Center(child: CircularProgressIndicator());
                     }
                   }
-                  ),
-              // Padding(
-              //   padding: const EdgeInsets.all(10.0),
-              //   child: Container(
-              //     width: 130,
-              //     height: 130,
-              //     decoration: const BoxDecoration(
-              //       shape: BoxShape.circle,
-              //       image: DecorationImage(
-              //           image: AssetImage('assets/images/logo.png'),
-              //           fit: BoxFit.fill),
-              //     ),
-              //   ),
-              // ),
-            ),
+                  )),
             centerTitle: true,
             title: Text(
               'الصفحة الرئيسية',
@@ -326,17 +307,6 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                                   .data!.docs[index]["CityOfFounded"]
                                                   .toString(),
                                             )
-                                            // FoundedPeopleContainer(
-                                            //   onTap: () {},
-                                            //   borderColor: Colors.blue,
-                                            //   nameOfFounded: snapshot.data!.docs[index]["nameOfChild"],
-                                            //   dateOfReported: snapshot.data!.docs[index]["nameOfChild"],
-                                            //   placesOfChild:snapshot.data!.docs[index]["placesOfChild"],
-                                            //   ageOfChild: snapshot.data!.docs[index]["ageOfChild"],
-                                            //   docId: snapshot.data!.docs[index].id,
-                                            //   list: snapshot.data!.docs[index],
-                                            //   imageUrl: snapshot.data!.docs[index]["imageUrl"],
-                                            // ),
                                             )),
                                   ),
                                 ),

@@ -149,10 +149,27 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
               )),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      viewModel.list['nameOfMissing'],
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    const Icon(
+                      Icons.person,
+                      size: 17,
+                    ),
+
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -170,13 +187,7 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
 
                   ],
                 ),
-                Text(
-                  viewModel.list['nameOfMissing'],
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
+
               ],
             ),
           ),

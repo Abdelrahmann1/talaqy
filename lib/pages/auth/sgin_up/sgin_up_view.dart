@@ -393,13 +393,17 @@ class RegisterView extends HookView<SignUpViewModel> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // SmallButton(
-                          //     "Facebook", () {}, FontAwesomeIcons.facebook),
-                          SmallButton(
-                            "Google",
-                            () async {await userProviderAuth.logInWithGoogle(context);},
-                            FontAwesomeIcons.google,
-                          ),
+                          if(!userProviderAuth.loading!)
+                            SmallButton(
+                              "Google",
+                                  () async {
+                                await userProviderAuth.logInWithGoogle(context);
+                              },
+                              FontAwesomeIcons.google,
+                            ),
+                          if(userProviderAuth.loading!)
+                            const Center(child: CircularProgressIndicator(),)
+
                         ],
                       ),
                       const SizedBox(
@@ -430,6 +434,7 @@ class RegisterView extends HookView<SignUpViewModel> {
                       ),
                       Row(
                         children: [
+                          if(!viewModel.loading!)
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: MainButton(
@@ -438,13 +443,22 @@ class RegisterView extends HookView<SignUpViewModel> {
                                 if (viewModel.formKey.currentState != null &&
                                     viewModel.formKey.currentState!
                                         .validate()) {
+
                                   viewModel.signUpWithEmailAndPassword();
                                 }
                               },
                               bgColor: AppColors.primaryColor,
                             ),
                           ),
-                        ],
+                          if(viewModel.loading!)
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: MainButton(
+                                "جاري إنشاء حساب",
+                                    () async {},
+                                bgColor: AppColors.blackColor,
+                              ),
+                            )],
                       )
                     ],
                   ),
