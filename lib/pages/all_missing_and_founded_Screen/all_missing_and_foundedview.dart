@@ -34,6 +34,8 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
         child: Scaffold(
           appBar: AppBar(
             actions: [
+
+              const Text("بحث"),
               IconButton(
                 icon: const Icon(Icons.search),
                 onPressed: () {
@@ -48,10 +50,10 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
             bottom: const TabBar(
               tabs: [
                 Tab(
-                  text: "مفقود",
+                  text: " أشخاص مفقودة",
                 ),
                 Tab(
-                  text: "موجود",
+                  text: "أشخاص موجودة ",
                 ),
               ],
             ),

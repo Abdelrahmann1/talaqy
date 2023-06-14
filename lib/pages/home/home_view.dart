@@ -58,14 +58,14 @@ class HomeView extends HookView<HomeViewModel> {
                                 ),
                               ),
                               MainButton(
-                                "الإبلاغ عن مفقود",
+                                "الإبلاغ عن شخص مفقود",
                                 () {
                                   Navigator.pushNamed(context, AppRouter.addMissingScreen);
                                 },
                                 bgColor: AppColors.primaryColor,
                               ),
                               MainButton(
-                                "الإبلاغ عن موجود",
+                                "الإبلاغ عن شخص موجود",
                                 () {
                                   Navigator.pushNamed(context, AppRouter.addFoundedScreen);
 
@@ -102,6 +102,7 @@ class HomeView extends HookView<HomeViewModel> {
                 icon: Icon(Icons.receipt),
                 label: 'بلاغاتي',
               ),
+
             ],
           ),
           backgroundColor: AppColors.white,

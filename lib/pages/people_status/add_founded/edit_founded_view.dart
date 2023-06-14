@@ -41,7 +41,7 @@ class EditFoundedView extends HookView<EditFoundedViewModel> {
           leading: Container(),
           centerTitle: true,
           title: Text(
-            '  الإبلاغ عن طفل موجود  ',
+            '  الإبلاغ عن موجود  ',
             style: Theme.of(context).textTheme.displayMedium,
           ),
         ),
@@ -57,7 +57,7 @@ class EditFoundedView extends HookView<EditFoundedViewModel> {
                 MainFormField(
                   controller: viewModel.nameOfChild,
                   textInputType: TextInputType.text,
-                  labelText:'إسم الطفل',
+                  labelText:'إسم الموجود',
                   validator: (value) {
                     if (value!.length > 100) {
                       return "لا يمكن ان يكون اكثر من 100 حرف";
@@ -74,7 +74,7 @@ class EditFoundedView extends HookView<EditFoundedViewModel> {
                 MainFormField(
                   textInputType: TextInputType.number,
                   controller: viewModel.ageOfChild,
-                  labelText:'عمر الطفل',
+                  labelText:'عمر الموجود',
                   validator:
                       (value) {
                     if (value!.length > 3) {
@@ -92,7 +92,7 @@ class EditFoundedView extends HookView<EditFoundedViewModel> {
                 MainFormField(
                   textInputType: TextInputType.text,
                   controller: viewModel.clothesOfChild,
-                  labelText: 'الملابس الخاصة بالطفل *',
+                  labelText: 'الملابس الخاصة بالموجود *',
                   validator: (value) {
                     if (value!.length > 100) {
                       return "لا يمكن ان يكون اسم الاب اكير من 100 حروف";
@@ -110,7 +110,7 @@ class EditFoundedView extends HookView<EditFoundedViewModel> {
                   textInputType: TextInputType.text,
 
                   controller: viewModel.placesOfChild,
-                  labelText:'مكان العثور علي الطفل',
+                  labelText:'مكان العثور علي الموجود',
                   validator:
                       (value) {
                     if (value!.length > 100) {
@@ -145,7 +145,7 @@ class EditFoundedView extends HookView<EditFoundedViewModel> {
                 MainFormField(
                   textInputType: TextInputType.text,
                   controller: viewModel.dateOfFounded,
-                  labelText: 'تاريخ فقد الطفل',
+                  labelText: 'تاريخ فقد الموجود',
                 ),
 
                 const SizedBox(

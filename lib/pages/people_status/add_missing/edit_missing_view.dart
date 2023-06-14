@@ -41,7 +41,7 @@ class EditMissingView extends HookView<EditMissingViewModel> {
           leading: Container(),
           centerTitle: true,
           title: Text(
-            'تعديل البيانات عن طفل مفقود',
+            'تعديل البيانات عن مفقود',
             style: Theme.of(context).textTheme.displayMedium,
           ),
         ),
@@ -90,8 +90,6 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                   height: 13,
                 ),
                 MainFormField(
-                  // initialValue: viewModel.list["fatherPhoneNumber"].toString(),
-
                   textInputType: TextInputType.number,
                   controller: viewModel.fatherPhoneNumber,
                   labelText: 'رقم تليفون الاب / الوصي',
@@ -113,7 +111,7 @@ class EditMissingView extends HookView<EditMissingViewModel> {
 
                   controller: viewModel.nameOfMissing,
                   textInputType: TextInputType.text,
-                  labelText: 'إسم الطفل',
+                  labelText: 'إسم المفقود',
                   validator: (value) {
                     if (value!.length > 100) {
                       return "لا يمكن ان يكون اكثر من 100 حرف";
@@ -132,7 +130,7 @@ class EditMissingView extends HookView<EditMissingViewModel> {
 
                   textInputType: TextInputType.number,
                   controller: viewModel.ageOfMissing,
-                  labelText: 'عمر الطفل',
+                  labelText: 'عمر المفقود',
                   validator: (value) {
                     if (value!.length > 3) {
                       return "لا يمكن ان يكون اكثر من 3 ارقام";
@@ -151,7 +149,7 @@ class EditMissingView extends HookView<EditMissingViewModel> {
 
                   textInputType: TextInputType.text,
                   controller: viewModel.placesOfMissing,
-                  labelText: 'مكان فقد الطفل',
+                  labelText: 'مكان الفقد ',
                   validator: (value) {
                     if (value!.length > 100) {
                       return "لا يمكن ان يكون اكثر من 100 حرف";
@@ -168,7 +166,7 @@ class EditMissingView extends HookView<EditMissingViewModel> {
                 MainFormField(
                   textInputType: TextInputType.text,
                   controller: viewModel.dateOfMissing,
-                  labelText: 'تاريخ فقد الطفل',
+                  labelText: 'تاريخ الفقد ',
                 ),
                 const SizedBox(
                   height: 13,

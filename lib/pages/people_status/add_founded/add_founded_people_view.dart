@@ -45,7 +45,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
           leading: Container(),
           centerTitle: true,
           title: Text(
-            'الإبلاغ عن طفل موجود',
+            'الإبلاغ عن موجود',
             style: Theme.of(context).textTheme.displayMedium,
           ),
         ),
@@ -66,7 +66,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                   MainFormField(
                     controller: viewModel.nameOfChild,
                     textInputType: TextInputType.text,
-                    labelText: 'إسم الطفل',
+                    labelText: 'إسم الموجود',
                     validator: (value) {
                       if (value!.length > 100) {
                         return "لا يمكن ان يكون اكثر من 100 حرف";
@@ -83,7 +83,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                   MainFormField(
                     textInputType: TextInputType.number,
                     controller: viewModel.ageOfChild,
-                    labelText: 'عمر الطفل',
+                    labelText: 'العمر الموجود',
                     validator: (value) {
                       if (value!.length > 3) {
                         return "لا يمكن ان يكون اكثر من 3 ارقام";
@@ -100,7 +100,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                   MainFormField(
                     textInputType: TextInputType.text,
                     controller: viewModel.clothesOfChild,
-                    labelText: 'الملابس الخاصة بالطفل *',
+                    labelText: 'الملابس الخاصة بالموجود *',
                     validator: (value) {
                       if (value!.length > 100) {
                         return "لا يمكن ان يكون اسم الاب اكير من 100 حروف";
@@ -127,7 +127,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                       child: DropdownButtonFormField<String>(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please select an option';
+                            return '';
                           }
                           return null;
                         },
@@ -213,7 +213,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                   MainFormField(
                     textInputType: TextInputType.text,
                     controller: viewModel.placesOfChild,
-                    labelText: 'مكان العثور علي الطفل بي التفصيل',
+                    labelText: 'مكان العثور بي التفصيل',
                   ),
                   const SizedBox(
                     height: 13,
@@ -241,7 +241,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                       child: MainFormField(
                         readonly: true,
                         controller: viewModel.dateOfFounded,
-                        labelText: 'تاريخ وجود الطفل',
+                        labelText: 'تاريخ الوجود ',
                       ),
                     ),
                   ),
@@ -459,7 +459,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text("هل الطفل من ذوي الاحتياجات الخاصة ؟",
+                      Text("هل الموجود من ذوي الاحتياجات الخاصة ؟",
                           style: TextStyle(color: AppColors.fontSmoothGrey)),
                     ],
                   ),
@@ -496,7 +496,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text("هل يستطيع الطفل اخبار اسمه ؟",
+                      Text("هل يستطيع الموجود اخبار اسمه ؟",
                           style: TextStyle(
                             color: AppColors.fontSmoothGrey,
                           )),
@@ -740,7 +740,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: MainButton("الإبلاغ عن العثور علي طفل",
+                    child: MainButton("الإبلاغ عن العثور علي الموجود",
                         bgColor: AppColors.blackColor, () async {
                       viewModel.addFounded(context);
                     }),

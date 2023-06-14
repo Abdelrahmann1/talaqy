@@ -403,7 +403,6 @@ class RegisterView extends HookView<SignUpViewModel> {
                             ),
                           if(userProviderAuth.loading!)
                             const Center(child: CircularProgressIndicator(),)
-
                         ],
                       ),
                       const SizedBox(

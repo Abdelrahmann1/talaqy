@@ -17,8 +17,7 @@ class MainButton extends StatelessWidget {
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(backgroundColor: bgColor),
           onPressed: onTap as void Function()?,
-          child: Text(
-            text!,
+          child: Text(text!,
             style: Theme.of(context).textTheme.bodyMedium,
           )),
     );

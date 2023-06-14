@@ -44,7 +44,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
           leading: Container(),
           centerTitle: true,
           title: Text(
-            'الإبلاغ عن طفل مفقود',
+            'الإبلاغ عن مفقود',
             style: Theme.of(context).textTheme.displayMedium,
           ),
         ),
@@ -114,7 +114,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                   MainFormField(
                     controller: viewModel.nameOfMissing,
                     textInputType: TextInputType.text,
-                    labelText: 'إسم الطفل',
+                    labelText: 'إسم المفقود',
                     validator: (value) {
                       if (value!.length > 100) {
                         return "لا يمكن ان يكون اكثر من 100 حرف";
@@ -131,7 +131,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                   MainFormField(
                     textInputType: TextInputType.number,
                     controller: viewModel.ageOfMissing,
-                    labelText: 'عمر الطفل',
+                    labelText: 'عمر المفقود',
                     validator: (value) {
                       if (value!.length > 3) {
                         return "لا يمكن ان يكون اكثر من 3 ارقام";
@@ -245,7 +245,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                   MainFormField(
                     textInputType: TextInputType.text,
                     controller: viewModel.placesOfMissing,
-                    labelText: 'مكان فقد الطفل بي التفصيل',
+                    labelText: 'مكان الفقد بي التفصيل',
                     validator: (value) {
                       if (value!.length > 100) {
                         return "لا يمكن ان يكون اكثر من 100 حرف";
@@ -266,7 +266,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                       child: MainFormField(
                         readonly: true,
                         controller: viewModel.dateOfMissing,
-                        labelText: 'تاريخ فقد الطفل',
+                        labelText: 'تاريخ الفقد',
                       ),
                     ),
                   ),
@@ -277,7 +277,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                     hintText: 'فاعل خير , اب او ام.......   ',
                     textInputType: TextInputType.text,
                     controller: viewModel.urRoleOfChild,
-                    labelText: 'صفتك بي النسبه للطفل',
+                    labelText: 'صفتك بي النسبه للمفقود',
 
                   ),
                   const SizedBox(
@@ -286,7 +286,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                   MainFormField(
                     textInputType: TextInputType.number,
                     controller: viewModel.heightOfMissing,
-                    labelText: 'طول الطفل (اختياري)',
+                    labelText: 'طول (اختياري)',
                   ),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -499,7 +499,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text("هل الطفل من ذوي الاحتياجات الخاصة ؟",
+                      Text("هل المفقود من ذوي الاحتياجات الخاصة ؟",
                           style: TextStyle(color: AppColors.fontSmoothGrey)),
                     ],
                   ),
@@ -536,7 +536,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text("هل يستطيع الطفل اخبار اسمه ؟",
+                      Text("هل يستطيع المفقود اخبار اسمه ؟",
                           style: TextStyle(
                             color: AppColors.fontSmoothGrey,
                           )),
@@ -779,7 +779,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                           ))),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: MainButton("الإبلاغ عن العثور علي طفل",
+                    child: MainButton("الإبلاغ عن العثور علي المفقود",
                         bgColor: AppColors.blackColor, () async {
                       viewModel.addMissing(context);
                     }),

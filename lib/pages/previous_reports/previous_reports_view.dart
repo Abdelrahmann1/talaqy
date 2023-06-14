@@ -38,6 +38,8 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
             backgroundColor: AppColors.white,
             elevation: 0,
             actions: [
+              const Text("بحث"),
+
               IconButton(
                 icon: const Icon(Icons.search),
                 onPressed: () {
@@ -46,6 +48,7 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                       delegate: CustomSearchBar(hintText: "بحث"));
                 },
               ),
+
             ],
             leading: InkWell(
               onTap: () {
@@ -136,10 +139,10 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
             bottom: const TabBar(
               tabs: [
                 Tab(
-                  text: "مفقود",
+                  text: " أشخاص مفقودة ",
                 ),
                 Tab(
-                  text: "موجود",
+                  text: "أشخاص موجودة",
                 ),
               ],
             ),
