@@ -15,8 +15,7 @@ class SuccessfulMessage extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 3,
-                  child: PageView.builder(itemBuilder: (context, i) {
-                    return SingleChildScrollView(
+                  child:SingleChildScrollView(
                       child: Column(
                         children: [
                           const SizedBox(
@@ -43,8 +42,7 @@ class SuccessfulMessage extends StatelessWidget {
                           )
                         ],
                       ),
-                    );
-                  }),
+                  ),
                 ),
                 Expanded(
                     child: Column(

@@ -542,18 +542,6 @@ class AddFoundedPeopleViewModel extends ViewModel {
   CollectionReference addMissingRef =
       FirebaseFirestore.instance.collection("Founded People");
   Future addFounded(BuildContext context) async {
-    if (file == null) {
-      return AwesomeDialog(
-          context: context,
-          title: ("صوره"),
-          body: const Center(
-              child: Text(
-            "برجاء ادخال صوره",
-            style: TextStyle(color: Colors.black),
-          )))
-        ..show();
-    }
-
     var formData = formKey.currentState;
     if (formData!.validate()) {
       showLoading(context);

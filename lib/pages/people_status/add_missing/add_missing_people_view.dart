@@ -82,8 +82,8 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                     controller: viewModel.fatherId,
                     labelText: 'رقم بطاقة الاب / الوصي',
                     validator: (value) {
-                      if (value!.length > 14) {
-                        return "لا يمكن ان يكون اكثر من 14 حرف";
+                      if (value == null || value.isEmpty) {
+                        return "لا يمكن ان يكون اكثر او اقل من 14 حرف";
                       }
                       if (value.length < 0) {
                         return "لا يمكن ان يكون اقل من 0 حرف";
@@ -99,7 +99,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                     controller: viewModel.fatherPhoneNumber,
                     labelText: 'رقم تليفون ',
                     validator: (value) {
-                      if (value!.length > 11) {
+                      if (value == null || value.isEmpty) {
                         return "لا يمكن ان يكون اكثر من 11 رقم";
                       }
                       if (value.length < 0) {
@@ -116,7 +116,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                     textInputType: TextInputType.text,
                     labelText: 'إسم المفقود',
                     validator: (value) {
-                      if (value!.length > 100) {
+                      if (value!.length > 25) {
                         return "لا يمكن ان يكون اكثر من 100 حرف";
                       }
                       if (value.length < 2) {
@@ -158,7 +158,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                       child: DropdownButtonFormField<String>(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please select an option';
+                            return 'يجب اختار البلد';
                           }
                           return null;
                         },
@@ -191,7 +191,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                       child: DropdownButtonFormField<String>(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please select an option';
+                            return 'يجب اختار المحافظه';
                           }
                           return null;
                         },
@@ -221,7 +221,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                       child: DropdownButtonFormField<String>(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please select an option';
+                            return 'يجب اختار الحي';
                           }
                           return null;
                         },
