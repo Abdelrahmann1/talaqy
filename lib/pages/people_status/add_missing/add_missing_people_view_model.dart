@@ -214,8 +214,10 @@ class AddMissingPeopleViewModel extends ViewModel {
     if (pickedDate != null && pickedDate != _selectedDate) {
       dateOfMissing.text =
           DateFormat('yyyy/MM/dd').format(pickedDate).toString();
-      _selectedDate =
-          DateFormat('yyyy/MM/dd').format(pickedDate).toString() as DateTime?;
+       _selectedDate = DateTime.parse(DateFormat('yyyy/MM/dd').format(pickedDate));
+
+      // _selectedDate =
+      //     DateFormat('yyyy/MM/dd').format(pickedDate).toString() as DateTime?;
       notifyListeners();
     }
   }
