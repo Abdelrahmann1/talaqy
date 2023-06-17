@@ -24,6 +24,7 @@ class AllMissingAndFoundedScreen extends StatelessWidget {
   }
 }
 class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
+
   const AllMissingAndFoundedView({Key? key, reactive = true});
   @override
   Widget render(context, viewModel) {
@@ -107,9 +108,7 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                 height: 90,
                                 placeholder: (context, url) => const Center(
                                     child: CircularProgressIndicator()),
-                                errorWidget: (context, url, error) =>
-                                    Image.asset("assets/images/logo.png"),
-                                fit: BoxFit.fill),
+                                errorWidget: (context, url, error) => Image.asset("assets/images/logo.png"), fit: BoxFit.fill),
                           ),
                         );
                       }
@@ -136,6 +135,7 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
+
                       if (snapshot.data!.docs.isNotEmpty) {
                         return AnimationLimiter(
                           child: ListView.builder(
@@ -184,26 +184,19 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                               );
                                             }));
                                           },
-                                          child: MissingContainer(
+                                          child:
+
+                                          MissingContainer(
                                             borderColor: Colors.blue,
-                                            ageOfMissing: snapshot.data!
-                                                .docs[index]["ageOfMissing"]
-                                                .toString(),
-                                            nameOfMissing: snapshot.data!
-                                                .docs[index]["nameOfMissing"]
-                                                .toString(),
-                                            placesOfMissing: snapshot.data!
-                                                .docs[index]["gender"]
-                                                .toString(),
-                                            docId:
-                                                snapshot.data!.docs[index].id,
+                                            ageOfMissing: snapshot.data!.docs[index]["ageOfMissing"].toString(),
+                                            nameOfMissing: snapshot.data!.docs[index]["nameOfMissing"].toString(),
+                                            placesOfMissing: snapshot.data!.docs[index]["gender"].toString(),
+                                            docId: snapshot.data!.docs[index].id,
                                             list: snapshot.data!.docs[index],
-                                            imageUrl: snapshot.data!.docs[index]["imageUrl"].toString(),
-                                            dateOfMissing: snapshot.data!
-                                                .docs[index]["dateOfMissing"]
-                                                .toString(),
+                                            dateOfMissing: snapshot.data!.docs[index]["dateOfMissing"].toString(),
                                             locationOfCity:  snapshot.data!.docs[index]["CityOfMissing"].toString(),
                                             locationOfSection: snapshot.data!.docs[index]["SecitonOfMissing"].toString(),
+                                            imageUrl: snapshot.data!.docs[index]["imageUrl"].toString(),
 
                                           ),
                                         )),
@@ -299,9 +292,7 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                               ageOfChild: snapshot.data!
                                                   .docs[index]["ageOfChild"]
                                                   .toString(),
-                                              imageUrl: snapshot
-                                                  .data!.docs[index]["imageUrl"]
-                                                  .toString(),
+                                              imageUrl: snapshot.data!.docs[index]["imageUrl"].toString(),
                                               locationOfSection: snapshot
                                                   .data!.docs[index]["sectionOfFounded"]
                                                   .toString(),

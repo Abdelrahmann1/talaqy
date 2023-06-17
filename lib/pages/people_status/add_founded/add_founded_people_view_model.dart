@@ -546,13 +546,30 @@ class AddFoundedPeopleViewModel extends ViewModel {
     if (formData!.validate()) {
       showLoading(context);
       formData.save();
-      await ref!.putFile(file!);
-      imageUrl = ref!.getDownloadURL();
-      await ref2!.putFile(file2!);
-      imageUrl2 = ref2!.getDownloadURL();
-      await ref3!.putFile(file3!);
-      imageUrl3 = ref3!.getDownloadURL();
-      await addMissingRef.add({
+      try{
+        await ref!.putFile(file!);
+        imageUrl = ref!.getDownloadURL();
+      }catch(error){
+        print("Failed to upload file: $error");
+        imageUrl = null;
+      }
+      try{
+        await ref2!.putFile(file2!);
+        imageUrl2 = ref2!.getDownloadURL();
+      }catch(error){
+        print("Failed to upload file: $error");
+        imageUrl2 = null;
+
+      }
+      try{
+        await ref3!.putFile(file3!);
+        imageUrl3 = ref3!.getDownloadURL();
+
+      }catch(error){
+        print("Failed to upload file: $error");
+        imageUrl3 = null;
+
+      }      await addMissingRef.add({
         "nameOfChild": nameOfChild.text,
         "ageOfChild": ageOfChild.text,
         "clothesOfChild": clothesOfChild.text,
@@ -571,9 +588,9 @@ class AddFoundedPeopleViewModel extends ViewModel {
         "moreDetails": moreDetails.text,
         "dateOfFounded": dateOfFounded.value.text.toString(),
         "dateOfSend":DateFormat('yyyy/MM/dd').format(DateTime.now()).toString(),
-        "imageUrl": await imageUrl,
-        "imageUrl2": await imageUrl2,
-        "imageUrl3": await imageUrl3,
+        "imageUrl": await imageUrl??"",
+        "imageUrl2": await imageUrl2??"",
+        "imageUrl3": await imageUrl3??"",
         "userId": FirebaseAuth.instance.currentUser!.uid,
       });
       Navigator.of(context).pop();

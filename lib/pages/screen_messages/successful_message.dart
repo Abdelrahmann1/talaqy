@@ -3,7 +3,6 @@ import 'package:talaqy/extentions/padding_ext.dart';
 import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
 import 'package:talaqy/widgets/main_button.dart';
-
 class SuccessfulMessage extends StatelessWidget {
   const SuccessfulMessage({Key? key}) : super(key: key);
   @override
@@ -24,7 +23,7 @@ class SuccessfulMessage extends StatelessWidget {
                           const Padding(
                             padding: EdgeInsets.only(right: 8.0, left: 8),
                             child: Text(
-                              "تم الإبلاغ عن الطفل بنجاح",
+                              "تم الإبلاغ بنجاح",
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,

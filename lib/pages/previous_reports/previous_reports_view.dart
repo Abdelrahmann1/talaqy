@@ -204,9 +204,15 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                         onTapDelete: () async {
                                           showLoading(context);
                                           await viewModel.addMissingRef.doc(snapshot.data!.docs[index].id).delete();
-                                          await FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl"]).delete();
-                                          await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl2"]).delete();
-                                          await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl3"]).delete();
+                                          try{
+                                            await FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl"]).delete();
+                                            await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl2"]).delete();
+                                            await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl3"]).delete();
+
+                                          }catch(e){
+                                            print(e);
+                                          }
+
                                           Navigator.of(context).pop();
                                           showDialog(context: context, builder: (context){
                                             return AlertDialog(
@@ -296,9 +302,16 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                         onTapDelete: () async{
                                           showLoading(context);
                                           await viewModel.addFoundedRef.doc(snapshot.data!.docs[index].id).delete();
-                                          await FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl"]).delete();
-                                          await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl2"]).delete();
-                                          await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl3"]).delete();
+
+                                          try{
+                                            await FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl"]).delete();
+                                            await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl2"]).delete();
+                                            await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl3"]).delete();
+
+                                          }catch(e){
+                                            return null;
+                                          }
+
                                           Navigator.of(context).pop();
                                           showDialog(context: context, builder: (context){
                                             return AlertDialog(

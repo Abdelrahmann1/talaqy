@@ -4,6 +4,7 @@ import 'package:talaqy/pages/home/home_view.dart';
 import 'package:talaqy/pages/previous_reports/previous_reports_view.dart';
 class AllMissingAndFoundedViewModel extends ViewModel {
   int currentIndex = 0;
+
   QuerySnapshot? data;
   final CollectionReference addMissingRef =
       FirebaseFirestore.instance.collection("Missing People");

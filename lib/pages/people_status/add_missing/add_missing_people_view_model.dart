@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:intl/intl.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -59,27 +58,34 @@ class AddMissingPeopleViewModel extends ViewModel {
       FirebaseFirestore.instance.collection("Missing People");
 
   addMissing(BuildContext context) async {
-    if (file == null) {
-      return AwesomeDialog(
-          context: context,
-          title: ("صوره"),
-          body: const Center(
-              child: Text(
-            "برجاء ادخال صوره",
-            style: TextStyle(color: Colors.black),
-          )))
-        ..show();
-    }
     var formData = formKey.currentState;
     if (formData!.validate()) {
       showLoading(context);
       formData.save();
-      await ref!.putFile(file!);
-      imageUrl = ref!.getDownloadURL();
-      await ref2!.putFile(file2!);
-      imageUrl2 = ref2!.getDownloadURL();
-      await ref3!.putFile(file3!);
-      imageUrl3 = ref3!.getDownloadURL();
+      try{
+        await ref!.putFile(file!);
+        imageUrl = ref!.getDownloadURL();
+      }catch(error){
+        print("Failed to upload file: $error");
+        imageUrl = null;
+      }
+      try{
+        await ref2!.putFile(file2!);
+        imageUrl2 = ref2!.getDownloadURL();
+      }catch(error){
+        print("Failed to upload file: $error");
+        imageUrl2 = null;
+
+      }
+      try{
+        await ref3!.putFile(file3!);
+        imageUrl3 = ref3!.getDownloadURL();
+
+      }catch(error){
+        print("Failed to upload file: $error");
+        imageUrl3 = null;
+
+      }
       await addMissingRef.add({
         "fatherName": fatherName.text,
         "fatherId": fatherId.text,
@@ -102,9 +108,10 @@ class AddMissingPeopleViewModel extends ViewModel {
         "hairColor": hairColor.toString(),
         "specialNeeds": specialNeeds.toString(),
         "canTalkHisName": canTalkHisName.toString(),
-        "imageUrl": await imageUrl,
-        "imageUrl2": await imageUrl2,
-        "imageUrl3": await imageUrl3,
+        "imageUrl": await imageUrl ?? "",
+        "imageUrl2": await imageUrl2 ?? "",
+        "imageUrl3": await imageUrl3 ?? "",
+
         "userId": FirebaseAuth.instance.currentUser!.uid,
       });
       Navigator.of(context).pop();
@@ -123,43 +130,35 @@ class AddMissingPeopleViewModel extends ViewModel {
     sectionOfMissing = null;
     notifyListeners();
   }
-
   setCityOfMissing(val) {
     cityOfMissing = val;
     sectionOfMissing = null;
     notifyListeners();
   }
-
   setSectionOfMissing(val) {
     sectionOfMissing = val;
     notifyListeners();
   }
-
   setCairo(val) {
     gender = val;
     notifyListeners();
   }
-
   setSkinColor(val) {
     skinColor = val;
     notifyListeners();
   }
-
   setColorOfEye(val) {
     colorOfEye = val;
     notifyListeners();
   }
-
   setHairColor(val) {
     hairColor = val;
     notifyListeners();
   }
-
   setSpecialNeeds(val) {
     specialNeeds = val;
     notifyListeners();
   }
-
   setCanTalk(val) {
     canTalkHisName = val;
     notifyListeners();
@@ -168,7 +167,6 @@ class AddMissingPeopleViewModel extends ViewModel {
     selectDna = val;
     notifyListeners();
   }
-
   pickImage() async {
     pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
@@ -179,19 +177,16 @@ class AddMissingPeopleViewModel extends ViewModel {
     }
     notifyListeners();
   }
-
   pickImage2() async {
     pickedImage2 = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage2 != null) {
       file2 = File(pickedImage2.path);
       random2 = Random().nextInt(100000);
       nameOfImagePicked2 = basename(pickedImage2.path);
-      ref2 =
-          FirebaseStorage.instance.ref("images").child("$nameOfImagePicked2");
+      ref2 = FirebaseStorage.instance.ref("images").child("$nameOfImagePicked2");
     }
     notifyListeners();
   }
-
   pickImage3() async {
     pickedImage3 = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage3 != null) {
@@ -203,7 +198,6 @@ class AddMissingPeopleViewModel extends ViewModel {
     }
     notifyListeners();
   }
-
   setDateTime(context) async {
     final DateTime? pickedDate = await showDatePicker(
         context: context,
@@ -632,37 +626,5 @@ class AddMissingPeopleViewModel extends ViewModel {
         child: Text(city),
       );
     }).toList();
-  }
-  Future<void> showAlertDialog(BuildContext context, String title, String message) {
-    return showDialog<void>(
-      context: context,
-        builder: (context) {
-          return AlertDialog(
-            backgroundColor: AppColors.white,
-            title: const Center(
-                child: Text(
-                  "خطا في تسجيل الدخول ",
-                  style: TextStyle(fontSize: 12),
-                )),
-            content: const Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  "failureMassage",
-                  style: TextStyle(color: AppColors.blackColor),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text("حسنا"))
-            ],
-          );
-        }
-
-    ).then((value) => Future.value()); // Return a non-nullable Future with a value of null
   }
 }

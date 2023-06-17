@@ -41,20 +41,14 @@ class MyApp extends StatelessWidget {
                 ),
                 displayMedium: TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
+                  fontWeight: FontWeight.w400),
                 bodyMedium: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     color: AppColors.white),
                 displaySmall: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                ),
-                titleSmall: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w400,
-                )),
+                  fontSize: 12,fontWeight: FontWeight.w400),
+                titleSmall: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,)),
               colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor), useMaterial3: true),
             home: initScreen==0|| initScreen == null?const OnBoardingScreen():const SplashScreen(),
             routes: AppRouter().routes()));
