@@ -44,7 +44,7 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                               placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator()),
                               errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error_outline),
+                                  Image.asset("assets/images/logo.png"),
                               fit: BoxFit.fill),
                         ),
                         SizedBox(
@@ -53,7 +53,7 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                               placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator()),
                               errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error_outline),
+                                  Image.asset("assets/images/logo.png"),
                               fit: BoxFit.fill),
                         ),
                         SizedBox(
@@ -62,7 +62,7 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                               placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator()),
                               errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error_outline),
+                                  Image.asset("assets/images/logo.png"),
                               fit: BoxFit.fill),
                         ),
                       ],
@@ -276,8 +276,8 @@ class FoundedChildProfileView extends HookView<FoundedChildProfileViewModel> {
                       ],
                     ),
                   ),
-                  SingleChildScrollView(
-                    child: const Column(
+                  const SingleChildScrollView(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [

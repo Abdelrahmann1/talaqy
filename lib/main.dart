@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talaqy/pages/onboarding_screen/onboarding_view.dart';
+import 'package:talaqy/pages/people_status/add_missing/add_missing_people_view_model.dart';
 import 'package:talaqy/pages/splash_screen/splash_screen_view.dart';
 import 'package:talaqy/provider/auth_provider.dart';
 import 'package:talaqy/provider/search_bar%20provider.dart';
@@ -29,7 +30,10 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<AlertExitApp>(
               create: (context) => AlertExitApp()),
           ChangeNotifierProvider<SearchBarProvider>(
-              create: (context) => SearchBarProvider())],
+              create: (context) => SearchBarProvider()) ,
+          ChangeNotifierProvider<AddMissingPeopleViewModel>(
+              create: (context) => AddMissingPeopleViewModel())
+        ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(

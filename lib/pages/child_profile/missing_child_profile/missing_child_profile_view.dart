@@ -42,7 +42,7 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
                          child: CachedNetworkImage(
                              imageUrl: viewModel.list['imageUrl'],
                              placeholder: (context, url) =>  const Center(child: CircularProgressIndicator()),
-                             errorWidget: (context, url, error) =>  const Icon(Icons.error_outline),
+                             errorWidget: (context, url, error) =>  Image.asset("assets/images/logo.png"),
                              fit: BoxFit.fill
                          ),
                        ),
@@ -51,7 +51,7 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
                          child: CachedNetworkImage(
                              imageUrl: viewModel.list['imageUrl2'],
                              placeholder: (context, url) =>  const Center(child: CircularProgressIndicator()),
-                             errorWidget: (context, url, error) =>  const Icon(Icons.error_outline),
+                             errorWidget: (context, url, error) =>  Image.asset("assets/images/logo.png"),
                              fit: BoxFit.fill
                          ),
                        ),
@@ -60,7 +60,7 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
                          child: CachedNetworkImage(
                              imageUrl: viewModel.list['imageUrl3'],
                              placeholder: (context, url) =>  const Center(child: CircularProgressIndicator()),
-                             errorWidget: (context, url, error) =>  const Icon(Icons.error_outline),
+                             errorWidget: (context, url, error) =>  Image.asset("assets/images/logo.png"),
                              fit: BoxFit.fill
                          ),
                        ),
@@ -187,7 +187,6 @@ class MissingChildProfileView extends HookView<MissingChildProfileViewModel> {
 
                   ],
                 ),
-
               ],
             ),
           ),

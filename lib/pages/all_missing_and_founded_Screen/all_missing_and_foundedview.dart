@@ -12,7 +12,9 @@ import 'package:talaqy/widgets/not_found.dart';
 import '../../utils/app_router.dart';
 import '../child_profile/founded_child_profile/founded_child_profile_view.dart';
 import '../child_profile/missing_child_profile/missing_child_profile_view.dart';
+import '../people_status/add_missing/add_missing_people_view_model.dart';
 import 'all_missing_and_founded_view_model.dart';
+
 class AllMissingAndFoundedScreen extends StatelessWidget {
   const AllMissingAndFoundedScreen({Key? key}) : super(key: key);
   @override
@@ -23,8 +25,8 @@ class AllMissingAndFoundedScreen extends StatelessWidget {
     );
   }
 }
-class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
 
+class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
   const AllMissingAndFoundedView({Key? key, reactive = true});
   @override
   Widget render(context, viewModel) {
@@ -35,7 +37,6 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
         child: Scaffold(
           appBar: AppBar(
             actions: [
-
               const Text("بحث"),
               IconButton(
                 icon: const Icon(Icons.search),
@@ -59,17 +60,21 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
               ],
             ),
             leading: InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, AppRouter.userProfileScreen);
-              },
-              child: FutureBuilder(
-                  future: viewModel.userData.where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid).get(),
-                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      if (snapshot.data!.docs.isNotEmpty) {
-                        return Padding(
-                          padding: const EdgeInsets.all(7.0),
-                          child: Container(
+                onTap: () {
+                  Navigator.pushNamed(context, AppRouter.userProfileScreen);
+                },
+                child: FutureBuilder(
+                    future: viewModel.userData
+                        .where("userId",
+                            isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                        .get(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.data!.docs.isNotEmpty) {
+                          return Padding(
+                            padding: const EdgeInsets.all(7.0),
+                            child: Container(
                               width: 200,
                               height: 200,
                               decoration: BoxDecoration(
@@ -78,9 +83,9 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                   border: Border.all(
                                       color: AppColors.primaryColor, width: 3)),
                               child: ClipOval(
-                                child:
-                                CachedNetworkImage(
-                                    imageUrl:snapshot.data!.docs[0]["imageUrl"],
+                                child: CachedNetworkImage(
+                                    imageUrl: snapshot.data!.docs[0]
+                                        ["imageUrl"],
                                     width: 90,
                                     height: 90,
                                     placeholder: (context, url) => const Center(
@@ -90,33 +95,33 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                     fit: BoxFit.fill),
                               ),
                             ),
-                        );
-                    } else {
-                        return  Container(
-                          width: 200,
-                          height: 200,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: AppColors.white, width: 6)),
-                          child: ClipOval(
-                            child:
-                            CachedNetworkImage(
-                                imageUrl:snapshot.data!.docs[0]["imageUrl"],
-                                width: 90,
-                                height: 90,
-                                placeholder: (context, url) => const Center(
-                                    child: CircularProgressIndicator()),
-                                errorWidget: (context, url, error) => Image.asset("assets/images/logo.png"), fit: BoxFit.fill),
-                          ),
-                        );
+                          );
+                        } else {
+                          return Container(
+                            width: 200,
+                            height: 200,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: AppColors.white, width: 6)),
+                            child: ClipOval(
+                              child: CachedNetworkImage(
+                                  imageUrl: snapshot.data!.docs[0]["imageUrl"],
+                                  width: 90,
+                                  height: 90,
+                                  placeholder: (context, url) => const Center(
+                                      child: CircularProgressIndicator()),
+                                  errorWidget: (context, url, error) =>
+                                      Image.asset("assets/images/logo.png"),
+                                  fit: BoxFit.fill),
+                            ),
+                          );
+                        }
+                      } else {
+                        return const Center(child: CircularProgressIndicator());
                       }
-                    }else{
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                  }
-                  )),
+                    })),
             centerTitle: true,
             title: Text(
               'الصفحة الرئيسية',
@@ -134,78 +139,74 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                   future: viewModel.addMissingRef.get(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
+                    final AddMissingPeople =
+                        Provider.of<AddMissingPeopleViewModel>(context);
 
+                    if (snapshot.connectionState == ConnectionState.done) {
                       if (snapshot.data!.docs.isNotEmpty) {
                         return AnimationLimiter(
-                          child: ListView.builder(
-                            padding: EdgeInsets.all(_w / 25),
-                            physics: const BouncingScrollPhysics(
-                                parent: AlwaysScrollableScrollPhysics()),
-                            itemCount: snapshot.data!.docs.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return AnimationConfiguration.staggeredList(
-                                position: index,
-                                delay: const Duration(milliseconds: 100),
-                                child: SlideAnimation(
-                                  duration: const Duration(milliseconds: 2500),
-                                  curve: Curves.fastLinearToSlowEaseIn,
-                                  child: FadeInAnimation(
-                                    curve: Curves.fastLinearToSlowEaseIn,
-                                    duration:
-                                        const Duration(milliseconds: 2500),
-                                    child: Container(
-                                        margin:
-                                            EdgeInsets.only(bottom: _w / 20),
-                                        height: _w / 3,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(10)),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:
-                                                  Colors.black.withOpacity(0.1),
-                                              blurRadius: 40,
-                                              spreadRadius: 10,
-                                            ),
-                                          ],
-                                        ),
-                                        child: InkWell(
-                                          onTap: () {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (context) {
-                                              return MissingChildProfileScreen(
-                                                docid: snapshot
-                                                    .data!.docs[index].id,
-                                                list:
-                                                    snapshot.data!.docs[index],
-                                              );
-                                            }));
-                                          },
-                                          child:
-
-                                          MissingContainer(
-                                            borderColor: Colors.blue,
-                                            ageOfMissing: snapshot.data!.docs[index]["ageOfMissing"].toString(),
-                                            nameOfMissing: snapshot.data!.docs[index]["nameOfMissing"].toString(),
-                                            placesOfMissing: snapshot.data!.docs[index]["gender"].toString(),
-                                            docId: snapshot.data!.docs[index].id,
-                                            list: snapshot.data!.docs[index],
-                                            dateOfMissing: snapshot.data!.docs[index]["dateOfMissing"].toString(),
-                                            locationOfCity:  snapshot.data!.docs[index]["CityOfMissing"].toString(),
-                                            locationOfSection: snapshot.data!.docs[index]["SecitonOfMissing"].toString(),
-                                            imageUrl: snapshot.data!.docs[index]["imageUrl"].toString(),
-
-                                          ),
-                                        )),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        );
+                            child: ListView.builder(
+                                padding: EdgeInsets.all(_w / 25),
+                                physics: const BouncingScrollPhysics(
+                                    parent: AlwaysScrollableScrollPhysics()),
+                                itemCount: snapshot.data!.docs.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return AnimationConfiguration.staggeredList(
+                                      position: index,
+                                      delay: const Duration(milliseconds: 100),
+                                      child: SlideAnimation(
+                                          duration: const Duration(
+                                              milliseconds: 2500),
+                                          curve: Curves.fastLinearToSlowEaseIn,
+                                          child: FadeInAnimation(
+                                              curve:
+                                                  Curves.fastLinearToSlowEaseIn,
+                                              duration: const Duration(
+                                                  milliseconds: 2500),
+                                              child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      bottom: _w / 20),
+                                                  height: _w / 3,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                            Radius.circular(
+                                                                10)),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black
+                                                            .withOpacity(0.1),
+                                                        blurRadius: 40,
+                                                        spreadRadius: 10,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  child: InkWell(
+                                                      onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                                                          return MissingChildProfileScreen(
+                                                            docid: snapshot.data!.docs[index].id,
+                                                            list: snapshot.data!.docs[index]);}));
+                                                      },
+                                                      child: MissingContainer(
+                                                          borderColor:
+                                                              Colors.blue,
+                                                          ageOfMissing: snapshot.data!.docs[index]["ageOfMissing"].toString(),
+                                                          nameOfMissing: snapshot.data!.docs[index]["nameOfMissing"].toString(),
+                                                          placesOfMissing: snapshot.data!.docs[index]["gender"].toString(),
+                                                          docId: snapshot.data!.docs[index].id,
+                                                          list: snapshot.data!.docs[index],
+                                                          dateOfMissing: snapshot.data!.docs[index]["dateOfMissing"].toString(),
+                                                          locationOfCity: snapshot.data!.docs[index]["CityOfMissing"].toString(),
+                                                          locationOfSection: snapshot.data!.docs[index]["SecitonOfMissing"].toString(),
+                                                          imageUrl: AddMissingPeople.imageUrl == null ? snapshot.data!.docs[index]["imageUrl"].toString() : snapshot.data!.docs[index]["imageUrl2"].toString()
+                                                      )
+                                                  )
+                                              )
+                                          )
+                                      )
+                                  );
+                                }));
                       } else {
                         return const NotFound(
                           status: 'لا توجد بلاغات ',
@@ -280,8 +281,8 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                               docId:
                                                   snapshot.data!.docs[index].id,
                                               list: snapshot.data!.docs[index],
-                                              placesOfChild: snapshot.data!
-                                                  .docs[index]["gender"]
+                                              placesOfChild: snapshot
+                                                  .data!.docs[index]["gender"]
                                                   .toString(),
                                               nameOfFounded: snapshot.data!
                                                   .docs[index]["nameOfChild"]
@@ -292,15 +293,18 @@ class AllMissingAndFoundedView extends HookView<AllMissingAndFoundedViewModel> {
                                               ageOfChild: snapshot.data!
                                                   .docs[index]["ageOfChild"]
                                                   .toString(),
-                                              imageUrl: snapshot.data!.docs[index]["imageUrl"].toString(),
+                                              imageUrl: snapshot
+                                                  .data!.docs[index]["imageUrl"]
+                                                  .toString(),
                                               locationOfSection: snapshot
-                                                  .data!.docs[index]["sectionOfFounded"]
+                                                  .data!
+                                                  .docs[index]
+                                                      ["sectionOfFounded"]
                                                   .toString(),
-                                              locationOfCity: snapshot
-                                                  .data!.docs[index]["CityOfFounded"]
+                                              locationOfCity: snapshot.data!
+                                                  .docs[index]["CityOfFounded"]
                                                   .toString(),
-                                            )
-                                            )),
+                                            ))),
                                   ),
                                 ),
                               );

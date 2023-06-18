@@ -111,7 +111,6 @@ class AddMissingPeopleViewModel extends ViewModel {
         "imageUrl": await imageUrl ?? "",
         "imageUrl2": await imageUrl2 ?? "",
         "imageUrl3": await imageUrl3 ?? "",
-
         "userId": FirebaseAuth.instance.currentUser!.uid,
       });
       Navigator.of(context).pop();

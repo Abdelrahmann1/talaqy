@@ -309,7 +309,7 @@ class PreviousReportsView extends HookView<PreviousReportsViewModel> {
                                             await  FirebaseStorage.instance.refFromURL(snapshot.data!.docs[index]["imageUrl3"]).delete();
 
                                           }catch(e){
-                                            return null;
+
                                           }
 
                                           Navigator.of(context).pop();

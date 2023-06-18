@@ -61,18 +61,10 @@ class ReportsCards extends StatelessWidget {
                       placeholder: (context, url) =>
                           const Center(child: CircularProgressIndicator()),
                       errorWidget: (context, url, error) =>
-                          const Icon(Icons.error_outline),
-                      fit: BoxFit.fill),
-
-
-
-                ),
-
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(nameOfMissing,
-                    style: Theme.of(context).textTheme.displayMedium),
+                           Image.asset("assets/images/logo.png"),
+                      fit: BoxFit.fill)),
+                const SizedBox(height: 5),
+                Text(nameOfMissing,style: Theme.of(context).textTheme.displayMedium),
                 const SizedBox(
                   height: 8,
                 ),

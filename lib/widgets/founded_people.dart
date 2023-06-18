@@ -172,7 +172,7 @@ class FoundedPeopleContainer extends StatelessWidget {
             placeholder: (context, url) =>
                 const Center(child: CircularProgressIndicator()),
             errorWidget: (context, url, error) =>
-                const Icon(Icons.error_outline),
+                 Image.asset("assets/images/logo.png"),
             fit: BoxFit.fill,
           ),
         ),

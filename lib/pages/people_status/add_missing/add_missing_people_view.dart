@@ -615,7 +615,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text("إرفاق صورة",
+                      Text("إرفاق صورة اساسيه",
                           style: TextStyle(
                             color: AppColors.blackColor,
                           )),
@@ -624,132 +624,147 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
 
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: Row(
+                    child: Column(
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             viewModel.pickedImage != null
                                 ? Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                              color: Colors.black, width: 3),
-                                        ),
-                                        width: 110.00,
-                                        height: 130,
-                                        child: const Center(
-                                            child: Text(
-                                          "تم اضافه الصوره",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(color: Colors.black),
-                                        ))),
-                                  )
-                                : Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        viewModel.pickImage();
-                                      },
-                                      child: Container(
-                                        width: 110,
-                                        height: 130,
-                                        color: AppColors.backgroundGrey,
-                                        child: const Icon(
-                                          Icons.add,
-                                          color: AppColors.white,
-                                          size: 100,
-                                        ),
-                                      ),
-                                    ),
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(20),
+                                    border: Border.all(
+                                        color: Colors.black, width: 3),
                                   ),
+                                  width: 110.00,
+                                  height: 130,
+                                  child: const Center(
+                                      child: Text(
+                                        "تم اضافه الصوره",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(color: Colors.black),
+                                      ))),
+                            )
+                                : Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: InkWell(
+                                onTap: () async {
+                                  viewModel.pickImage();
+                                },
+                                child: Container(
+                                  width: 110,
+                                  height: 130,
+                                  color: AppColors.backgroundGrey,
+                                  child: const Icon(
+                                    Icons.add,
+                                    color: AppColors.white,
+                                    size: 100,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            viewModel.pickedImage3 != null
-                                ? Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                              color: Colors.black, width: 3),
-                                        ),
-                                        width: 110.00,
-                                        height: 130,
-                                        child: const Center(
-                                            child: Text(
-                                          "تم اضافه الصوره",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(color: Colors.black),
-                                        ))),
-                                  )
-                                : Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        viewModel.pickImage3();
-                                      },
-                                      child: Container(
-                                        width: 110,
-                                        height: 130,
-                                        color: AppColors.backgroundGrey,
-                                        child: const Icon(
-                                          Icons.add,
-                                          color: AppColors.white,
-                                          size: 100,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                            Text("إرفاق باقي الصورة",
+                                style: TextStyle(
+                                  color: AppColors.blackColor,
+                                )),
                           ],
                         ),
+
+
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            viewModel.pickedImage2 != null
-                                ? Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                              color: Colors.black, width: 3),
-                                        ),
-                                        width: 110.00,
-                                        height: 130,
-                                        child: const Center(
-                                            child: Text(
-                                          "تم اضافه الصوره",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(color: Colors.black),
-                                        ))),
-                                  )
-                                : Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        viewModel.pickImage2();
-                                      },
-                                      child: Container(
-                                        width: 110,
-                                        height: 130,
-                                        color: AppColors.backgroundGrey,
-                                        child: const Icon(
-                                          Icons.add,
-                                          color: AppColors.white,
-                                          size: 100,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                viewModel.pickedImage3 != null
+                                    ? Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              border: Border.all(
+                                                  color: Colors.black, width: 3),
+                                            ),
+                                            width: 110.00,
+                                            height: 130,
+                                            child: const Center(
+                                                child: Text(
+                                              "تم اضافه الصوره",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(color: Colors.black),
+                                            ))),
+                                      )
+                                    : Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: InkWell(
+                                          onTap: () async {
+                                            viewModel.pickImage3();
+                                          },
+                                          child: Container(
+                                            width: 110,
+                                            height: 130,
+                                            color: AppColors.backgroundGrey,
+                                            child: const Icon(
+                                              Icons.add,
+                                              color: AppColors.white,
+                                              size: 100,
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                viewModel.pickedImage2 != null
+                                    ? Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              border: Border.all(
+                                                  color: Colors.black, width: 3),
+                                            ),
+                                            width: 110.00,
+                                            height: 130,
+                                            child: const Center(
+                                                child: Text(
+                                              "تم اضافه الصوره",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(color: Colors.black),
+                                            ))),
+                                      )
+                                    : Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: InkWell(
+                                          onTap: () async {
+                                            viewModel.pickImage2();
+                                          },
+                                          child: Container(
+                                            width: 110,
+                                            height: 130,
+                                            color: AppColors.backgroundGrey,
+                                            child: const Icon(
+                                              Icons.add,
+                                              color: AppColors.white,
+                                              size: 100,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                              ],
+                            ),
                           ],
                         ),
                       ],
