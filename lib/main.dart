@@ -10,6 +10,7 @@ import 'package:talaqy/utils/app_colors.dart';
 import 'package:talaqy/utils/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'provider/alert_provider.dart';
+
 int? initScreen;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,7 @@ void main() async {
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -30,31 +32,24 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<AlertExitApp>(
               create: (context) => AlertExitApp()),
           ChangeNotifierProvider<SearchBarProvider>(
-              create: (context) => SearchBarProvider()) ,
+              create: (context) => SearchBarProvider()),
           ChangeNotifierProvider<AddMissingPeopleViewModel>(
               create: (context) => AddMissingPeopleViewModel())
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              fontFamily: "Alexandria",
-              textTheme: const TextTheme(
-                displayLarge: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                ),
-                displayMedium: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400),
-                bodyMedium: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.white),
-                displaySmall: TextStyle(
-                  fontSize: 12,fontWeight: FontWeight.w400),
-                titleSmall: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,)),
-              colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor), useMaterial3: true),
-            home: initScreen==0|| initScreen == null?const OnBoardingScreen():const SplashScreen(),
-            routes: AppRouter().routes()));
+                fontFamily: "Alexandria",
+                textTheme: const TextTheme(
+                    displayLarge: TextStyle(fontSize: 24,fontWeight: FontWeight.w600),
+                    displayMedium:TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                    bodyMedium: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: AppColors.white),
+                    displaySmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                    titleSmall:TextStyle(fontSize: 10, fontWeight: FontWeight.w400)),
+                colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+                useMaterial3: true),
+            home: initScreen == 0 || initScreen == null
+                ? const OnBoardingScreen()
+                : const SplashScreen(),routes: AppRouter().routes()));
   }
 }

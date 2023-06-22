@@ -85,8 +85,8 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                       if (value == null || value.isEmpty) {
                         return "لا يمكن ان يكون اكثر او اقل من 14 حرف";
                       }
-                      if (value.length < 0) {
-                        return "لا يمكن ان يكون اقل من 0 حرف";
+                      if (value.length < 14) {
+                        return "لا يمكن ان يكون اقل من 14 رقم";
                       }
                       return null;
                     },
@@ -102,8 +102,8 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                       if (value == null || value.isEmpty) {
                         return "لا يمكن ان يكون اكثر من 11 رقم";
                       }
-                      if (value.length < 0) {
-                        return "لا يمكن ان يكون اقل من 3 حرف";
+                      if (value.length < 11) {
+                        return "لا يمكن ان يكون اقل من 11 رقم";
                       }
                       return null;
                     },
@@ -120,7 +120,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                         return "لا يمكن ان يكون اكثر من 100 حرف";
                       }
                       if (value.length < 2) {
-                        return "لا يمكن ان يكون اقل من 3 حرف";
+                        return "لا يمكن ان يكون اقل من 2 حرف";
                       }
                       return null;
                     },
@@ -133,14 +133,15 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                     controller: viewModel.ageOfMissing,
                     labelText: 'عمر المفقود',
                     validator: (value) {
-                      if (value!.length > 3) {
-                        return "لا يمكن ان يكون اكثر من 3 ارقام";
+                      if (value == null || value.isEmpty) {
+                        return "لا يمكن ان يكون اكثر من 1 رقم";
                       }
-                      if (value.length < 0) {
-                        return "لا يمكن ان يكون اقل من 3 حرف";
+                      if (value.length < 1) {
+                        return "لا يمكن ان يكون اقل من 1 رقم";
                       }
                       return null;
                     },
+
                   ),
                   const SizedBox(
                     height: 13,
@@ -278,6 +279,15 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                     textInputType: TextInputType.text,
                     controller: viewModel.urRoleOfChild,
                     labelText: 'صفتك بي النسبه للمفقود',
+                    validator: (value) {
+                      if (value!.length > 100) {
+                        return "لا يمكن ان يكون اكثر من 15 حرف";
+                      }
+                      if (value.length < 2) {
+                        return "لا يمكن ان يكون اقل من 2 حرف";
+                      }
+                      return null;
+                    },
 
                   ),
                   const SizedBox(
@@ -671,7 +681,7 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text("إرفاق باقي الصورة",
+                            Text("إرفاق باقي الصور",
                                 style: TextStyle(
                                   color: AppColors.blackColor,
                                 )),
@@ -801,8 +811,6 @@ class AddMissingPeopleView extends HookView<AddMissingPeopleViewModel> {
                   ),
                 ],
               ).setPageHorizontalPadding(context),
-            ),
-          ),
-        ));
+            ))));
   }
 }

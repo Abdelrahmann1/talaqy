@@ -84,8 +84,9 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                     textInputType: TextInputType.number,
                     controller: viewModel.ageOfChild,
                     labelText: 'العمر الموجود',
+
                     validator: (value) {
-                      if (value!.length > 3) {
+                      if (value!.length > 3   || value.isEmpty) {
                         return "لا يمكن ان يكون اكثر من 3 ارقام";
                       }
                       if (value.length < 0) {
@@ -127,7 +128,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                       child: DropdownButtonFormField<String>(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return '';
+                            return 'يجب اختار البلد';
                           }
                           return null;
                         },
@@ -160,7 +161,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                       child: DropdownButtonFormField<String>(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please select an option';
+                            return 'يجب اختار المحافظه';
                           }
                           return null;
                         },
@@ -190,7 +191,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                       child: DropdownButtonFormField<String>(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please select an option';
+                            return 'يجب اختار الحي';
                           }
                           return null;
                         },
@@ -214,6 +215,16 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                     textInputType: TextInputType.text,
                     controller: viewModel.placesOfChild,
                     labelText: 'مكان العثور بي التفصيل',
+                    validator: (value) {
+                      if (value!.length > 14|| value.isEmpty) {
+                        return "لا يمكن ان يكون اكثر من 14 حرف";
+                      }
+                      if (value.length < 0) {
+                        return "لا يمكن ان يكون اقل من 0 حرف";
+                      }
+                      return null;
+                    },
+
                   ),
                   const SizedBox(
                     height: 13,
@@ -223,7 +234,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                     controller: viewModel.phoneNumberOfReported,
                     labelText: 'رقم تليفون المبلغ ',
                     validator: (value) {
-                      if (value!.length > 14) {
+                      if (value!.length > 14|| value.isEmpty) {
                         return "لا يمكن ان يكون اكثر من 14 حرف";
                       }
                       if (value.length < 0) {
@@ -630,7 +641,7 @@ class AddFoundedPeopleView extends HookView<AddFoundedPeopleViewModel> {
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text("  إرفاق باقي الصورة ",
+                            Text("  إرفاق باقي الصور",
                                 style: TextStyle(
                                   color: AppColors.blackColor,
                                 )),

@@ -10,9 +10,6 @@ import 'package:talaqy/utils/app_router.dart';
 import 'package:talaqy/widgets/show_loading.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-
-import '../../../utils/app_colors.dart';
-
 class AddMissingPeopleViewModel extends ViewModel {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController fatherName = TextEditingController();
@@ -56,7 +53,6 @@ class AddMissingPeopleViewModel extends ViewModel {
   Reference? ref3;
   CollectionReference addMissingRef =
       FirebaseFirestore.instance.collection("Missing People");
-
   addMissing(BuildContext context) async {
     var formData = formKey.currentState;
     if (formData!.validate()) {
@@ -75,7 +71,6 @@ class AddMissingPeopleViewModel extends ViewModel {
       }catch(error){
         print("Failed to upload file: $error");
         imageUrl2 = null;
-
       }
       try{
         await ref3!.putFile(file3!);
@@ -84,7 +79,6 @@ class AddMissingPeopleViewModel extends ViewModel {
       }catch(error){
         print("Failed to upload file: $error");
         imageUrl3 = null;
-
       }
       await addMissingRef.add({
         "fatherName": fatherName.text,
@@ -93,21 +87,21 @@ class AddMissingPeopleViewModel extends ViewModel {
         "dateOfSend": DateFormat('yyyy/MM/dd').format(DateTime.now()).toString(),
         "fatherPhoneNumber": fatherPhoneNumber.text,
         "nameOfMissing": nameOfMissing.text,
-        "ageOfMissing": ageOfMissing.text,
+        "ageOfMissing": ageOfMissing.text ,
         "placesOfMissing": placesOfMissing.text,
         "CountryOfMissing": countryOfMissing,
         "CityOfMissing": cityOfMissing,
         "SecitonOfMissing": sectionOfMissing,
         "heightOfMissing": heightOfMissing.text,
         "MoreDetails": moreDetails.text,
-        "urRoleOfChild": urRoleOfChild.text,
-        "gender": gender.toString(),
-        "DNA": selectDna.toString(),
-        "skinColor": skinColor.toString(),
-        "colorOfEye": colorOfEye.toString(),
-        "hairColor": hairColor.toString(),
-        "specialNeeds": specialNeeds.toString(),
-        "canTalkHisName": canTalkHisName.toString(),
+        "urRoleOfChild": urRoleOfChild.text ,
+        "gender": gender?.toString() ?? 'غير موضح',
+        "DNA": selectDna?.toString() ?? 'غير موضح',
+        "skinColor": skinColor?.toString() ?? 'غير موضح',
+        "colorOfEye": colorOfEye?.toString() ?? 'غير موضح',
+        "hairColor": hairColor?.toString() ?? 'غير موضح',
+        "specialNeeds": specialNeeds?.toString() ?? 'غير موضح',
+        "canTalkHisName": canTalkHisName?.toString() ?? 'غير موضح',
         "imageUrl": await imageUrl ?? "",
         "imageUrl2": await imageUrl2 ?? "",
         "imageUrl3": await imageUrl3 ?? "",
